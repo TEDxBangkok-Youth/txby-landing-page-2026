@@ -302,10 +302,3 @@
   font-size: var(--text-xs);
   margin-top: 2px;
 }
-
-/* Volunteers: image + roster card side by side, stacking on small screens */
-@media (max-width: 820px) {
-  .volunteers-grid {
-    grid-template-columns: 1fr !important;
-  }
-}

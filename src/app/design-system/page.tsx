@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ThaiTag } from "@/components/site/thai-ui";
+import { TicketTag } from "@/components/site/ticket-tag";
 import { Button } from "@/components/ui/button";
 import { ImageSlot } from "@/components/site/image-slot";
 import { VolunteersRoster } from "@/components/site/volunteers-roster";
@@ -506,17 +506,17 @@ export default function DesignSystemPage() {
 
           <SubHeading>ThaiTag</SubHeading>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 24, marginBottom: 24 }}>
-            <ThaiTag price="฿590" color="yellow">
+            <TicketTag price="฿590" tone="yellow">
               Early bird
-            </ThaiTag>
-            <ThaiTag price="฿890" color="pink">
+            </TicketTag>
+            <TicketTag price="฿890" tone="pink">
               Regular
-            </ThaiTag>
-            <ThaiTag price="฿1,290" color="cyan">
+            </TicketTag>
+            <TicketTag price="฿1,290" tone="cyan">
               VIP
-            </ThaiTag>
-            <ThaiTag price="Sold out" color="red" />
-            <ThaiTag price="Free" color="white" />
+            </TicketTag>
+            <TicketTag price="Sold out" tone="red" />
+            <TicketTag price="Free" tone="paper" />
           </div>
 
           <SubHeading>ImageSlot</SubHeading>

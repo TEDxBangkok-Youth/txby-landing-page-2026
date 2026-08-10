@@ -129,6 +129,7 @@
   --color-foreground-muted: var(--t-foreground-muted);
   --color-foreground-faint: var(--t-foreground-faint);
   --color-foreground-inverse: var(--t-foreground-inverse);
+  --color-foreground-on-sunken: var(--t-foreground-on-sunken);
 
   /* Brand accent. Deliberately NOT named `accent` — shadcn
      reserves --color-accent for its subtle hover surface. */

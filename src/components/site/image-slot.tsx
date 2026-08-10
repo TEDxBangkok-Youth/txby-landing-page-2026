@@ -25,7 +25,7 @@ export function ImageSlot({
         className
       )}
     >
-      <span className="flex flex-col items-center gap-1 px-2 font-body text-xs font-medium leading-tight text-foreground/45">
+      <span className="flex flex-col items-center gap-1 px-2 font-body text-xs font-medium leading-tight text-foreground-on-sunken/45">
         <svg
           width="22"
           height="22"

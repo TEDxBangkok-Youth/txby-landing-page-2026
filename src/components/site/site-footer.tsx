@@ -1,77 +1,38 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
+
+import { Separator } from "@/components/ui/separator";
 import { footerLinks, social } from "@/lib/site-data";
 
-/** Ported from the TEDxBangkok Youth design-system `Footer` component. */
+/** Main-CI footer on an inverted (black) surface. */
 export function SiteFooter() {
   return (
     <footer
-      data-theme="main" data-surface="inverse"
-      style={{
-        background: "var(--t-surface)",
-        color: "var(--t-foreground)",
-        fontFamily: "var(--t-font-body)",
-        padding: "64px 32px 32px",
-      }}
+      data-theme="main"
+      data-surface="inverse"
+      className="bg-surface px-8 pt-16 pb-8 font-body text-foreground"
     >
-      <div
-        style={{
-          maxWidth: 1280,
-          margin: "0 auto",
-          display: "flex",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: 40,
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <img
+      <div className="mx-auto flex max-w-7xl flex-wrap justify-between gap-10">
+        <div className="flex flex-col gap-4">
+          <Image
             src="/assets/logos/tedxbangkokyouth-lockup-white.png"
             alt="TEDxBangkok Youth"
-            style={{
-              height: 40,
-              width: "auto",
-              alignSelf: "flex-start",
-              objectFit: "contain",
-            }}
+            width={259}
+            height={40}
+            className="h-10 w-auto self-start object-contain"
           />
-          <p
-            style={{
-              color: "var(--t-foreground-muted)",
-              fontSize: 13,
-              maxWidth: 320,
-              lineHeight: 1.6,
-              margin: 0,
-            }}
-          >
+          <p className="max-w-80 text-caption leading-[1.6] text-foreground-muted">
             This independent TEDx event is operated under license from TED.
           </p>
         </div>
-        <div style={{ display: "flex", gap: 56, flexWrap: "wrap" }}>
+
+        <div className="flex flex-wrap gap-14">
           {footerLinks.map((group) => (
-            <div
-              key={group.title}
-              style={{ display: "flex", flexDirection: "column", gap: 10 }}
-            >
-              <span
-                style={{
-                  fontSize: 11,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.14em",
-                  color: "var(--t-foreground-muted)",
-                }}
-              >
+            <div key={group.title} className="flex flex-col gap-2.5">
+              <span className="text-micro tracking-caps uppercase text-foreground-muted">
                 {group.title}
               </span>
               {group.items.map((it) => (
-                <a
-                  key={it}
-                  href="#"
-                  style={{
-                    color: "var(--t-foreground)",
-                    fontSize: 14,
-                    textDecoration: "none",
-                  }}
-                >
+                <a key={it} href="#" className="text-sm leading-normal text-foreground">
                   {it}
                 </a>
               ))}
@@ -79,31 +40,18 @@ export function SiteFooter() {
           ))}
         </div>
       </div>
-      <div
-        style={{
-          maxWidth: 1280,
-          margin: "48px auto 0",
-          paddingTop: 20,
-          borderTop: "1px solid var(--t-line-subtle)",
-          display: "flex",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: 16,
-          fontSize: 12,
-          color: "var(--t-foreground-faint)",
-        }}
-      >
-        <span>© 2026 TEDxBangkok Youth</span>
-        <div style={{ display: "flex", gap: 16 }}>
-          {social.map((s) => (
-            <a
-              key={s}
-              href="#"
-              style={{ color: "var(--t-foreground-faint)", textDecoration: "none" }}
-            >
-              {s}
-            </a>
-          ))}
+
+      <div className="mx-auto mt-12 max-w-7xl">
+        <Separator className="bg-line-subtle" />
+        <div className="flex flex-wrap justify-between gap-4 pt-5 text-xs leading-normal text-foreground-faint">
+          <span>© 2026 TEDxBangkok Youth</span>
+          <div className="flex gap-4">
+            {social.map((s) => (
+              <a key={s} href="#" className="text-foreground-faint">
+                {s}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

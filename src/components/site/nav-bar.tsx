@@ -1,16 +1,26 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import { MenuIcon } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 import { navLinks } from "@/lib/site-data";
 
 /**
- * Fixed nav that sits over the yellow hero. A white "sheet" fades in once the
- * page is scrolled, matching the design's `navSheet` behaviour. Logo is red,
- * links are ink-black, CTA is TED red.
+ * Fixed nav over the yellow hero. A white sheet fades in once the page
+ * is scrolled. Runs on the main CI scope, not the seasonal skin.
  */
 export function NavBar() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -23,87 +33,69 @@ export function NavBar() {
   }, []);
 
   return (
-    <div
-      data-theme="main"
-      style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 60 }}
-    >
+    <div data-theme="main" className="fixed inset-x-0 top-0 z-50">
       <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "var(--t-surface-card)",
-          borderBottom: "1px solid var(--t-line)",
-          transition: "opacity 140ms ease",
-          pointerEvents: "none",
-          opacity: scrolled ? 1 : 0,
-        }}
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute inset-0 border-b border-line bg-surface-card transition-opacity duration-140",
+          scrolled ? "opacity-100" : "opacity-0"
+        )}
       />
-      <nav
-        style={{
-          position: "relative",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "20px 32px",
-          fontFamily: "var(--t-font-body)",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1280,
-            margin: "0 auto",
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 24,
-          }}
-        >
-          <a href="#hero" style={{ display: "inline-flex" }}>
-            <img
+      <nav className="relative flex items-center justify-between px-8 py-5 font-body">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6">
+          <a href="#hero" className="inline-flex">
+            <Image
               src="/assets/logos/tedxbangkokyouth-lockup-red.png"
               alt="TEDxBangkok Youth"
-              style={{ height: 34, width: "auto", display: "block" }}
+              width={220}
+              height={34}
+              className="block h-8.5 w-auto"
             />
           </a>
-          <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-            <ul
-              className="hidden md:flex"
-              style={{ gap: 26, listStyle: "none", margin: 0, padding: 0 }}
-            >
+
+          <div className="flex items-center gap-7">
+            <ul className="hidden gap-6.5 md:flex">
               {navLinks.map((l) => (
                 <li key={l.label}>
                   <a
                     href={l.href}
-                    style={{
-                      color: "var(--t-foreground)",
-                      fontSize: 14,
-                      fontWeight: "500",
-                      textDecoration: "none",
-                    }}
+                    className="text-sm leading-normal font-medium text-foreground hover:text-brand"
                   >
                     {l.label}
                   </a>
                 </li>
               ))}
             </ul>
-            <a
-              href="#tickets"
-              style={{
-                background: "var(--t-brand)",
-                color: "var(--t-surface-card)",
-                border: "none",
-                borderRadius: "var(--t-radius-control)",
-                padding: "10px 20px",
-                fontSize: 14,
-                fontWeight: "600",
-                fontFamily: "var(--t-font-body)",
-                textDecoration: "none",
-                whiteSpace: "nowrap",
-              }}
-            >
-              ซื้อบัตรเข้าชม
-            </a>
+
+            <Button asChild className="text-sm leading-normal">
+              <a href="#tickets">ซื้อบัตรเข้าชม</a>
+            </Button>
+
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild className="md:hidden">
+                <Button variant="ghost" size="icon-sm" aria-label="เปิดเมนู">
+                  <MenuIcon />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" data-theme="main" className="w-72">
+                <SheetTitle className="px-6 pt-6 font-heading text-title-sm">
+                  เมนู
+                </SheetTitle>
+                <ul className="flex flex-col px-6 py-4">
+                  {navLinks.map((l) => (
+                    <li key={l.label}>
+                      <a
+                        href={l.href}
+                        onClick={() => setOpen(false)}
+                        className="block border-b border-line-subtle py-3 text-base font-medium text-foreground hover:text-brand"
+                      >
+                        {l.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </nav>

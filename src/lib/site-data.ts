@@ -12,10 +12,14 @@ export const navLinks = [
 ];
 
 // ─── Gallery ────────────────────────────────────────────────
+/** Brand tones, resolved to token-driven classes in the card components. */
+export type Tone = "pink" | "yellow" | "cyan" | "green" | "red";
+
 export type GalleryYear = {
-  bg: string;
-  chip: string;
-  panelDark: string;
+  /** Drives the card field and its image panel tint. */
+  tone: Tone;
+  /** The eyebrow tone. 2023 deliberately pairs a red chip with a yellow card. */
+  chipTone: Tone;
   year: string;
   talks: string;
   title: string;
@@ -26,9 +30,8 @@ export type GalleryYear = {
 
 export const galleryYears: GalleryYear[] = [
   {
-    bg: "#02AFDA",
-    panelDark: "#CFF1FA",
-    chip: "#0288AB",
+    tone: "cyan",
+    chipTone: "cyan",
     year: "2024",
     talks: "10 talks",
     title: "คัมมิ่งโฮม",
@@ -37,9 +40,8 @@ export const galleryYears: GalleryYear[] = [
     placeholder: "รูปปี 2024",
   },
   {
-    bg: "#F9EF3E",
-    panelDark: "#FDFBC9",
-    chip: "#A11B1F",
+    tone: "yellow",
+    chipTone: "red",
     year: "2023",
     talks: "9 talks",
     title: "UnleashXpression",
@@ -48,9 +50,8 @@ export const galleryYears: GalleryYear[] = [
     placeholder: "รูปปี 2023",
   },
   {
-    bg: "#00A14B",
-    panelDark: "#CFEEDD",
-    chip: "#00803B",
+    tone: "green",
+    chipTone: "green",
     year: "2022",
     talks: "8 talks",
     title: "You(th) Matter!",
@@ -59,9 +60,8 @@ export const galleryYears: GalleryYear[] = [
     placeholder: "รูปปี 2022",
   },
   {
-    bg: "#EF4899",
-    panelDark: "#FBDCEB",
-    chip: "#D6317F",
+    tone: "pink",
+    chipTone: "pink",
     year: "2019",
     talks: "8 talks",
     title: "Playing From Playlist",
@@ -70,9 +70,8 @@ export const galleryYears: GalleryYear[] = [
     placeholder: "รูปปี 2019",
   },
   {
-    bg: "#C82227",
-    panelDark: "#F8DADB",
-    chip: "#A11B1F",
+    tone: "red",
+    chipTone: "red",
     year: "2018",
     talks: "6 talks",
     title: "TEDx Youth 2018",
@@ -105,7 +104,7 @@ const SPEAKERS: SpeakerSource[] = [
   { name: "สุพิชญา ธรรมวัฒน์", role: "ผู้ประกาศข่าวโรงเรียน", talk: "ไมโครโฟนที่มือฉันสั่น", photo: "2025-12" },
 ];
 
-const TINTS = ["#FBDCEB", "#FDFBC9", "#CFF1FA", "#CFEEDD", "#F8DADB"];
+const TONES: Tone[] = ["pink", "yellow", "cyan", "green", "red"];
 
 // The design only has speaker photos 01–03 and 05–12 available; the card
 // for a missing photo falls back to the speaker's initial on a tinted panel.
@@ -123,7 +122,7 @@ export const speakers = SPEAKERS.map((s, i) => {
     hasPhoto,
     photo: hasPhoto ? `/assets/speakers/${s.photo}.jpg` : null,
     initial: (s.name || "?").trim().charAt(0),
-    tint: TINTS[i % TINTS.length],
+    tone: TONES[i % TONES.length],
   };
 });
 

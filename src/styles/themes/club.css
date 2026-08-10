@@ -21,6 +21,8 @@
   --t-foreground-muted: var(--color-club-ink-500);
   --t-foreground-faint: var(--color-club-ink-400);
   --t-foreground-inverse: var(--color-club-paper);
+  /* Reads on --t-surface-sunken, which stays light when inverted. */
+  --t-foreground-on-sunken: var(--color-club-ink-900);
 
   /* Brand */
   --t-brand: var(--color-club-red);

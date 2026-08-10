@@ -21,6 +21,8 @@
   --t-foreground-muted: var(--color-tg-navy-500);
   --t-foreground-faint: var(--color-tg-navy-100);
   --t-foreground-inverse: var(--color-tg-paper);
+  /* Reads on --t-surface-sunken, which stays light when inverted. */
+  --t-foreground-on-sunken: var(--color-tg-ink);
 
   /* Brand */
   --t-brand: var(--color-tg-pink);

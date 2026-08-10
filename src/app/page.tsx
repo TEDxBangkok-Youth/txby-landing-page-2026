@@ -1,728 +1,270 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
+
+import { Button } from "@/components/ui/button";
+import { ClubMap } from "@/components/site/club-map";
+import { GalleryYearCard } from "@/components/site/gallery-year-card";
 import { ImageSlot } from "@/components/site/image-slot";
 import { NavBar } from "@/components/site/nav-bar";
+import { SectionHeader, SectionShell } from "@/components/site/section-shell";
 import { SiteFooter } from "@/components/site/site-footer";
-import { ClubMap } from "@/components/site/club-map";
+import { SpeakerCard } from "@/components/site/speaker-card";
+import { TicketTag } from "@/components/site/ticket-tag";
 import { VolunteersRoster } from "@/components/site/volunteers-roster";
-import { ThaiTag } from "@/components/site/thai-ui";
-import { Button } from "@/components/ui/button";
 import { galleryYears, speakers } from "@/lib/site-data";
-
-const CARD_SHADOW = "3px 4px 0 rgba(17,29,69,.9)";
 
 export default function Home() {
   return (
-    <div
-      style={{
-        background: "#FBF6E9",
-        fontFamily: "var(--t-font-body)",
-        color: "#111D45",
-      }}
+    <div className="bg-surface font-body text-foreground">
+      <Hero />
+      <Gallery />
+      <Club />
+      <Speakers />
+      <Volunteers />
+      <SiteFooter />
+    </div>
+  );
+}
+
+/**
+ * The hero is a fixed-ratio poster. Everything inside is positioned in
+ * cqw so the whole composition scales as one unit with the stage.
+ */
+function Hero() {
+  return (
+    <section
+      id="hero"
+      className="relative flex h-dvh min-h-140 w-full items-center justify-center overflow-hidden bg-tg-yellow-field"
     >
-      {/* ═══════════════ HERO ═══════════════ */}
-      <section
-        id="hero"
-        className="thai"
-        style={{
-          position: "relative",
-          overflow: "hidden",
-          boxSizing: "border-box",
-          width: "100%",
-          height: "100dvh",
-          minHeight: 560,
-          background: "#F4E31E",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <NavBar />
+      <NavBar />
 
-        <div
-          style={{
-            position: "relative",
-            width: "min(100%, calc((100dvh - 132px) * 1456 / 1010))",
-            maxWidth: 1680,
-            margin: "0 auto",
-            aspectRatio: "1456 / 1010",
-            containerType: "inline-size",
-          }}
-        >
-          <img
-            src="/assets/thaigredient/burst-blue.svg"
-            alt=""
-            style={{
-              position: "absolute",
-              left: "-6cqw",
-              top: "-2cqw",
-              width: "30cqw",
-              height: "auto",
-            }}
-          />
+      <div className="@container relative mx-auto aspect-1456/1010 w-[min(100%,calc((100dvh-132px)*1456/1010))] max-w-[1680px]">
+        <Image
+          src="/assets/thaigredient/burst-blue.svg"
+          alt=""
+          width={491}
+          height={381}
+          className="absolute top-[-2cqw] left-[-6cqw] h-auto w-[30cqw]"
+        />
 
-          <div
-            style={{
-              position: "absolute",
-              left: "23cqw",
-              top: "6cqw",
-              width: "74cqw",
-              fontFamily: "var(--t-font-heading)",
-              fontWeight: 700,
-              color: "#111D45",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "1cqw",
-                fontSize: "9.8cqw",
-                lineHeight: 1.12,
-                letterSpacing: "-0.01em",
-              }}
-            >
-              <span>ส่วนผสม</span>
-              <span
-                style={{
-                  display: "inline-block",
-                  background: "#02AFDA",
-                  border: "0.38cqw solid #111D45",
-                  borderRadius: "1.2cqw",
-                  padding: "0 1cqw 0.5cqw",
-                  transform: "rotate(-1.5deg)",
-                }}
-              >
-                ลับ
-              </span>
-            </div>
-            <div
-              style={{
-                marginLeft: "9.8cqw",
-                marginTop: "-0.4cqw",
-                fontSize: "9.5cqw",
-                lineHeight: 1.3,
-                letterSpacing: "0.01em",
-                color: "transparent",
-                WebkitTextStroke: "0.3cqw #111D45",
-              }}
-            >
-              ฉบับคนไทย
-            </div>
+        <div className="absolute top-[6cqw] left-[23cqw] w-[74cqw] font-heading font-bold text-foreground">
+          <div className="flex items-center gap-[1cqw] text-[9.8cqw] leading-[1.12] tracking-[-0.01em]">
+            <span>ส่วนผสม</span>
+            <span className="inline-block rotate-[-1.5deg] rounded-[1.2cqw] border-[0.38cqw] border-line-strong bg-tg-cyan px-[1cqw] pb-[0.5cqw]">
+              ลับ
+            </span>
           </div>
-
-          <img
-            src="/assets/thaigredient/skewer-pork.png"
-            alt=""
-            style={{
-              position: "absolute",
-              left: "5cqw",
-              top: "20cqw",
-              width: "19cqw",
-              height: "auto",
-              transform: "rotate(-4deg)",
-            }}
-          />
-          <img
-            src="/assets/thaigredient/bowl-mix-hero.png"
-            alt="ชามส่วนผสมลับ"
-            style={{
-              position: "absolute",
-              left: "7cqw",
-              top: "22cqw",
-              width: "82cqw",
-              height: "auto",
-            }}
-          />
-          <img
-            src="/assets/thaigredient/tag-price-67.png"
-            alt="฿67.00 เท็ด x บางกอก"
-            style={{
-              position: "absolute",
-              left: "70cqw",
-              top: "48cqw",
-              width: "12cqw",
-              height: "auto",
-              transform: "rotate(-3deg)",
-            }}
-          />
+          <div className="mt-[-0.4cqw] ml-[9.8cqw] text-[9.5cqw] leading-[1.3] tracking-[0.01em] text-transparent [-webkit-text-stroke:0.3cqw_var(--t-foreground)]">
+            ฉบับคนไทย
+          </div>
         </div>
-      </section>
 
-      {/* ═══════════════ GALLERY ═══════════════ */}
-      <section
-        id="gallery"
-        className="thai grain-overlay"
-        style={{
-          background: "#FBF6E9",
-          padding: "104px 32px",
-          borderBottom: "4px solid #111D45",
-        }}
-      >
-        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
-              gap: 40,
-              flexWrap: "wrap",
-              marginBottom: 56,
-            }}
-          >
-            <div style={{ maxWidth: 660 }}>
-              <h2
-                style={{
-                  margin: 0,
-                  fontFamily: "var(--t-font-heading)",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  fontSize: "clamp(2.25rem,6vw,4.25rem)",
-                  lineHeight: 1.02,
-                  letterSpacing: ".01em",
-                  color: "#111D45",
-                }}
-              >
-                TED Youth
-                <br />
-                Gallery
-              </h2>
-              <p
-                style={{
-                  margin: "18px 0 0",
-                  fontSize: "1.125rem",
-                  lineHeight: 1.5,
-                  maxWidth: 520,
-                  color: "#233064",
-                  textWrap: "pretty",
-                }}
-              >
-                ทุกปีคือหนึ่งสูตร ย้อนดูธีม ผู้พูด และรสชาติของแต่ละรุ่นที่ผ่านเวทีนี้
-              </p>
-            </div>
-            <img
-              src="/assets/thaigredient/bowl-rooster.png"
-              alt=""
-              style={{ width: 170, height: "auto", transform: "rotate(6deg)" }}
+        <Image
+          src="/assets/thaigredient/skewer-pork.png"
+          alt=""
+          width={680}
+          height={1110}
+          className="absolute top-[20cqw] left-[5cqw] h-auto w-[19cqw] rotate-[-4deg]"
+        />
+        <Image
+          src="/assets/thaigredient/bowl-mix-hero.png"
+          alt="ชามส่วนผสมลับ"
+          width={2557}
+          height={1352}
+          preload
+          className="absolute top-[22cqw] left-[7cqw] h-auto w-[82cqw]"
+        />
+        <Image
+          src="/assets/thaigredient/tag-price-67.png"
+          alt="฿67.00 เท็ด x บางกอก"
+          width={480}
+          height={393}
+          className="absolute top-[48cqw] left-[70cqw] h-auto w-[12cqw] rotate-[-3deg]"
+        />
+      </div>
+    </section>
+  );
+}
+
+function Gallery() {
+  return (
+    <SectionShell id="gallery" surface="paper" grain>
+      <SectionHeader
+        className="mb-14"
+        measure="max-w-[660px]"
+        leadMeasure="max-w-[520px]"
+        title={
+          <>
+            TED Youth
+            <br />
+            Gallery
+          </>
+        }
+        lead="ทุกปีคือหนึ่งสูตร ย้อนดูธีม ผู้พูด และรสชาติของแต่ละรุ่นที่ผ่านเวทีนี้"
+        aside={
+          <Image
+            src="/assets/thaigredient/bowl-rooster.png"
+            alt=""
+            width={520}
+            height={319}
+            className="h-auto w-42.5 rotate-[6deg]"
+          />
+        }
+      />
+
+      {/* Featured — the most recent edition */}
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(380px,1fr))] items-center gap-14">
+        <div className="relative rotate-[-1.4deg]">
+          <div className="relative aspect-video w-full overflow-hidden rounded-card border-sticker border-line-strong bg-tg-paper-100 shadow-card">
+            <Image
+              src="/assets/gallery-2025-cover.jpg"
+              alt="บรรยากาศงานปี 2025"
+              fill
+              sizes="(max-width: 768px) 100vw, 600px"
+              className="object-cover"
             />
           </div>
-
-          {/* featured 2025 */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(380px,1fr))",
-              alignItems: "center",
-              gap: 56,
-            }}
-          >
-            <div style={{ position: "relative", transform: "rotate(-1.4deg)" }}>
-              <div
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  aspectRatio: "16 / 9",
-                  border: "2.5px solid #111D45",
-                  borderRadius: 14,
-                  overflow: "hidden",
-                  background: "#F3ECD8",
-                  boxShadow: CARD_SHADOW,
-                }}
-              >
-                <img
-                  src="/assets/gallery-2025-cover.jpg"
-                  alt="บรรยากาศงานปี 2025"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    display: "block",
-                  }}
-                />
-              </div>
-              <div
-                style={{
-                  position: "absolute",
-                  top: -26,
-                  right: -18,
-                  transform: "rotate(8deg)",
-                }}
-              >
-                <ThaiTag price="2025" color="pink">
-                  ปีล่าสุด
-                </ThaiTag>
-              </div>
-            </div>
-
-            <div
-              style={{
-                minWidth: 0,
-                display: "flex",
-                flexDirection: "column",
-                gap: 18,
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--t-font-heading)",
-                  fontWeight: 700,
-                  fontSize: 12,
-                  letterSpacing: ".08em",
-                  textTransform: "uppercase",
-                  color: "#D6317F",
-                }}
-              >
-                12 talks · หอศิลปกรุงเทพฯ
-              </div>
-              <h3
-                style={{
-                  margin: 0,
-                  fontFamily: "var(--t-font-heading)",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  fontSize: "clamp(1.75rem,4vw,2.75rem)",
-                  lineHeight: 1.3,
-                  color: "#111D45",
-                }}
-              >
-                เย็บปักถักทอล์ก
-              </h3>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: "1.0625rem",
-                  lineHeight: 1.6,
-                  color: "#233064",
-                  textWrap: "pretty",
-                }}
-              >
-                พบกับ 12 เรื่องเล่า จาก 12 เสียงต่างวัย ต่างเส้นทาง ที่ถักทอมาจากประสบการณ์
-                ความฝัน ความหวัง และความเจ็บปวด โดยร้อยเรียงและถ่ายทอดอย่างพิถีพิถัน
-                เพื่อให้หัวใจของคุณกลับมาพองโตอีกครั้ง
-              </p>
-              <div
-                style={{ display: "flex", flexWrap: "wrap", gap: 14, marginTop: 8 }}
-              >
-                <Button asChild>
-                  <a href="#">ดูรายละเอียดปี 2025</a>
-                </Button>
-                <Button asChild variant="outline">
-                  <a href="#">ดู Talk บน YouTube</a>
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* year archive */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(210px,1fr))",
-              gap: 28,
-              marginTop: 72,
-            }}
-          >
-            {galleryYears.map((y) => (
-              <a
-                key={y.year}
-                href="#"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  background: y.bg,
-                  border: "2.5px solid #111D45",
-                  borderRadius: 14,
-                  boxShadow: CARD_SHADOW,
-                  overflow: "hidden",
-                  color: "#111D45",
-                }}
-              >
-                <div
-                  style={{
-                    position: "relative",
-                    aspectRatio: "16 / 10",
-                    background: y.panelDark,
-                    borderBottom: "2.5px solid #111D45",
-                  }}
-                >
-                  <ImageSlot shape="rect" placeholder={y.placeholder} />
-                </div>
-                <div style={{ padding: "16px 18px 20px", background: "#FFFDF7", flex: 1 }}>
-                  <div
-                    style={{
-                      fontFamily: "var(--t-font-heading)",
-                      fontWeight: 700,
-                      fontSize: 11,
-                      letterSpacing: ".08em",
-                      textTransform: "uppercase",
-                      color: y.chip,
-                    }}
-                  >
-                    {y.year} · {y.talks}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "var(--t-font-heading)",
-                      fontWeight: 700,
-                      fontSize: "1.25rem",
-                      textTransform: "uppercase",
-                      marginTop: 8,
-                      lineHeight: 1.15,
-                    }}
-                  >
-                    {y.title}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: ".875rem",
-                      color: "#3E4B7C",
-                      marginTop: 8,
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    {y.desc}
-                  </div>
-                </div>
-              </a>
-            ))}
+          <div className="absolute -top-6.5 -right-4.5 rotate-[8deg]">
+            <TicketTag price="2025" tone="pink">
+              ปีล่าสุด
+            </TicketTag>
           </div>
         </div>
-      </section>
 
-      {/* ═══════════════ TED CLUB ═══════════════ */}
-      <section
-        id="club"
-        data-theme="club"
-        style={{
-          position: "relative",
-          overflow: "hidden",
-          background: "var(--t-surface)",
-          color: "var(--t-foreground)",
-          fontFamily: "var(--t-font-body)",
-          padding: "80px 32px",
-          borderTop: "var(--bw-marker) solid var(--t-line-strong)",
-          borderBottom: "var(--bw-marker) solid var(--t-line-strong)",
-        }}
-      >
-        <img
+        <div className="flex min-w-0 flex-col gap-4.5">
+          <div className="font-heading text-xs font-bold tracking-eyebrow uppercase text-brand-hover">
+            12 talks · หอศิลปกรุงเทพฯ
+          </div>
+          <h3 className="font-heading text-h2 font-bold uppercase">
+            เย็บปักถักทอล์ก
+          </h3>
+          <p className="text-body text-pretty text-foreground-secondary">
+            พบกับ 12 เรื่องเล่า จาก 12 เสียงต่างวัย ต่างเส้นทาง ที่ถักทอมาจากประสบการณ์
+            ความฝัน ความหวัง และความเจ็บปวด โดยร้อยเรียงและถ่ายทอดอย่างพิถีพิถัน
+            เพื่อให้หัวใจของคุณกลับมาพองโตอีกครั้ง
+          </p>
+          <div className="mt-2 flex flex-wrap gap-3.5">
+            <Button asChild>
+              <a href="#">ดูรายละเอียดปี 2025</a>
+            </Button>
+            <Button asChild variant="outline">
+              <a href="#">ดู Talk บน YouTube</a>
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Year archive */}
+      <div className="mt-18 grid grid-cols-[repeat(auto-fit,minmax(210px,1fr))] gap-7">
+        {galleryYears.map((y) => (
+          <GalleryYearCard key={y.year} year={y} />
+        ))}
+      </div>
+    </SectionShell>
+  );
+}
+
+function Club() {
+  return (
+    <SectionShell
+      id="club"
+      data-theme="club"
+      surface="theme"
+      rule="both"
+      className="overflow-hidden py-20"
+      decoration={
+        <Image
           src="/assets/tedclub/scribbles/field-texture.svg"
           alt=""
           aria-hidden
-          style={{
-            position: "absolute",
-            right: -150,
-            bottom: 24,
-            width: 380,
-            height: "auto",
-            opacity: 0.3,
-            pointerEvents: "none",
-          }}
+          width={800}
+          height={500}
+          className="pointer-events-none absolute -right-37.5 bottom-6 h-auto w-95 opacity-30"
         />
-        <div style={{ position: "relative", maxWidth: 1280, margin: "0 auto" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-              gap: 48,
-              flexWrap: "wrap",
-              marginBottom: 48,
-            }}
-          >
-            <div style={{ maxWidth: 640 }}>
-              <h2
-                style={{
-                  margin: 0,
-                  fontFamily: "var(--t-font-heading)",
-                  fontWeight: 700,
-                  fontSize: "clamp(32px,4.6vw,44px)",
-                  lineHeight: "1.14",
-                  letterSpacing: "-0.015em",
-                  color: "var(--t-foreground)",
-                }}
-              >
-                TED Club{" "}
-                <span
-                  style={{
-                    position: "relative",
-                    display: "inline-block",
-                    color: "var(--t-brand)",
-                  }}
-                >
-                  ทั่วประเทศไทย
-                  <img
-                    src="/assets/tedclub/scribbles/underline-red.svg"
-                    alt=""
-                    aria-hidden
-                    style={{
-                      position: "absolute",
-                      left: 0,
-                      right: 0,
-                      bottom: -10,
-                      width: "100%",
-                      height: "auto",
-                    }}
-                  />
-                </span>
-              </h2>
-              <p
-                style={{
-                  margin: "20px 0 0",
-                  fontFamily: "var(--t-font-body)",
-                  fontWeight: 400,
-                  fontSize: "var(--text-body-lg)",
-                  lineHeight: "1.55",
-                  color: "var(--t-foreground-secondary)",
-                  maxWidth: 560,
-                  textWrap: "pretty",
-                }}
-              >
-                ชมรมในโรงเรียนและมหาวิทยาลัยที่จัดเวทีของตัวเองตลอดทั้งปี
-                ทุกกิจกรรมออกแบบให้ครูหนึ่งคนจัดได้เอง ด้วยคู่มือและสไลด์ที่เตรียมไว้ให้
-              </p>
-            </div>
-            <img
-              src="/assets/tedclub/logo.png"
-              alt="TED Club · TEDxBangkok Youth"
-              style={{ height: 140, width: "auto", flexShrink: 0 }}
-            />
-          </div>
+      }
+    >
+      <SectionHeader
+        className="mb-12 gap-12"
+        align="start"
+        size="h3"
+        leadSize="body-lg"
+        surface="theme"
+        measure="max-w-[640px]"
+        leadMeasure="max-w-[560px]"
+        title={
+          <>
+            TED Club{" "}
+            <span className="relative inline-block text-brand">
+              ทั่วประเทศไทย
+              <Image
+                src="/assets/tedclub/scribbles/underline-red.svg"
+                alt=""
+                aria-hidden
+                width={320}
+                height={26}
+                className="absolute inset-x-0 -bottom-2.5 h-auto w-full"
+              />
+            </span>
+          </>
+        }
+        lead="ชมรมในโรงเรียนและมหาวิทยาลัยที่จัดเวทีของตัวเองตลอดทั้งปี ทุกกิจกรรมออกแบบให้ครูหนึ่งคนจัดได้เอง ด้วยคู่มือและสไลด์ที่เตรียมไว้ให้"
+        aside={
+          <Image
+            src="/assets/tedclub/logo.png"
+            alt="TED Club · TEDxBangkok Youth"
+            width={512}
+            height={507}
+            className="h-35 w-auto shrink-0"
+          />
+        }
+      />
 
-          <ClubMap />
+      <ClubMap />
+    </SectionShell>
+  );
+}
+
+function Speakers() {
+  return (
+    <SectionShell id="speakers" surface="brand" grain>
+      <SectionHeader
+        className="mb-12"
+        surface="brand"
+        measure="max-w-[620px]"
+        leadMeasure="max-w-[520px]"
+        title="Speakers"
+        lead="ผู้พูดทุกคนบนเวที TEDxBangkok Youth ปีนี้"
+      />
+
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-x-6 gap-y-8">
+        {speakers.map((s) => (
+          <SpeakerCard key={s.name} speaker={s} />
+        ))}
+      </div>
+    </SectionShell>
+  );
+}
+
+function Volunteers() {
+  return (
+    <SectionShell id="volunteers" surface="ink" grain>
+      <SectionHeader
+        className="mb-12"
+        surface="ink"
+        measure="max-w-[620px]"
+        leadMeasure="max-w-[560px]"
+        title="Volunteers"
+        lead="ทุกงานเกิดขึ้นได้เพราะอาสาสมัคร นี่คือรายชื่อทีมงานครบทุกคนของปีนี้"
+      />
+
+      <div className="grid grid-cols-[minmax(0,1fr)_400px] items-stretch gap-8 max-[820px]:grid-cols-1">
+        <div
+          data-surface="inverse"
+          className="relative min-w-0 overflow-hidden rounded-card border-sticker border-line-strong bg-surface-card shadow-card"
+        >
+          <ImageSlot shape="rect" placeholder="รูปทีมอาสาสมัคร" />
         </div>
-      </section>
-
-      {/* ═══════════════ SPEAKERS ═══════════════ */}
-      <section
-        id="speakers"
-        className="thai grain-overlay"
-        style={{
-          background: "#EF4899",
-          padding: "104px 32px",
-          borderBottom: "4px solid #111D45",
-        }}
-      >
-        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
-              gap: 40,
-              flexWrap: "wrap",
-              marginBottom: 48,
-            }}
-          >
-            <div style={{ maxWidth: 620 }}>
-              <h2
-                style={{
-                  margin: 0,
-                  fontFamily: "var(--t-font-heading)",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  fontSize: "clamp(2.25rem,6vw,4rem)",
-                  lineHeight: 1.02,
-                  color: "#FFFDF7",
-                }}
-              >
-                Speakers
-              </h2>
-              <p
-                style={{
-                  margin: "18px 0 0",
-                  fontSize: "1.125rem",
-                  lineHeight: 1.5,
-                  color: "#5B0E36",
-                  maxWidth: 520,
-                  textWrap: "pretty",
-                }}
-              >
-                ผู้พูดทุกคนบนเวที TEDxBangkok Youth ปีนี้
-              </p>
-            </div>
-          </div>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill,minmax(180px,1fr))",
-              gap: "32px 24px",
-              maxWidth: "100%",
-            }}
-          >
-            {speakers.map((s) => (
-              <div
-                key={s.name}
-                style={{
-                  minWidth: 0,
-                  background: "#FFFDF7",
-                  border: "2.5px solid #111D45",
-                  borderRadius: 14,
-                  boxShadow: CARD_SHADOW,
-                  overflow: "hidden",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <div
-                  style={{
-                    position: "relative",
-                    aspectRatio: "1 / 1",
-                    borderBottom: "2.5px solid #111D45",
-                    background: s.tint,
-                    overflow: "hidden",
-                  }}
-                >
-                  {s.hasPhoto ? (
-                    <div
-                      role="img"
-                      aria-label={s.name}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        backgroundImage: `url(${s.photo})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }}
-                    />
-                  ) : (
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontFamily: "var(--t-font-heading)",
-                        fontWeight: 700,
-                        fontSize: 56,
-                        color: "#111D45",
-                        opacity: 0.55,
-                      }}
-                    >
-                      {s.initial}
-                    </div>
-                  )}
-                </div>
-                <div
-                  style={{
-                    padding: "14px 16px 18px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 6,
-                    flex: 1,
-                  }}
-                >
-                  <div
-                    style={{
-                      fontFamily: "var(--t-font-heading)",
-                      fontWeight: 700,
-                      fontSize: "1.0625rem",
-                      lineHeight: 1.2,
-                      color: "#111D45",
-                    }}
-                  >
-                    {s.name}
-                  </div>
-                  <div style={{ fontSize: ".8125rem", lineHeight: 1.45, color: "#3E4B7C" }}>
-                    {s.role}
-                  </div>
-                  <div
-                    style={{
-                      marginTop: "auto",
-                      paddingTop: 10,
-                      fontSize: ".8125rem",
-                      fontWeight: 600,
-                      color: "#D6317F",
-                      lineHeight: 1.4,
-                    }}
-                  >
-                    “{s.talk}”
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════ VOLUNTEERS ═══════════════ */}
-      <section
-        id="volunteers"
-        className="thai grain-overlay"
-        style={{
-          background: "#111D45",
-          padding: "104px 32px",
-          borderBottom: "4px solid #111D45",
-        }}
-      >
-        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
-              gap: 40,
-              flexWrap: "wrap",
-              marginBottom: 48,
-            }}
-          >
-            <div style={{ maxWidth: 620 }}>
-              <h2
-                style={{
-                  margin: 0,
-                  fontFamily: "var(--t-font-heading)",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  fontSize: "clamp(2.25rem,6vw,4rem)",
-                  lineHeight: 1.02,
-                  color: "#FFFDF7",
-                }}
-              >
-                Volunteers
-              </h2>
-              <p
-                style={{
-                  margin: "18px 0 0",
-                  fontSize: "1.125rem",
-                  lineHeight: 1.5,
-                  color: "#DCDFEA",
-                  maxWidth: 560,
-                  textWrap: "pretty",
-                }}
-              >
-                ทุกงานเกิดขึ้นได้เพราะอาสาสมัคร นี่คือรายชื่อทีมงานครบทุกคนของปีนี้
-              </p>
-            </div>
-          </div>
-
-          <div
-            className="volunteers-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "minmax(0, 1fr) 400px",
-              gap: 32,
-              alignItems: "stretch",
-            }}
-          >
-            <div
-              style={{
-                position: "relative",
-                minWidth: 0,
-                border: "2.5px solid #FFFDF7",
-                borderRadius: 14,
-                overflow: "hidden",
-                background: "#233064",
-                boxShadow: "3px 4px 0 rgba(255,253,247,.9)",
-              }}
-            >
-              <ImageSlot shape="rect" placeholder="รูปทีมอาสาสมัคร" />
-            </div>
-            <VolunteersRoster />
-          </div>
-        </div>
-      </section>
-
-      <SiteFooter />
-    </div>
+        <VolunteersRoster />
+      </div>
+    </SectionShell>
   );
 }

@@ -1,5 +1,6 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
+import { Slot } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
@@ -30,11 +31,17 @@ function Card({
   className,
   variant = "default",
   size = "default",
+  asChild = false,
   ...props
 }: React.ComponentProps<"div"> &
-  VariantProps<typeof cardVariants> & { size?: "default" | "sm" }) {
+  VariantProps<typeof cardVariants> & {
+    size?: "default" | "sm"
+    asChild?: boolean
+  }) {
+  const Comp = asChild ? Slot.Root : "div"
+
   return (
-    <div
+    <Comp
       data-slot="card"
       data-variant={variant}
       data-size={size}
