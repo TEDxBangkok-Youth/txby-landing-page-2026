@@ -56,7 +56,7 @@ export default function DesignSystemPage() {
               {t.label}
             </Button>
           ))}
-          <span className="text-caption text-foreground-muted">
+          <span className="text-sm leading-[1.45] text-foreground-muted">
             {active.note}
           </span>
         </div>
@@ -95,7 +95,7 @@ export default function DesignSystemPage() {
 
         <Section
           title="Type scale"
-          lead="Custom steps exist only where Tailwind v4 has no equivalent — the fluid display sizes and the 11/13/15/17/19/21/26/32px steps."
+          lead="Only the fluid heading steps are custom — Tailwind v4 has no clamp()-based sizes. Every fixed size comes from Tailwind's own scale."
         >
           <ScaleTable
             rows={TYPE_SCALE.map((t) => ({
@@ -145,7 +145,7 @@ export default function DesignSystemPage() {
               <div
                 key={name}
                 className={cn(
-                  "flex flex-wrap gap-4 px-4 py-2.5 text-caption",
+                  "flex flex-wrap gap-4 px-4 py-2.5 text-sm leading-[1.45]",
                   i % 2 ? "bg-surface" : "bg-surface-card"
                 )}
               >
@@ -195,7 +195,7 @@ export default function DesignSystemPage() {
                     <div className="font-heading font-bold uppercase">
                       Sticker card
                     </div>
-                    <p className="mt-1 text-caption text-foreground-muted">
+                    <p className="mt-1 text-sm leading-[1.45] text-foreground-muted">
                       Border, radius and shadow all come from the scope.
                     </p>
                   </CardContent>
@@ -203,7 +203,7 @@ export default function DesignSystemPage() {
                 <Card className="w-64">
                   <CardContent>
                     <div className="font-medium">Default card</div>
-                    <p className="mt-1 text-caption text-muted-foreground">
+                    <p className="mt-1 text-sm leading-[1.45] text-muted-foreground">
                       Stock shadcn treatment.
                     </p>
                   </CardContent>
@@ -320,7 +320,7 @@ function ThemedProbe({ theme }: { theme: ThemeId }) {
             >
               ส่วนผสมลับ Secret Thaigredient
             </span>
-            <span className="text-micro text-foreground-muted">
+            <span className="text-xs leading-[1.4] text-foreground-muted">
               {values[`--t-font-${f}`]?.split(",")[0]}
             </span>
           </div>
@@ -377,9 +377,9 @@ function Section({
 }) {
   return (
     <section className="border-t-hairline border-line-subtle py-14">
-      <h2 className="font-heading text-title font-bold uppercase">{title}</h2>
+      <h2 className="font-heading text-2xl leading-heading font-bold uppercase">{title}</h2>
       {lead ? (
-        <p className="mt-1.5 mb-7 max-w-[640px] text-caption text-foreground-muted">
+        <p className="mt-1.5 mb-7 max-w-[640px] text-sm leading-[1.45] text-foreground-muted">
           {lead}
         </p>
       ) : null}
@@ -390,7 +390,7 @@ function Section({
 
 function SubHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="mt-6 mb-3.5 font-heading text-caption font-bold tracking-eyebrow uppercase text-foreground-secondary first:mt-0">
+    <h3 className="mt-6 mb-3.5 font-heading text-sm leading-[1.45] font-bold tracking-eyebrow uppercase text-foreground-secondary first:mt-0">
       {children}
     </h3>
   );
@@ -404,7 +404,7 @@ function Code({
   className?: string;
 }) {
   return (
-    <code className={cn("font-mono text-micro text-foreground", className)}>
+    <code className={cn("font-mono text-xs leading-[1.4] text-foreground", className)}>
       {children}
     </code>
   );
@@ -440,7 +440,7 @@ function Swatch({
       />
       <div className="leading-tight">
         <Code>{label}</Code>
-        <div className="font-mono text-micro text-foreground-muted">
+        <div className="font-mono text-xs leading-[1.4] text-foreground-muted">
           {resolved || "—"}
         </div>
       </div>

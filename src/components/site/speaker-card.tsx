@@ -8,8 +8,10 @@ import { cn } from "@/lib/utils";
 type Speaker = (typeof speakers)[number];
 
 /**
- * A speaker portrait over a tinted panel, with the talk title pinned
- * to the bottom of the caption so cards in a row line up.
+ * A speaker portrait over a tinted panel. Carries exactly the same
+ * three facts as the event page's card — ชื่อเล่น, ชื่อจริง and the
+ * one-liner — from the same source in src/lib/events.ts. The talk title
+ * belongs to the year page's talk index, not here.
  */
 export function SpeakerCard({ speaker }: { speaker: Speaker }) {
   return (
@@ -23,25 +25,30 @@ export function SpeakerCard({ speaker }: { speaker: Speaker }) {
         {speaker.photo ? (
           <Image
             src={speaker.photo}
-            alt={speaker.name}
+            alt={`${speaker.nickname} — ${speaker.fullName}`}
             fill
             sizes="(max-width: 768px) 50vw, 220px"
             className="object-cover"
           />
         ) : (
-          <div className="flex size-full items-center justify-center font-heading text-6xl font-bold text-foreground opacity-55">
+          <div
+            aria-hidden
+            className="flex size-full items-center justify-center font-heading text-6xl font-bold text-foreground opacity-55"
+          >
             {speaker.initial}
           </div>
         )}
       </div>
-      <CardContent className="flex flex-1 flex-col gap-1.5 px-4 pt-3.5 pb-4.5">
-        <div className="font-heading text-body leading-[1.2] font-bold text-foreground">
-          {speaker.name}
-        </div>
-        <div className="text-caption text-foreground-muted">{speaker.role}</div>
-        <div className="mt-auto pt-2.5 text-caption leading-[1.4] font-semibold text-brand-hover">
-          &ldquo;{speaker.talk}&rdquo;
-        </div>
+      <CardContent className="flex flex-1 flex-col px-4 pt-3.5 pb-4.5">
+        <h3 className="font-heading text-xl leading-heading font-bold text-foreground">
+          {speaker.nickname}
+        </h3>
+        <p className="mt-0.5 text-sm leading-[1.45] text-foreground-muted">
+          {speaker.fullName}
+        </p>
+        <p className="mt-2.5 text-sm leading-normal text-pretty text-foreground-secondary">
+          {speaker.oneLiner}
+        </p>
       </CardContent>
     </Card>
   );

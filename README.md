@@ -31,10 +31,23 @@ pnpm build      # production build
   Speakers, Team wall, Sponsors, Final CTA and Footer.
 - `src/components/site/sticker-button.tsx` — the `.txby-btn` sticker button
   (CVA variants: `pink · yellow · cyan · green · red · outline`, sizes `md · lg`).
+- `src/components/site/site-nav.tsx` — the shared top bar (padding, 7xl column,
+  link and logo sizing) used by both `nav-bar.tsx` (landing: fixed, scroll-faded,
+  mobile sheet) and `event-nav.tsx` (event pages: sticky, solid). Change spacing
+  here, not in the two callers.
 - `src/components/site/image-slot.tsx` — placeholder drop-zone that stands in for
   the design's `<image-slot>` web component (posters, speaker/team photos, logos).
 - `src/lib/site-data.ts` — editable event info (`ticketUrl`, `ticketPrice`,
   `eventDate`) and the generated speakers / team / sponsors / past-events collections.
+- `src/app/events/[year]/page.tsx` — one page per past edition (`/events/2025`),
+  prerendered for every year in `src/lib/events.ts`. Runs on the **TEDx main CI**
+  scope only (black / white / grey + TED red, Inter + IBM Plex Sans Thai) — no
+  Thaigredient or TED Club language. Sections: hero (theme + รายละเอียด),
+  speakers (ชื่อเล่น / ชื่อจริง / one-liner), รูปบรรยากาศในงาน, and the talk
+  index linking to YouTube.
+- `src/lib/events.ts` — the per-year content. Adding next year's page is adding
+  one `EventYear` object; the `youtubeId` / `playlistUrl` placeholders
+  (`REPLACEME*`) are the only values that must be swapped for real ids.
 - `public/assets/illustrations/` — the sticker illustrations from the design.
 
 ## Editing content

@@ -28,11 +28,11 @@ export function VolunteersRoster() {
           >
             ← กลับไปที่รายชื่อทีม
           </button>
-          <div className="text-title leading-snug">{detail.name}</div>
+          <div className="text-2xl leading-snug">{detail.name}</div>
         </div>
         <div className="flex flex-col gap-2 overflow-y-auto px-6 py-4.5">
           {detail.names.map((n) => (
-            <span key={n} className="text-body-sm text-foreground-secondary">
+            <span key={n} className="text-sm leading-normal text-foreground-secondary">
               {n}
             </span>
           ))}
@@ -44,7 +44,7 @@ export function VolunteersRoster() {
   return (
     <Card variant="sticker" className="gap-0">
       <div className={`${header} pb-4`}>
-        <div className="text-title-sm leading-snug">รายชื่อทีม Volunteers</div>
+        <div className="text-xl leading-snug">รายชื่อทีม Volunteers</div>
       </div>
       <div className="overflow-y-auto">
         {teams.map((t, i) => (
@@ -54,7 +54,7 @@ export function VolunteersRoster() {
             onClick={() => setSelected(i)}
             className="flex w-full cursor-pointer items-center justify-between border-b-2 border-line-subtle px-6 py-4 text-left text-foreground hover:bg-surface-wash"
           >
-            <span className="font-heading text-body-sm font-bold uppercase">
+            <span className="font-heading text-sm leading-normal font-bold uppercase">
               {t.name}
             </span>
             <ChevronRightIcon className="size-4 text-brand-hover" />

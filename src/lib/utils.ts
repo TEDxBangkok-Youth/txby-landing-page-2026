@@ -5,29 +5,15 @@ import { extendTailwindMerge } from "tailwind-merge"
  * tailwind-merge has to be taught the design system's custom
  * utilities, or it mis-groups them and silently drops classes:
  * `border-control` looks like a border *color* and loses to
- * `border-line-strong`, and `text-body-sm` looks like a text
- * *color* and knocks out `text-brand-foreground`. Registering each
- * name in its real group keeps both sides of those pairs.
+ * `border-line-strong`, and `text-h2` looks like a text *color*
+ * and knocks out `text-brand-foreground`. Registering each name in
+ * its real group keeps both sides of those pairs.
  *
  * Anything added to src/styles/tokens.css under a namespace that
  * already exists in Tailwind (--text-*, --radius-*, --shadow-*) or
  * as an @utility needs a line here too.
  */
-const FONT_SIZES = [
-  "display",
-  "h1",
-  "h2",
-  "h3",
-  "h4",
-  "title-lg",
-  "title",
-  "title-sm",
-  "body-lg",
-  "body",
-  "body-sm",
-  "caption",
-  "micro",
-]
+const FONT_SIZES = ["h1", "h2", "h3", "h4"]
 
 const BORDER_WIDTHS = [
   "frame",
@@ -68,7 +54,7 @@ const twMerge = extendTailwindMerge({
       rounded: RADII.map((s) => `rounded-${s}`),
       shadow: SHADOWS.map((s) => `shadow-${s}`),
       leading: ["leading-display", "leading-heading"],
-      tracking: ["tracking-eyebrow", "tracking-caps"],
+      tracking: ["tracking-eyebrow"],
     },
   },
 })

@@ -117,7 +117,7 @@ export function SectionHeader({
           <p
             className={cn(
               sectionLead({ surface }),
-              leadSize === "lg" ? "text-lg leading-normal" : "text-body-lg",
+              leadSize === "lg" ? "text-lg leading-normal" : "text-lg",
               leadMeasure
             )}
           >

@@ -40,3 +40,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# locally installed agent skills — not part of the project source,
+# and their scripts otherwise flood `pnpm lint` with warnings
+.agents/skills/impeccable/
+.claude/skills/impeccable/

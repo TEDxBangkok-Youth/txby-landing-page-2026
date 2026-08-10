@@ -178,7 +178,7 @@ export function ClubMap() {
               setSelected(null);
             }}
           >
-            <RotateCcwIcon />
+            <RotateCcwIcon/>
           </ZoomButton>
           <ZoomButton
             label="Zoom out"
@@ -197,12 +197,12 @@ export function ClubMap() {
             <button
               type="button"
               onClick={() => setSelected(null)}
-              className="block cursor-pointer pb-2.5 text-left text-caption font-bold tracking-widest uppercase text-foreground-muted hover:text-brand"
+              className="block cursor-pointer pb-2.5 text-left text-sm leading-[1.45] font-bold tracking-widest uppercase text-foreground-muted hover:text-brand"
             >
               ← กลับไปที่รายชื่อทั้งหมด
             </button>
           ) : null}
-          <div className="font-heading text-title leading-heading font-bold tracking-tight">
+          <div className="font-heading text-2xl leading-heading font-bold tracking-tight">
             {detail ? detail.city : MAP_DEFAULT_TITLE}
           </div>
         </div>
@@ -213,7 +213,7 @@ export function ClubMap() {
               <Stat value={detail.clubs} label="ชมรม" />
               <Stat value={detail.since} label="ตั้งแต่" />
             </div>
-            <div className="mt-5 text-body leading-[1.55] text-foreground-secondary">
+            <div className="mt-5 text-base leading-[1.55] text-foreground-secondary">
               {detail.note}
             </div>
           </div>
@@ -228,8 +228,8 @@ export function ClubMap() {
                 onMouseLeave={() => setTip(null)}
                 className="block w-full cursor-pointer border-b-hairline border-line-subtle px-6 py-3.5 text-left text-foreground hover:bg-surface-wash"
               >
-                <div className="font-heading text-body font-bold">{c.city}</div>
-                <div className="mt-0.75 text-body-sm text-foreground-secondary">
+                <div className="font-heading text-base leading-[1.6] font-bold">{c.city}</div>
+                <div className="mt-0.75 text-sm leading-normal text-foreground-secondary">
                   {c.en} · {c.note} · ตั้งแต่ {c.since}
                 </div>
               </button>
@@ -242,7 +242,7 @@ export function ClubMap() {
         <div
           role="tooltip"
           style={{ left: tip.x, top: tip.y }}
-          className="pointer-events-none fixed z-50 -translate-x-1/2 -translate-y-[120%] rounded-sm border-ink border-line-strong bg-surface-card px-3 py-2 font-body text-body-sm font-bold whitespace-nowrap text-foreground shadow-card"
+          className="pointer-events-none fixed z-50 -translate-x-1/2 -translate-y-[120%] rounded-sm border-ink border-line-strong bg-surface-card px-3 py-2 font-body text-sm leading-normal font-bold whitespace-nowrap text-foreground shadow-card"
         >
           <div>{CLUBS[tip.index].city}</div>
           <div className="mt-0.5 text-xs font-normal text-foreground-muted">
@@ -288,10 +288,10 @@ function ZoomButton({
 function Stat({ value, label }: { value: number; label: string }) {
   return (
     <div>
-      <b className="block font-heading text-title-lg leading-[1.1] font-bold text-brand">
+      <b className="block font-heading text-3xl leading-[1.1] font-bold text-brand">
         {value}
       </b>
-      <span className="text-caption font-bold tracking-widest uppercase text-foreground-muted">
+      <span className="text-sm leading-[1.45] font-bold tracking-widest uppercase text-foreground-muted">
         {label}
       </span>
     </div>

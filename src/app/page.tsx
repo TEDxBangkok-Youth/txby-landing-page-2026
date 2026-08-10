@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { ClubMap } from "@/components/site/club-map";
@@ -10,6 +11,7 @@ import { SiteFooter } from "@/components/site/site-footer";
 import { SpeakerCard } from "@/components/site/speaker-card";
 import { TicketTag } from "@/components/site/ticket-tag";
 import { VolunteersRoster } from "@/components/site/volunteers-roster";
+import { getEvent } from "@/lib/events";
 import { galleryYears, speakers } from "@/lib/site-data";
 
 export default function Home() {
@@ -86,8 +88,12 @@ function Hero() {
 }
 
 function Gallery() {
+  /* The featured block is the most recent edition; its talk playlist
+     comes from that year's event page data. */
+  const featured = getEvent("2025");
+
   return (
-    <SectionShell id="gallery" surface="paper" grain>
+    <SectionShell id="gallery" surface="paper" rule="none" grain>
       <SectionHeader
         className="mb-14"
         measure="max-w-[660px]"
@@ -114,7 +120,12 @@ function Gallery() {
       {/* Featured — the most recent edition */}
       <div className="grid grid-cols-[repeat(auto-fit,minmax(380px,1fr))] items-center gap-14">
         <div className="relative rotate-[-1.4deg]">
-          <div className="relative aspect-video w-full overflow-hidden rounded-card border-sticker border-line-strong bg-tg-paper-100 shadow-card">
+          {/* The poster is the primary way into the 2025 page, so it
+              lifts off the paper like every other sticker here. */}
+          <Link
+            href="/events/2025"
+            className="relative block aspect-video w-full overflow-hidden rounded-card border-sticker border-line-strong bg-tg-paper-100 shadow-card transition-[translate,box-shadow] duration-140 ease-ink hover:translate-x-(--t-lift-x) hover:translate-y-(--t-lift-y) hover:shadow-card-hover active:translate-x-(--t-press-x) active:translate-y-(--t-press-y) active:shadow-card-press focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-4 focus-visible:outline-none"
+          >
             <Image
               src="/assets/gallery-2025-cover.jpg"
               alt="บรรยากาศงานปี 2025"
@@ -122,8 +133,11 @@ function Gallery() {
               sizes="(max-width: 768px) 100vw, 600px"
               className="object-cover"
             />
-          </div>
-          <div className="absolute -top-6.5 -right-4.5 rotate-[8deg]">
+            <span className="sr-only">ดูรายละเอียดปี 2025</span>
+          </Link>
+          {/* Decorative, and it overlaps the poster's corner — it must
+              not eat clicks meant for the link underneath. */}
+          <div className="pointer-events-none absolute -top-6.5 -right-4.5 rotate-[8deg]">
             <TicketTag price="2025" tone="pink">
               ปีล่าสุด
             </TicketTag>
@@ -131,24 +145,29 @@ function Gallery() {
         </div>
 
         <div className="flex min-w-0 flex-col gap-4.5">
-          <div className="font-heading text-xs font-bold tracking-eyebrow uppercase text-brand-hover">
-            12 talks · หอศิลปกรุงเทพฯ
-          </div>
           <h3 className="font-heading text-h2 font-bold uppercase">
             เย็บปักถักทอล์ก
           </h3>
-          <p className="text-body text-pretty text-foreground-secondary">
+          <p className="text-base leading-[1.6] text-pretty text-foreground-secondary">
             พบกับ 12 เรื่องเล่า จาก 12 เสียงต่างวัย ต่างเส้นทาง ที่ถักทอมาจากประสบการณ์
             ความฝัน ความหวัง และความเจ็บปวด โดยร้อยเรียงและถ่ายทอดอย่างพิถีพิถัน
             เพื่อให้หัวใจของคุณกลับมาพองโตอีกครั้ง
           </p>
           <div className="mt-2 flex flex-wrap gap-3.5">
             <Button asChild>
-              <a href="#">ดูรายละเอียดปี 2025</a>
+              <Link href="/events/2025">ดูรายละเอียดปี 2025</Link>
             </Button>
-            <Button asChild variant="outline">
-              <a href="#">ดู Talk บน YouTube</a>
-            </Button>
+            {featured?.playlistUrl ? (
+              <Button asChild variant="outline">
+                <a
+                  href={featured.playlistUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  ดู Talk บน YouTube
+                </a>
+              </Button>
+            ) : null}
           </div>
         </div>
       </div>
@@ -169,7 +188,7 @@ function Club() {
       id="club"
       data-theme="club"
       surface="theme"
-      rule="both"
+      rule="none"
       className="overflow-hidden py-20"
       decoration={
         <Image
@@ -235,9 +254,10 @@ function Speakers() {
         lead="ผู้พูดทุกคนบนเวที TEDxBangkok Youth ปีนี้"
       />
 
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-x-6 gap-y-8">
+      {/* Five across on desktop, matching the event page's line-up. */}
+      <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-5">
         {speakers.map((s) => (
-          <SpeakerCard key={s.name} speaker={s} />
+          <SpeakerCard key={s.fullName} speaker={s} />
         ))}
       </div>
     </SectionShell>

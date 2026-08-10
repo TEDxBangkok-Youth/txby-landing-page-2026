@@ -79,3 +79,25 @@
   stroke: var(--t-foreground-faint);
   stroke-width: 0.8;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Reduced motion. Deliberately unlayered: Tailwind's utilities
+   live in @layer utilities, and unlayered rules beat layered ones
+   in the cascade, so this wins without !important.
+
+   scroll-behavior goes back to auto as well — the nav's #speakers
+   / #photos / #talks links would otherwise still animate the
+   whole page, which is exactly the motion this query opts out of.
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none;
+    animation: none;
+  }
+}

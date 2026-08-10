@@ -56,7 +56,10 @@
     "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   /* Control typography + press physics. The CI is flat: sentence
-     case, semibold, no movement. */
+     case, semibold, no offset and no lift on hover. Press is the one
+     exception — a control that gives no feedback on click reads as
+     broken, so it takes a scale rather than the offset the other two
+     scopes use. */
   --t-control-weight: 600;
   --t-control-transform: none;
   --t-control-tracking: normal;
@@ -64,6 +67,7 @@
   --t-lift-y: 0px;
   --t-press-x: 0px;
   --t-press-y: 0px;
+  --t-press-scale: 0.97;
 
   /* Structure */
   --t-radius-card: var(--radius-sm);

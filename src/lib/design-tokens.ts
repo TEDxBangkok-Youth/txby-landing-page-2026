@@ -98,19 +98,11 @@ export const PRIMITIVE_RAMPS = [
 
 /** Tier 2 globals. `custom: false` means it is a Tailwind v4 built-in. */
 export const TYPE_SCALE = [
-  { token: "display", custom: true },
   { token: "h1", custom: true },
   { token: "h2", custom: true },
   { token: "h3", custom: true },
   { token: "h4", custom: true },
-  { token: "title-lg", custom: true },
-  { token: "title", custom: true },
-  { token: "title-sm", custom: true },
-  { token: "body-lg", custom: true },
-  { token: "body", custom: true },
-  { token: "body-sm", custom: true },
-  { token: "caption", custom: true },
-  { token: "micro", custom: true },
+  { token: "3xl", custom: false },
   { token: "2xl", custom: false },
   { token: "xl", custom: false },
   { token: "lg", custom: false },
@@ -153,6 +145,6 @@ export const INHERITED_FROM_TAILWIND = [
   ["Breakpoints", "sm/md/lg/xl/2xl, plus one max-[820px] for the map and roster."],
   ["Container", "max-w-7xl is the site's 1280px column."],
   ["Duration", "Numeric utilities — duration-140, duration-200."],
-  ["Tracking", "tight/normal/wide/wider/widest, plus eyebrow and caps."],
+  ["Tracking", "tight/normal/wide/wider/widest, plus eyebrow."],
   ["Leading", "tight/snug/normal/relaxed, plus display and heading."],
 ] as const;

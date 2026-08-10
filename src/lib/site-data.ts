@@ -4,6 +4,11 @@
  * "TEDxBangkokYouth Landing v3".
  */
 
+import { getEvent } from "@/lib/events";
+
+/** The edition the landing page features — its line-up and poster. */
+export const FEATURED_YEAR = "2025";
+
 export const navLinks = [
   { label: "Gallery", href: "#gallery" },
   { label: "TED Club", href: "#club" },
@@ -82,49 +87,26 @@ export const galleryYears: GalleryYear[] = [
 ];
 
 // ─── Speakers ───────────────────────────────────────────────
-type SpeakerSource = {
-  name: string;
-  role: string;
-  talk: string;
-  photo: string;
-};
-
-const SPEAKERS: SpeakerSource[] = [
-  { name: "ปุณณ์ อริยะวงศ์", role: "นักเรียน ม.6 · นักพัฒนาเกม", talk: "เกมที่สอนให้ฉันล้มเหลว", photo: "2025-01" },
-  { name: "ญาดา เตชะวิบูลย์", role: "นักวิจัยเยาวชนด้านคุณภาพอากาศ", talk: "ฝุ่นที่เราหายใจร่วมกัน", photo: "2025-02" },
-  { name: "กันต์ ศรีวรกุล", role: "ผู้ก่อตั้งวงดนตรีในโรงเรียน", talk: "เสียงรบกวนก็เป็นดนตรีได้", photo: "2025-04" },
-  { name: "พิมพ์ชนก โชติวัฒน์", role: "นักเรียนพยาบาล", talk: "ดูแลคนอื่นก่อนดูแลตัวเอง", photo: "2025-03" },
-  { name: "ธีรัตม์ นิลกำแหง", role: "อาสาสมัครกู้ภัยอายุ 19", talk: "สิบสองนาทีแรก", photo: "2025-06" },
-  { name: "อรณิชา บุญมาก", role: "ช่างภาพสารคดี", talk: "เมืองที่ไม่มีใครถ่าย", photo: "2025-05" },
-  { name: "ปวีณ์นุช ทองประเสริฐ", role: "นักเรียนละครเวที ม.5", talk: "หัวเราะทั้งที่ยังไม่หายเจ็บ", photo: "2025-07" },
-  { name: "ชยากร ไวยกิจ", role: "นักออกแบบเสื้อผ้ารีไซเคิล", talk: "เศษผ้าที่กลายเป็นตัวตน", photo: "2025-08" },
-  { name: "ณิชาภัทร วงศ์เจริญ", role: "ประธานชมรมโต้วาที", talk: "แพ้บนเวทีไม่ใช่จบ", photo: "2025-09" },
-  { name: "ภัสสร ดำรงพันธุ์", role: "นักออกแบบเกมกระดาน", talk: "กติกาที่ฉันเขียนเอง", photo: "2025-10" },
-  { name: "กมลชนก ศรีสวัสดิ์", role: "นักเรียนแลกเปลี่ยนกลับบ้าน", talk: "บ้านที่เปลี่ยนไปตอนฉันไม่อยู่", photo: "2025-11" },
-  { name: "สุพิชญา ธรรมวัฒน์", role: "ผู้ประกาศข่าวโรงเรียน", talk: "ไมโครโฟนที่มือฉันสั่น", photo: "2025-12" },
-];
-
 const TONES: Tone[] = ["pink", "yellow", "cyan", "green", "red"];
 
-// The design only has speaker photos 01–03 and 05–12 available; the card
-// for a missing photo falls back to the speaker's initial on a tinted panel.
-const AVAILABLE_PHOTOS = new Set([
-  "2025-01", "2025-02", "2025-03", "2025-05", "2025-06",
-  "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12",
-]);
-
-export const speakers = SPEAKERS.map((s, i) => {
-  const hasPhoto = AVAILABLE_PHOTOS.has(s.photo);
-  return {
-    name: s.name,
-    role: s.role,
-    talk: s.talk,
-    hasPhoto,
-    photo: hasPhoto ? `/assets/speakers/${s.photo}.jpg` : null,
-    initial: (s.name || "?").trim().charAt(0),
+/**
+ * The landing page shows the most recent edition's line-up. The names,
+ * one-liners and portraits are NOT duplicated here — they come from
+ * src/lib/events.ts, the same source the /events/[year] page reads, so
+ * the two pages cannot describe the same speaker differently. Only the
+ * seasonal tint is decided here, because it belongs to this page's
+ * Thaigredient styling rather than to the speaker.
+ */
+export const speakers = (getEvent(FEATURED_YEAR)?.speakers ?? []).map(
+  (s, i) => ({
+    nickname: s.nickname,
+    fullName: s.fullName,
+    oneLiner: s.oneLiner,
+    photo: s.photo,
+    initial: (s.nickname || "?").trim().charAt(0),
     tone: TONES[i % TONES.length],
-  };
-});
+  })
+);
 
 // ─── Volunteers roster ──────────────────────────────────────
 const TEAM_NAMES = [

@@ -59,6 +59,8 @@
   --t-lift-y: -2px;
   --t-press-x: 1px;
   --t-press-y: 2px;
+  /* The sticker already sinks into its shadow on press. */
+  --t-press-scale: 1;
 
   /* Structure — aliases into the global scales. */
   --t-radius-card: var(--radius-sticker);

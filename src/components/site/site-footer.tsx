@@ -20,7 +20,7 @@ export function SiteFooter() {
             height={40}
             className="h-10 w-auto self-start object-contain"
           />
-          <p className="max-w-80 text-caption leading-[1.6] text-foreground-muted">
+          <p className="max-w-80 text-sm leading-[1.6] text-foreground-muted">
             This independent TEDx event is operated under license from TED.
           </p>
         </div>
@@ -28,7 +28,7 @@ export function SiteFooter() {
         <div className="flex flex-wrap gap-14">
           {footerLinks.map((group) => (
             <div key={group.title} className="flex flex-col gap-2.5">
-              <span className="text-micro tracking-caps uppercase text-foreground-muted">
+              <span className="text-xs leading-[1.4] uppercase text-foreground-muted">
                 {group.title}
               </span>
               {group.items.map((it) => (

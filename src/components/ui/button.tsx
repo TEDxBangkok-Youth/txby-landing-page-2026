@@ -12,7 +12,10 @@ import { cn } from "@/lib/utils"
  * src/styles/themes/ for what each scope sets.
  */
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap font-heading control-type border-control border-line-strong rounded-control shadow-control select-none transition-[transform,box-shadow,background-color,color] duration-140 ease-ink hover:translate-x-(--t-lift-x) hover:translate-y-(--t-lift-y) hover:shadow-control-hover active:translate-x-(--t-press-x) active:translate-y-(--t-press-y) active:shadow-control-press focus-visible:ring-focus focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  // The lift/press utilities set the independent `translate` and
+  // `scale` properties, not `transform` — transitioning `transform`
+  // would leave them snapping. They must be named directly.
+  "group/button inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap font-heading control-type border-control border-line-strong rounded-control shadow-control select-none transition-[translate,scale,box-shadow,background-color,color] duration-140 ease-ink hover:translate-x-(--t-lift-x) hover:translate-y-(--t-lift-y) hover:shadow-control-hover active:translate-x-(--t-press-x) active:translate-y-(--t-press-y) active:scale-(--t-press-scale) active:shadow-control-press focus-visible:ring-focus focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
@@ -32,8 +35,8 @@ const buttonVariants = cva(
         red: "bg-tg-red text-white",
       },
       size: {
-        sm: "px-3.5 py-2 text-caption",
-        default: "px-5 py-2.5 text-body-sm",
+        sm: "px-3.5 py-2 text-sm leading-[1.45]",
+        default: "px-5 py-2.5 text-sm leading-normal",
         lg: "px-7 py-3.5 text-lg",
         icon: "size-11",
         "icon-sm": "size-9",
