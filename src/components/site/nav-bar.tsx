@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { MenuIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { LanguageSwitcher } from "@/components/site/language-switcher";
 import { SiteNav, SiteNavLogo } from "@/components/site/site-nav";
 import { cn } from "@/lib/utils";
 import { navLinks } from "@/lib/site-data";
@@ -23,6 +25,11 @@ import { navLinks } from "@/lib/site-data";
 export function NavBar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const t = useTranslations("nav");
+
+  // `navLinks` carries only keys/hrefs (see site-data.ts); the label
+  // text is resolved here so SiteNav stays translation-agnostic.
+  const links = navLinks.map((l) => ({ label: t(l.key), href: l.href }));
 
   useEffect(() => {
     const onScroll = () => {
@@ -37,8 +44,8 @@ export function NavBar() {
   return (
     <SiteNav
       className="fixed inset-x-0 top-0 z-50"
-      links={navLinks}
-      brand={<SiteNavLogo href="#hero" />}
+      links={links}
+      brand={<SiteNavLogo href="#hero" alt={t("homeAlt")} />}
       backdrop={
         <div
           aria-hidden
@@ -51,22 +58,24 @@ export function NavBar() {
       actions={
         <>
           <Button asChild className="text-sm leading-normal">
-            <a href="#tickets">ซื้อบัตรเข้าชม</a>
+            <a href="#tickets">{t("tickets")}</a>
           </Button>
+
+          <LanguageSwitcher />
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon-sm" aria-label="เปิดเมนู">
+              <Button variant="ghost" size="icon-sm" aria-label={t("openMenu")}>
                 <MenuIcon />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" data-theme="main" className="w-72">
               <SheetTitle className="px-6 pt-6 font-heading text-xl leading-heading">
-                เมนู
+                {t("menuTitle")}
               </SheetTitle>
               <ul className="flex flex-col px-6 py-4">
-                {navLinks.map((l) => (
-                  <li key={l.label}>
+                {links.map((l) => (
+                  <li key={l.href}>
                     <a
                       href={l.href}
                       onClick={() => setOpen(false)}

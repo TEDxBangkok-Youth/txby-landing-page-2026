@@ -1,9 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { MinusIcon, PlusIcon, RotateCcwIcon } from "lucide-react";
 
-import { CLUBS, MAP_DEFAULT_TITLE } from "@/lib/site-data";
+import type { Locale } from "@/i18n/routing";
+import { getClubs, type Club } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 const MIN_ZOOM = 1;
@@ -11,6 +13,16 @@ const MAX_ZOOM = 6;
 const DRAG_THRESHOLD = 4;
 
 type Tip = { x: number; y: number; index: number };
+
+/**
+ * The province name in the current locale — `city` (Thai) or `en`. Only
+ * this one is shown: a row used to carry the other language's name as a
+ * subtitle, but a reader who picked a language doesn't need the province
+ * spelled twice.
+ */
+function primaryName(club: Club, locale: Locale): string {
+  return locale === "th" ? club.city : club.en;
+}
 
 /**
  * Interactive map of Thai provinces with active TED Clubs. Hover
@@ -27,14 +39,21 @@ export function ClubMap() {
   const [tip, setTip] = useState<Tip | null>(null);
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [svgReady, setSvgReady] = useState(0);
 
   const hostRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
   const drag = useRef({ active: false, maybe: false, sx: 0, sy: 0, tx: 0, ty: 0 });
 
+  const locale = useLocale() as Locale;
+  const t = useTranslations("clubMap");
+  const CLUBS = getClubs();
+
   const detail = selected != null ? CLUBS[selected] : null;
 
-  /* Load the province map once and tag the provinces that have clubs. */
+  /* Load the province map once and tag the provinces that have clubs.
+     This only needs to happen once per mount — the SVG structure itself
+     doesn't depend on locale, only the <title> text injected below. */
   useEffect(() => {
     let disposed = false;
 
@@ -51,29 +70,47 @@ export function ClubMap() {
         svg.removeAttribute("width");
         svg.removeAttribute("height");
 
-        CLUBS.forEach((c, i) => {
+        getClubs().forEach((c, i) => {
           const path = svg.querySelector<SVGPathElement>(
             `path[id="${c.provinceId}"]`
           );
           if (!path) return;
           path.classList.add("club");
           path.dataset.i = String(i);
-          const title = document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "title"
+          path.appendChild(
+            document.createElementNS("http://www.w3.org/2000/svg", "title")
           );
-          title.textContent = `${c.city} · ${c.note}`;
-          path.appendChild(title);
         });
 
         hostRef.current.replaceChildren(svg);
         svgRef.current = svg as SVGSVGElement;
+        setSvgReady((n) => n + 1);
       });
 
     return () => {
       disposed = true;
     };
+    // Runs once per mount; the locale-dependent <title> text is kept in
+    // sync by the effect below instead of re-fetching the SVG.
+     
   }, []);
+
+  /* Keep each province's native <title> tooltip in the current locale. */
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    svg.querySelectorAll<SVGPathElement>("path.club").forEach((p) => {
+      const i = Number(p.dataset.i);
+      const club = CLUBS[i];
+      const title = p.querySelector("title");
+      if (club && title) {
+        title.textContent = `${primaryName(club, locale)} · ${t("clubCount", {
+          count: club.clubs,
+        })}`;
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [svgReady, locale, t]);
 
   /* Sync province highlighting to state. */
   useEffect(() => {
@@ -121,7 +158,7 @@ export function ClubMap() {
   return (
     <div
       role="group"
-      aria-label="แผนที่ TED Club ในประเทศไทย"
+      aria-label={t("label")}
       className="relative grid h-155 grid-cols-[1fr_380px] gap-6 overflow-hidden max-[820px]:grid-cols-1"
     >
       {/* Map column */}
@@ -167,11 +204,11 @@ export function ClubMap() {
         />
 
         <div className="absolute top-0 right-5 z-10 flex flex-col overflow-hidden rounded-card border-frame border-line-strong bg-surface-card shadow-card">
-          <ZoomButton label="Zoom in" onClick={() => applyZoom(zoom + 0.5)}>
+          <ZoomButton label={t("zoomIn")} onClick={() => applyZoom(zoom + 0.5)}>
             <PlusIcon />
           </ZoomButton>
           <ZoomButton
-            label="Reset zoom"
+            label={t("zoomReset")}
             divider
             onClick={() => {
               applyZoom(1);
@@ -181,7 +218,7 @@ export function ClubMap() {
             <RotateCcwIcon/>
           </ZoomButton>
           <ZoomButton
-            label="Zoom out"
+            label={t("zoomOut")}
             divider
             onClick={() => applyZoom(zoom - 0.5)}
           >
@@ -199,22 +236,22 @@ export function ClubMap() {
               onClick={() => setSelected(null)}
               className="block cursor-pointer pb-2.5 text-left text-sm leading-[1.45] font-bold tracking-widest uppercase text-foreground-muted hover:text-brand"
             >
-              ← กลับไปที่รายชื่อทั้งหมด
+              ← {t("back")}
             </button>
           ) : null}
           <div className="font-heading text-2xl leading-heading font-bold tracking-tight">
-            {detail ? detail.city : MAP_DEFAULT_TITLE}
+            {detail ? primaryName(detail, locale) : t("defaultTitle")}
           </div>
         </div>
 
         {detail ? (
           <div className="min-h-0 flex-1 overflow-y-auto px-6 pt-4 pb-6">
+            {/* The two stats are the whole detail. A prose line under
+                them used to carry the "network hub" label; without it it
+                only repeated the club count back at the reader. */}
             <div className="flex gap-6 pt-4">
-              <Stat value={detail.clubs} label="ชมรม" />
-              <Stat value={detail.since} label="ตั้งแต่" />
-            </div>
-            <div className="mt-5 text-base leading-[1.55] text-foreground-secondary">
-              {detail.note}
+              <Stat value={detail.clubs} label={t("statClubs")} />
+              <Stat value={detail.since} label={t("statSince")} />
             </div>
           </div>
         ) : (
@@ -228,9 +265,12 @@ export function ClubMap() {
                 onMouseLeave={() => setTip(null)}
                 className="block w-full cursor-pointer border-b-hairline border-line-subtle px-6 py-3.5 text-left text-foreground hover:bg-surface-wash"
               >
-                <div className="font-heading text-base leading-[1.6] font-bold">{c.city}</div>
+                <div className="font-heading text-base leading-[1.6] font-bold">
+                  {primaryName(c, locale)}
+                </div>
                 <div className="mt-0.75 text-sm leading-normal text-foreground-secondary">
-                  {c.en} · {c.note} · ตั้งแต่ {c.since}
+                  {t("clubCount", { count: c.clubs })} ·{" "}
+                  {t("since", { year: c.since })}
                 </div>
               </button>
             ))}
@@ -244,9 +284,9 @@ export function ClubMap() {
           style={{ left: tip.x, top: tip.y }}
           className="pointer-events-none fixed z-50 -translate-x-1/2 -translate-y-[120%] rounded-sm border-ink border-line-strong bg-surface-card px-3 py-2 font-body text-sm leading-normal font-bold whitespace-nowrap text-foreground shadow-card"
         >
-          <div>{CLUBS[tip.index].city}</div>
+          <div>{primaryName(CLUBS[tip.index], locale)}</div>
           <div className="mt-0.5 text-xs font-normal text-foreground-muted">
-            {CLUBS[tip.index].en} · {CLUBS[tip.index].note}
+            {t("clubCount", { count: CLUBS[tip.index].clubs })}
           </div>
         </div>
       ) : null}

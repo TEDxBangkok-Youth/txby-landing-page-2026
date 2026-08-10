@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { ArrowUpRightIcon } from "lucide-react";
 
 import { talkUrl, type EventSpeaker } from "@/lib/events";
@@ -8,7 +9,9 @@ import { cn } from "@/lib/utils";
  * than another photo grid — the speaker section above already carries
  * the portraits, so this reads as a table of contents for the playlist.
  */
-export function TalkList({ speakers }: { speakers: EventSpeaker[] }) {
+export async function TalkList({ speakers }: { speakers: EventSpeaker[] }) {
+  const t = await getTranslations("event.talks");
+
   return (
     <ol className="border-t border-line">
       {speakers.map((speaker, i) => {
@@ -39,7 +42,7 @@ export function TalkList({ speakers }: { speakers: EventSpeaker[] }) {
                   className="size-6 text-brand transition-[translate] duration-140 ease-ink group-hover/row:translate-x-0.5 group-hover/row:-translate-y-0.5"
                 />
               ) : (
-                <span>เร็ว ๆ นี้</span>
+                <span>{t("comingSoon")}</span>
               )}
             </div>
           </>

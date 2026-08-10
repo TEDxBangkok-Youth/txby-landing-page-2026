@@ -1,0 +1,137 @@
+{
+  "meta": {
+    "title": "TEDxBangkok Youth 2026 · ส่วนผสมลับ ฉบับคนไทย",
+    "description": "TEDxBangkok Youth 2026 — เวทีของไอเดียจากคนรุ่นใหม่ หยิบวัตถุดิบธรรมดาในชีวิตแบบไทย ๆ มาผสมใหม่ให้กลายเป็นสูตร(ไม่)ลับของความคิดสร้างสรรค์"
+  },
+  "nav": {
+    "gallery": "แกลเลอรี",
+    "club": "TED Club",
+    "speakers": "สปีกเกอร์",
+    "volunteers": "อาสาสมัคร",
+    "tickets": "ซื้อบัตรเข้าชม",
+    "openMenu": "เปิดเมนู",
+    "menuTitle": "เมนู",
+    "homeAlt": "TEDxBangkok Youth — กลับหน้าแรก"
+  },
+  "hero": {
+    "titleLine1": "ส่วนผสม",
+    "titleHighlight": "ลับ",
+    "titleLine2": "ฉบับคนไทย",
+    "bowlAlt": "ชามส่วนผสมลับ",
+    "priceTagAlt": "฿67.00 เท็ด x บางกอก"
+  },
+  "gallery": {
+    "titleLine1": "TED Youth",
+    "titleLine2": "Gallery",
+    "lead": "ทุกปีคือหนึ่งสูตร ย้อนดูธีม ผู้พูด และรสชาติของแต่ละรุ่นที่ผ่านเวทีนี้",
+    "featured": {
+      "badge": "ปีล่าสุด",
+      "coverAlt": "บรรยากาศงานปี {year}",
+      "cta": "ดูรายละเอียดปี {year}",
+      "youtubeCta": "ดู Talk บน YouTube"
+    },
+    "card": {
+      "talks": "{count, plural, other {# talks}}",
+      "placeholder": "รูปปี {year}"
+    }
+  },
+  "club": {
+    "titlePrefix": "TED Club",
+    "titleHighlight": "ทั่วประเทศไทย",
+    "lead": "ชมรมในโรงเรียนและมหาวิทยาลัยที่จัดเวทีของตัวเองตลอดทั้งปี ทุกกิจกรรมออกแบบให้ครูหนึ่งคนจัดได้เอง ด้วยคู่มือและสไลด์ที่เตรียมไว้ให้",
+    "logoAlt": "TED Club · TEDxBangkok Youth"
+  },
+  "clubMap": {
+    "label": "แผนที่ TED Club ในประเทศไทย",
+    "defaultTitle": "จังหวัดที่มี TED Club",
+    "back": "กลับไปที่รายชื่อทั้งหมด",
+    "zoomIn": "ซูมเข้า",
+    "zoomOut": "ซูมออก",
+    "zoomReset": "รีเซ็ตซูม",
+    "statClubs": "ชมรม",
+    "statSince": "ตั้งแต่",
+    "clubCount": "{count, plural, other {# ชมรม}}",
+    "since": "ตั้งแต่ {year}"
+  },
+  "speakers": {
+    "title": "Speakers",
+    "lead": "{count, plural, other {# คน}}ที่จะขึ้นเวทีปีนี้ พร้อมเรื่องที่ไม่เคยเล่าที่ไหนมาก่อน"
+  },
+  "volunteers": {
+    "title": "Volunteers",
+    "lead": "ทุกงานเกิดขึ้นได้เพราะอาสาสมัคร นี่คือรายชื่อทีมงานครบทุกคนของปีนี้",
+    "photoPlaceholder": "รูปทีมอาสาสมัคร",
+    "rosterTitle": "รายชื่อทีม Volunteers",
+    "back": "กลับไปที่รายชื่อทีม",
+    "teams": {
+      "producer": "โปรดิวเซอร์",
+      "advisor": "ที่ปรึกษา",
+      "director": "ผู้กำกับ",
+      "production": "ฝ่ายโปรดักชัน",
+      "people": "ฝ่ายบุคคล",
+      "finance": "ฝ่ายการเงิน",
+      "sponsor": "ฝ่ายสปอนเซอร์",
+      "it": "ฝ่ายไอที"
+    }
+  },
+  "footer": {
+    "groups": {
+      "event": "Event",
+      "community": "Community",
+      "info": "Info"
+    },
+    "links": {
+      "gallery": "Gallery",
+      "speakers": "Speakers",
+      "schedule": "Schedule",
+      "venue": "Venue",
+      "tedClub": "TED Club",
+      "volunteers": "Volunteers",
+      "sponsors": "Sponsors",
+      "about": "About",
+      "faq": "FAQ",
+      "contact": "Contact"
+    },
+    "copyright": "© 2026 TEDxBangkok Youth",
+    "logoAlt": "TEDxBangkok Youth",
+    "disclaimer": "งาน TEDx อิสระนี้จัดขึ้นภายใต้ใบอนุญาตจาก TED"
+  },
+  "event": {
+    "nav": {
+      "speakers": "Speakers",
+      "photos": "บรรยากาศในงาน",
+      "talks": "Talks",
+      "watch": "ดู Talk",
+      "watchSuffix": " ทั้งหมด"
+    },
+    "meta": {
+      "date": "วันที่จัดงาน",
+      "venue": "สถานที่",
+      "talks": "จำนวน Talk",
+      "talksValue": "{count, plural, other {# talks}}"
+    },
+    "cta": {
+      "watchAll": "ดู Talk ทั้งหมดบน YouTube",
+      "photos": "รูปบรรยากาศในงาน"
+    },
+    "coverPlaceholder": "ภาพหลักของปี {year}",
+    "speakers": {
+      "title": "{count, plural, other {#}} เสียงบนเวทีปี {year}",
+      "lead": "ชื่อเล่น ชื่อจริง และหนึ่งบรรทัดที่บอกว่าเขาเป็นใคร ก่อนจะขึ้นไปเล่าเรื่องของตัวเองบนวงกลมสีแดง"
+    },
+    "photos": {
+      "title": "รูปบรรยากาศในงาน",
+      "lead": "ภาพจากวันงาน {date} ตั้งแต่คิวลงทะเบียนหน้าห้อง จนถึงภาพหมู่สุดท้ายหลังไฟบนเวทีดับลง"
+    },
+    "talks": {
+      "title": "ดู Talk ย้อนหลัง",
+      "lead": "ทุก Talk ของปีนี้ ดูฟรีบน YouTube ไม่ต้องสมัครสมาชิก",
+      "playlistCta": "เปิดเพลย์ลิสต์ทั้งปี",
+      "comingSoon": "เร็ว ๆ นี้"
+    }
+  },
+  "common": {
+    "imagePlaceholder": "รูปภาพ",
+    "languageLabel": "เปลี่ยนภาษา"
+  }
+}

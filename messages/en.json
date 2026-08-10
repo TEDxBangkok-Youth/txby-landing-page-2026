@@ -1,0 +1,137 @@
+{
+  "meta": {
+    "title": "TEDxBangkok Youth 2026: Secret Sauce, Thai Edition",
+    "description": "A TEDx stage for young ideas — everyday Thai life, remixed into a recipe for creativity that isn't so secret after all."
+  },
+  "nav": {
+    "gallery": "Gallery",
+    "club": "TED Club",
+    "speakers": "Speakers",
+    "volunteers": "Volunteers",
+    "tickets": "Get Tickets",
+    "openMenu": "Open menu",
+    "menuTitle": "Menu",
+    "homeAlt": "TEDxBangkok Youth — back to home"
+  },
+  "hero": {
+    "titleLine1": "Secret",
+    "titleHighlight": "Sauce",
+    "titleLine2": "Thai Edition",
+    "bowlAlt": "The secret sauce mixing bowl",
+    "priceTagAlt": "฿67.00 · TED x Bangkok"
+  },
+  "gallery": {
+    "titleLine1": "TED Youth",
+    "titleLine2": "Gallery",
+    "lead": "Every year is its own recipe. Look back at the themes, the speakers, and the flavor each edition brought to this stage.",
+    "featured": {
+      "badge": "Latest Year",
+      "coverAlt": "Atmosphere at the {year} event",
+      "cta": "See the {year} lineup",
+      "youtubeCta": "Watch the Talks on YouTube"
+    },
+    "card": {
+      "talks": "{count, plural, one {# talk} other {# talks}}",
+      "placeholder": "{year} photo"
+    }
+  },
+  "club": {
+    "titlePrefix": "TED Club",
+    "titleHighlight": "Across Thailand",
+    "lead": "School and university clubs that run their own stage all year round. Every activity is built so one teacher can run it solo, with a guide and slides ready to go.",
+    "logoAlt": "TED Club · TEDxBangkok Youth"
+  },
+  "clubMap": {
+    "label": "Map of TED Clubs in Thailand",
+    "defaultTitle": "Provinces with a TED Club",
+    "back": "Back to the full list",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "zoomReset": "Reset zoom",
+    "statClubs": "Clubs",
+    "statSince": "Since",
+    "clubCount": "{count, plural, one {# club} other {# clubs}}",
+    "since": "Since {year}"
+  },
+  "speakers": {
+    "title": "Speakers",
+    "lead": "{count, plural, one {# speaker} other {# speakers}} taking the stage this year, each with a story you won't hear anywhere else."
+  },
+  "volunteers": {
+    "title": "Volunteers",
+    "lead": "Every part of this event runs on volunteers. Here's the full crew, every team, this year.",
+    "photoPlaceholder": "Volunteer team photo",
+    "rosterTitle": "Volunteer team list",
+    "back": "Back to team list",
+    "teams": {
+      "producer": "Producer",
+      "advisor": "Advisor",
+      "director": "Director",
+      "production": "Production",
+      "people": "People",
+      "finance": "Finance",
+      "sponsor": "Sponsor",
+      "it": "IT"
+    }
+  },
+  "footer": {
+    "groups": {
+      "event": "Event",
+      "community": "Community",
+      "info": "Info"
+    },
+    "links": {
+      "gallery": "Gallery",
+      "speakers": "Speakers",
+      "schedule": "Schedule",
+      "venue": "Venue",
+      "tedClub": "TED Club",
+      "volunteers": "Volunteers",
+      "sponsors": "Sponsors",
+      "about": "About",
+      "faq": "FAQ",
+      "contact": "Contact"
+    },
+    "copyright": "© 2026 TEDxBangkok Youth",
+    "logoAlt": "TEDxBangkok Youth",
+    "disclaimer": "This independent TEDx event is operated under license from TED."
+  },
+  "event": {
+    "nav": {
+      "speakers": "Speakers",
+      "photos": "Photos",
+      "talks": "Talks",
+      "watch": "Watch",
+      "watchSuffix": " All"
+    },
+    "meta": {
+      "date": "Event date",
+      "venue": "Venue",
+      "talks": "Number of talks",
+      "talksValue": "{count, plural, one {# talk} other {# talks}}"
+    },
+    "cta": {
+      "watchAll": "Watch All Talks on YouTube",
+      "photos": "Event Photos"
+    },
+    "coverPlaceholder": "Cover photo for {year}",
+    "speakers": {
+      "title": "{count, plural, one {# voice} other {# voices}} on stage in {year}",
+      "lead": "A name, a face, and one line about who they are — before they step onto the red circle to tell their story."
+    },
+    "photos": {
+      "title": "Event Photos",
+      "lead": "Photos from {date}, from the check-in line outside the door to the final group shot after the stage lights went down."
+    },
+    "talks": {
+      "title": "Watch the Talks",
+      "lead": "Every talk from this year, free on YouTube — no sign-up required.",
+      "playlistCta": "Open the Full Playlist",
+      "comingSoon": "Coming Soon"
+    }
+  },
+  "common": {
+    "imagePlaceholder": "Image",
+    "languageLabel": "Change language"
+  }
+}

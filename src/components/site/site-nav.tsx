@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 /**
@@ -77,10 +77,11 @@ export function SiteNav({
  */
 export function SiteNavLogo({
   href,
-  alt = "TEDxBangkok Youth",
+  alt,
 }: {
   href: string;
-  alt?: string;
+  /** Real copy — pass the `nav.homeAlt` translation from the caller. */
+  alt: string;
 }) {
   const logo = (
     <Image
@@ -92,7 +93,9 @@ export function SiteNavLogo({
     />
   );
 
-  // In-page anchors stay plain <a>; a route gets the router.
+  // In-page anchors stay plain <a>; a route gets the locale-aware Link, so
+  // the lockup on /th/events/2025 returns to /th rather than bouncing
+  // through / and letting the proxy re-negotiate the language.
   return href.startsWith("#") ? (
     <a href={href} className="inline-flex shrink-0">
       {logo}

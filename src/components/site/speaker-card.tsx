@@ -2,14 +2,12 @@ import Image from "next/image";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { toneTint } from "@/components/site/tones";
-import type { speakers } from "@/lib/site-data";
+import type { Speaker } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
-
-type Speaker = (typeof speakers)[number];
 
 /**
  * A speaker portrait over a tinted panel. Carries exactly the same
- * three facts as the event page's card — ชื่อเล่น, ชื่อจริง and the
+ * three facts as the event page's card — nickname, full name and the
  * one-liner — from the same source in src/lib/events.ts. The talk title
  * belongs to the year page's talk index, not here.
  */

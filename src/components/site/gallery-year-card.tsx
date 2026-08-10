@@ -1,8 +1,9 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { ImageSlot } from "@/components/site/image-slot";
 import { toneField, toneInk, toneTint } from "@/components/site/tones";
+import { Link } from "@/i18n/navigation";
 import { eventHref } from "@/lib/events";
 import type { GalleryYear } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
@@ -11,9 +12,14 @@ import { cn } from "@/lib/utils";
  * One year in the gallery archive: tinted image panel over a paper
  * caption. Years that already have an event page link to it; the rest
  * stay inert until their page exists.
+ *
+ * `eventHref` returns an unprefixed path, so the link has to be the
+ * locale-aware one — plain `next/link` would send a Thai reader to
+ * /events/2024 and let the proxy re-negotiate the language.
  */
-export function GalleryYearCard({ year }: { year: GalleryYear }) {
+export async function GalleryYearCard({ year }: { year: GalleryYear }) {
   const href = eventHref(year.year);
+  const t = await getTranslations("gallery.card");
 
   const card = (
     <>
@@ -23,7 +29,10 @@ export function GalleryYearCard({ year }: { year: GalleryYear }) {
           toneTint[year.tone]
         )}
       >
-        <ImageSlot shape="rect" placeholder={year.placeholder} />
+        <ImageSlot
+          shape="rect"
+          placeholder={t("placeholder", { year: year.year })}
+        />
       </div>
       <CardContent className="flex-1 bg-surface-card px-4.5 pt-4 pb-5">
         <div
@@ -32,7 +41,7 @@ export function GalleryYearCard({ year }: { year: GalleryYear }) {
             toneInk[year.chipTone]
           )}
         >
-          {year.year} · {year.talks}
+          {year.year} · {t("talks", { count: year.talks })}
         </div>
         <div className="mt-2 font-heading text-xl leading-[1.15] font-bold uppercase">
           {year.title}

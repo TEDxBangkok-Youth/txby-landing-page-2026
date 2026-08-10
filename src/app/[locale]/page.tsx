@@ -1,5 +1,7 @@
+import { hasLocale } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
-import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { ClubMap } from "@/components/site/club-map";
@@ -11,17 +13,27 @@ import { SiteFooter } from "@/components/site/site-footer";
 import { SpeakerCard } from "@/components/site/speaker-card";
 import { TicketTag } from "@/components/site/ticket-tag";
 import { VolunteersRoster } from "@/components/site/volunteers-roster";
+import { Link } from "@/i18n/navigation";
+import { routing, type Locale } from "@/i18n/routing";
 import { getEvent } from "@/lib/events";
-import { galleryYears, speakers } from "@/lib/site-data";
+import { getGalleryYears, getSpeakers, FEATURED_YEAR } from "@/lib/site-data";
 
-export default function Home() {
+export default async function Home({ params }: PageProps<"/[locale]">) {
+  const { locale } = await params;
+
+  // `params` hands back plain strings; `hasLocale` narrows to the app's
+  // union so the value can flow into the locale-keyed content accessors.
+  // The layout 404s on an unknown locale before this renders, so this is
+  // a type-level narrow rather than a second line of defence.
+  if (!hasLocale(routing.locales, locale)) notFound();
+
   return (
     <div className="bg-surface font-body text-foreground">
-      <Hero />
-      <Gallery />
-      <Club />
-      <Speakers />
-      <Volunteers />
+      <Hero locale={locale} />
+      <Gallery locale={locale} />
+      <Club locale={locale} />
+      <Speakers locale={locale} />
+      <Volunteers locale={locale} />
       <SiteFooter />
     </div>
   );
@@ -30,8 +42,33 @@ export default function Home() {
 /**
  * The hero is a fixed-ratio poster. Everything inside is positioned in
  * cqw so the whole composition scales as one unit with the stage.
+ *
+ * The three title parts are separately positioned and styled — kept as
+ * three keys rather than one string with markup (see MESSAGES.md).
  */
-function Hero() {
+const HERO_TITLE_TYPE = {
+  /* The poster was drawn around Thai. Chakra Petch sets Latin appreciably
+     wider at the same optical size, so at the Thai sizes the English cut
+     ran ~11cqw past the Thai footprint on line 1 and ~8cqw on line 2, far
+     enough for "Edition" to collide with the sauce bottle in the bowl art.
+     These sizes put the Latin lines back on the Thai footprint; the stroke
+     scales with them so the outline keeps its weight relative to the glyph. */
+  th: {
+    line1: "text-[9.8cqw]",
+    line2: "text-[9.5cqw]",
+    stroke: "[-webkit-text-stroke:0.3cqw_var(--t-foreground)]",
+  },
+  en: {
+    line1: "text-[8.1cqw]",
+    line2: "text-[8.1cqw]",
+    stroke: "[-webkit-text-stroke:0.26cqw_var(--t-foreground)]",
+  },
+} as const;
+
+async function Hero({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: "hero" });
+  const type = HERO_TITLE_TYPE[locale];
+
   return (
     <section
       id="hero"
@@ -49,14 +86,18 @@ function Hero() {
         />
 
         <div className="absolute top-[6cqw] left-[23cqw] w-[74cqw] font-heading font-bold text-foreground">
-          <div className="flex items-center gap-[1cqw] text-[9.8cqw] leading-[1.12] tracking-[-0.01em]">
-            <span>ส่วนผสม</span>
+          <div
+            className={`flex items-center gap-[1cqw] ${type.line1} leading-[1.12] tracking-[-0.01em]`}
+          >
+            <span>{t("titleLine1")}</span>
             <span className="inline-block rotate-[-1.5deg] rounded-[1.2cqw] border-[0.38cqw] border-line-strong bg-tg-cyan px-[1cqw] pb-[0.5cqw]">
-              ลับ
+              {t("titleHighlight")}
             </span>
           </div>
-          <div className="mt-[-0.4cqw] ml-[9.8cqw] text-[9.5cqw] leading-[1.3] tracking-[0.01em] text-transparent [-webkit-text-stroke:0.3cqw_var(--t-foreground)]">
-            ฉบับคนไทย
+          <div
+            className={`mt-[-0.4cqw] ml-[9.8cqw] ${type.line2} leading-[1.3] tracking-[0.01em] text-transparent ${type.stroke}`}
+          >
+            {t("titleLine2")}
           </div>
         </div>
 
@@ -69,7 +110,7 @@ function Hero() {
         />
         <Image
           src="/assets/thaigredient/bowl-mix-hero.png"
-          alt="ชามส่วนผสมลับ"
+          alt={t("bowlAlt")}
           width={2557}
           height={1352}
           preload
@@ -77,7 +118,7 @@ function Hero() {
         />
         <Image
           src="/assets/thaigredient/tag-price-67.png"
-          alt="฿67.00 เท็ด x บางกอก"
+          alt={t("priceTagAlt")}
           width={480}
           height={393}
           className="absolute top-[48cqw] left-[70cqw] h-auto w-[12cqw] rotate-[-3deg]"
@@ -87,10 +128,15 @@ function Hero() {
   );
 }
 
-function Gallery() {
-  /* The featured block is the most recent edition; its talk playlist
-     comes from that year's event page data. */
-  const featured = getEvent("2025");
+async function Gallery({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: "gallery" });
+  const galleryYears = getGalleryYears(locale);
+
+  /* The featured block is the most recent edition; its talk playlist,
+     heading and paragraph come from that year's event page data rather
+     than being duplicated here — see MESSAGES.md's "Refactor required"
+     note under `gallery`. */
+  const featured = getEvent(locale, FEATURED_YEAR);
 
   return (
     <SectionShell id="gallery" surface="paper" rule="none" grain>
@@ -100,12 +146,12 @@ function Gallery() {
         leadMeasure="max-w-[520px]"
         title={
           <>
-            TED Youth
+            {t("titleLine1")}
             <br />
-            Gallery
+            {t("titleLine2")}
           </>
         }
-        lead="ทุกปีคือหนึ่งสูตร ย้อนดูธีม ผู้พูด และรสชาติของแต่ละรุ่นที่ผ่านเวทีนี้"
+        lead={t("lead")}
         aside={
           <Image
             src="/assets/thaigredient/bowl-rooster.png"
@@ -120,42 +166,44 @@ function Gallery() {
       {/* Featured — the most recent edition */}
       <div className="grid grid-cols-[repeat(auto-fit,minmax(380px,1fr))] items-center gap-14">
         <div className="relative rotate-[-1.4deg]">
-          {/* The poster is the primary way into the 2025 page, so it
-              lifts off the paper like every other sticker here. */}
+          {/* The poster is the primary way into the featured year's page,
+              so it lifts off the paper like every other sticker here. */}
           <Link
-            href="/events/2025"
+            href={`/events/${FEATURED_YEAR}`}
             className="relative block aspect-video w-full overflow-hidden rounded-card border-sticker border-line-strong bg-tg-paper-100 shadow-card transition-[translate,box-shadow] duration-140 ease-ink hover:translate-x-(--t-lift-x) hover:translate-y-(--t-lift-y) hover:shadow-card-hover active:translate-x-(--t-press-x) active:translate-y-(--t-press-y) active:shadow-card-press focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-4 focus-visible:outline-none"
           >
             <Image
               src="/assets/gallery-2025-cover.jpg"
-              alt="บรรยากาศงานปี 2025"
+              alt={t("featured.coverAlt", { year: FEATURED_YEAR })}
               fill
               sizes="(max-width: 768px) 100vw, 600px"
               className="object-cover"
             />
-            <span className="sr-only">ดูรายละเอียดปี 2025</span>
+            <span className="sr-only">
+              {t("featured.cta", { year: featured?.year ?? FEATURED_YEAR })}
+            </span>
           </Link>
           {/* Decorative, and it overlaps the poster's corner — it must
               not eat clicks meant for the link underneath. */}
           <div className="pointer-events-none absolute -top-6.5 -right-4.5 rotate-[8deg]">
-            <TicketTag price="2025" tone="pink">
-              ปีล่าสุด
+            <TicketTag price={FEATURED_YEAR} tone="pink">
+              {t("featured.badge")}
             </TicketTag>
           </div>
         </div>
 
         <div className="flex min-w-0 flex-col gap-4.5">
           <h3 className="font-heading text-h2 font-bold uppercase">
-            เย็บปักถักทอล์ก
+            {featured?.theme}
           </h3>
           <p className="text-base leading-[1.6] text-pretty text-foreground-secondary">
-            พบกับ 12 เรื่องเล่า จาก 12 เสียงต่างวัย ต่างเส้นทาง ที่ถักทอมาจากประสบการณ์
-            ความฝัน ความหวัง และความเจ็บปวด โดยร้อยเรียงและถ่ายทอดอย่างพิถีพิถัน
-            เพื่อให้หัวใจของคุณกลับมาพองโตอีกครั้ง
+            {featured?.description}
           </p>
           <div className="mt-2 flex flex-wrap gap-3.5">
             <Button asChild>
-              <Link href="/events/2025">ดูรายละเอียดปี 2025</Link>
+              <Link href={`/events/${FEATURED_YEAR}`}>
+                {t("featured.cta", { year: featured?.year ?? FEATURED_YEAR })}
+              </Link>
             </Button>
             {featured?.playlistUrl ? (
               <Button asChild variant="outline">
@@ -164,7 +212,7 @@ function Gallery() {
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  ดู Talk บน YouTube
+                  {t("featured.youtubeCta")}
                 </a>
               </Button>
             ) : null}
@@ -182,7 +230,9 @@ function Gallery() {
   );
 }
 
-function Club() {
+async function Club({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: "club" });
+
   return (
     <SectionShell
       id="club"
@@ -211,9 +261,9 @@ function Club() {
         leadMeasure="max-w-[560px]"
         title={
           <>
-            TED Club{" "}
+            {t("titlePrefix")}{" "}
             <span className="relative inline-block text-brand">
-              ทั่วประเทศไทย
+              {t("titleHighlight")}
               <Image
                 src="/assets/tedclub/scribbles/underline-red.svg"
                 alt=""
@@ -225,11 +275,11 @@ function Club() {
             </span>
           </>
         }
-        lead="ชมรมในโรงเรียนและมหาวิทยาลัยที่จัดเวทีของตัวเองตลอดทั้งปี ทุกกิจกรรมออกแบบให้ครูหนึ่งคนจัดได้เอง ด้วยคู่มือและสไลด์ที่เตรียมไว้ให้"
+        lead={t("lead")}
         aside={
           <Image
             src="/assets/tedclub/logo.png"
-            alt="TED Club · TEDxBangkok Youth"
+            alt={t("logoAlt")}
             width={512}
             height={507}
             className="h-35 w-auto shrink-0"
@@ -242,7 +292,10 @@ function Club() {
   );
 }
 
-function Speakers() {
+async function Speakers({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: "speakers" });
+  const speakers = getSpeakers(locale);
+
   return (
     <SectionShell id="speakers" surface="brand" grain>
       <SectionHeader
@@ -250,8 +303,8 @@ function Speakers() {
         surface="brand"
         measure="max-w-[620px]"
         leadMeasure="max-w-[520px]"
-        title="Speakers"
-        lead="ผู้พูดทุกคนบนเวที TEDxBangkok Youth ปีนี้"
+        title={t("title")}
+        lead={t("lead", { count: speakers.length })}
       />
 
       {/* Five across on desktop, matching the event page's line-up. */}
@@ -264,7 +317,9 @@ function Speakers() {
   );
 }
 
-function Volunteers() {
+async function Volunteers({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: "volunteers" });
+
   return (
     <SectionShell id="volunteers" surface="ink" grain>
       <SectionHeader
@@ -272,8 +327,8 @@ function Volunteers() {
         surface="ink"
         measure="max-w-[620px]"
         leadMeasure="max-w-[560px]"
-        title="Volunteers"
-        lead="ทุกงานเกิดขึ้นได้เพราะอาสาสมัคร นี่คือรายชื่อทีมงานครบทุกคนของปีนี้"
+        title={t("title")}
+        lead={t("lead")}
       />
 
       <div className="grid grid-cols-[minmax(0,1fr)_400px] items-stretch gap-8 max-[820px]:grid-cols-1">
@@ -281,7 +336,7 @@ function Volunteers() {
           data-surface="inverse"
           className="relative min-w-0 overflow-hidden rounded-card border-sticker border-line-strong bg-surface-card shadow-card"
         >
-          <ImageSlot shape="rect" placeholder="รูปทีมอาสาสมัคร" />
+          <ImageSlot shape="rect" placeholder={t("photoPlaceholder")} />
         </div>
         <VolunteersRoster />
       </div>

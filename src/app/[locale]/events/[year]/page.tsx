@@ -1,3 +1,5 @@
+import { hasLocale } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -10,12 +12,14 @@ import { ImageSlot } from "@/components/site/image-slot";
 import { PhotoWall } from "@/components/site/photo-wall";
 import { SiteFooter } from "@/components/site/site-footer";
 import { TalkList } from "@/components/site/talk-list";
-import { events, getEvent, type EventYear } from "@/lib/events";
+import { routing, type Locale } from "@/i18n/routing";
+import { eventYears, getEvent, type EventYear } from "@/lib/events";
 
 /**
- * One page per edition, /events/2025 and so on. Every year is known at
- * build time, so the whole set is prerendered and any other segment 404s
- * rather than being rendered on demand.
+ * One page per edition, /en/events/2025 and /th/events/2025 and so on.
+ * Every year × locale combination is known at build time, so the whole
+ * set is prerendered and any other segment 404s rather than being
+ * rendered on demand.
  *
  * The page runs entirely on the TEDx main CI scope: black / white / grey
  * with TED red as the only accent, Inter + IBM Plex Sans Thai, hairline
@@ -25,14 +29,21 @@ import { events, getEvent, type EventYear } from "@/lib/events";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return events.map((event) => ({ year: event.year }));
+  return routing.locales.flatMap((locale) =>
+    eventYears.map((year) => ({ locale, year }))
+  );
 }
 
 export async function generateMetadata(
-  props: PageProps<"/events/[year]">
+  props: PageProps<"/[locale]/events/[year]">
 ): Promise<Metadata> {
-  const { year } = await props.params;
-  const event = getEvent(year);
+  const { locale, year } = await props.params;
+
+  // `params` hands back plain strings; `hasLocale` narrows to the app's
+  // union so the value can flow into the locale-keyed content accessors.
+  if (!hasLocale(routing.locales, locale)) return {};
+
+  const event = getEvent(locale, year);
 
   if (!event) return {};
 
@@ -42,19 +53,24 @@ export async function generateMetadata(
   };
 }
 
-export default async function EventPage(props: PageProps<"/events/[year]">) {
-  const { year } = await props.params;
-  const event = getEvent(year);
+export default async function EventPage(
+  props: PageProps<"/[locale]/events/[year]">
+) {
+  const { locale, year } = await props.params;
+
+  if (!hasLocale(routing.locales, locale)) notFound();
+
+  const event = getEvent(locale, year);
 
   if (!event) notFound();
 
   return (
     <div data-theme="main" className="bg-surface font-body text-foreground">
       <EventNav year={event.year} playlistUrl={event.playlistUrl} />
-      <Hero event={event} />
-      <Speakers event={event} />
-      <Photos event={event} />
-      <Talks event={event} />
+      <Hero locale={locale} event={event} />
+      <Speakers locale={locale} event={event} />
+      <Photos locale={locale} event={event} />
+      <Talks locale={locale} event={event} />
       <SiteFooter />
     </div>
   );
@@ -62,11 +78,16 @@ export default async function EventPage(props: PageProps<"/events/[year]">) {
 
 /* ── Hero ─────────────────────────────────────────────────────────── */
 
-function Hero({ event }: { event: EventYear }) {
+async function Hero({ locale, event }: { locale: Locale; event: EventYear }) {
+  const t = await getTranslations({ locale, namespace: "event" });
+
   const meta = [
-    { label: "วันที่จัดงาน", value: event.date },
-    { label: "สถานที่", value: event.venue },
-    { label: "จำนวน Talk", value: `${event.speakers.length} talks` },
+    { label: t("meta.date"), value: event.date },
+    { label: t("meta.venue"), value: event.venue },
+    {
+      label: t("meta.talks"),
+      value: t("meta.talksValue", { count: event.speakers.length }),
+    },
   ];
 
   return (
@@ -111,7 +132,7 @@ function Hero({ event }: { event: EventYear }) {
                   rel="noreferrer noopener"
                 >
                   <PlayIcon />
-                  ดู Talk ทั้งหมดบน YouTube
+                  {t("cta.watchAll")}
                 </a>
               </Button>
             ) : null}
@@ -121,7 +142,7 @@ function Hero({ event }: { event: EventYear }) {
               variant="outline"
               className="border-hairline"
             >
-              <a href="#photos">รูปบรรยากาศในงาน</a>
+              <a href="#photos">{t("cta.photos")}</a>
             </Button>
           </div>
         </div>
@@ -137,7 +158,10 @@ function Hero({ event }: { event: EventYear }) {
               className="object-cover"
             />
           ) : (
-            <ImageSlot shape="rect" placeholder={`ภาพหลักของปี ${event.year}`} />
+            <ImageSlot
+              shape="rect"
+              placeholder={t("coverPlaceholder", { year: event.year })}
+            />
           )}
         </div>
       </div>
@@ -147,13 +171,24 @@ function Hero({ event }: { event: EventYear }) {
 
 /* ── Sections ─────────────────────────────────────────────────────── */
 
-function Speakers({ event }: { event: EventYear }) {
+async function Speakers({
+  locale,
+  event,
+}: {
+  locale: Locale;
+  event: EventYear;
+}) {
+  const t = await getTranslations({ locale, namespace: "event" });
+
   return (
     <section id="speakers" className="bg-surface px-8 py-24">
       <div className="mx-auto max-w-7xl">
         <SectionHead
-          title={`${event.speakers.length} เสียงบนเวทีปี ${event.year}`}
-          lead="ชื่อเล่น ชื่อจริง และหนึ่งบรรทัดที่บอกว่าเขาเป็นใคร ก่อนจะขึ้นไปเล่าเรื่องของตัวเองบนวงกลมสีแดง"
+          title={t("speakers.title", {
+            count: event.speakers.length,
+            year: event.year,
+          })}
+          lead={t("speakers.lead")}
         />
 
         {/* Five across on desktop, matching the landing page's line-up. */}
@@ -167,7 +202,15 @@ function Speakers({ event }: { event: EventYear }) {
   );
 }
 
-function Photos({ event }: { event: EventYear }) {
+async function Photos({
+  locale,
+  event,
+}: {
+  locale: Locale;
+  event: EventYear;
+}) {
+  const t = await getTranslations({ locale, namespace: "event" });
+
   return (
     <section
       id="photos"
@@ -175,8 +218,8 @@ function Photos({ event }: { event: EventYear }) {
     >
       <div className="mx-auto max-w-7xl">
         <SectionHead
-          title="รูปบรรยากาศในงาน"
-          lead={`ภาพจากวันงาน ${event.date} ตั้งแต่คิวลงทะเบียนหน้าห้อง จนถึงภาพหมู่สุดท้ายหลังไฟบนเวทีดับลง`}
+          title={t("photos.title")}
+          lead={t("photos.lead", { date: event.date })}
         />
 
         <PhotoWall photos={event.photos} />
@@ -185,7 +228,15 @@ function Photos({ event }: { event: EventYear }) {
   );
 }
 
-function Talks({ event }: { event: EventYear }) {
+async function Talks({
+  locale,
+  event,
+}: {
+  locale: Locale;
+  event: EventYear;
+}) {
+  const t = await getTranslations({ locale, namespace: "event" });
+
   return (
     <section
       id="talks"
@@ -193,8 +244,8 @@ function Talks({ event }: { event: EventYear }) {
     >
       <div className="mx-auto max-w-7xl">
         <SectionHead
-          title="ดู Talk ย้อนหลัง"
-          lead="ทุก Talk ของปีนี้ ดูฟรีบน YouTube ไม่ต้องสมัครสมาชิก"
+          title={t("talks.title")}
+          lead={t("talks.lead")}
           aside={
             event.playlistUrl ? (
               <Button asChild variant="outline" className="border-hairline">
@@ -204,7 +255,7 @@ function Talks({ event }: { event: EventYear }) {
                   rel="noreferrer noopener"
                 >
                   <PlayIcon />
-                  เปิดเพลย์ลิสต์ทั้งปี
+                  {t("talks.playlistCta")}
                 </a>
               </Button>
             ) : null

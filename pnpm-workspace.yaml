@@ -3,5 +3,10 @@
 #   sharp         — next/image optimization
 #   unrs-resolver — eslint-config-next import resolver
 allowBuilds:
+  # Both arrived with next-intl and are only used by its optional SWC-based
+  # message extractor. We keep translations in plain JSON catalogs under
+  # messages/, so nothing on our runtime path needs their native build.
+  '@parcel/watcher': false
+  '@swc/core': false
   sharp: true
   unrs-resolver: true
