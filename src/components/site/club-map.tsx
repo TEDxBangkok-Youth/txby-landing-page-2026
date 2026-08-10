@@ -247,7 +247,7 @@ export function ClubMap() {
         position: "relative",
         height: 620,
         overflow: "hidden",
-        borderRadius: "var(--radius-md)",
+        borderRadius: "var(--t-radius-card)",
       }}
     />
   );

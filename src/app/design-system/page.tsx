@@ -1,6 +1,5 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { ThaiButton, ThaiTag } from "@/components/site/thai-ui";
 import { StickerButton } from "@/components/site/sticker-button";
@@ -33,7 +32,7 @@ function Section({
       <div style={{ marginBottom: 28 }}>
         <h2
           style={{
-            fontFamily: "var(--font-display)",
+            fontFamily: "var(--t-font-heading)",
             fontSize: 28,
             fontWeight: 700,
             textTransform: "uppercase",
@@ -59,7 +58,7 @@ function SubHeading({ children }: { children: React.ReactNode }) {
   return (
     <h3
       style={{
-        fontFamily: "var(--font-display)",
+        fontFamily: "var(--t-font-heading)",
         fontSize: 15,
         fontWeight: 700,
         textTransform: "uppercase",
@@ -151,7 +150,7 @@ function StateChip({
         padding: "10px 16px",
         borderRadius: 12,
         border: "2.5px solid #111D45",
-        fontFamily: "var(--font-display)",
+        fontFamily: "var(--t-font-heading)",
         fontWeight: 700,
         fontSize: 13,
         textTransform: "uppercase",
@@ -223,7 +222,7 @@ export default function DesignSystemPage() {
         <section id="overview" style={{ padding: "48px 0 32px" }}>
           <h1
             style={{
-              fontFamily: "var(--font-display)",
+              fontFamily: "var(--t-font-heading)",
               fontSize: 40,
               fontWeight: 700,
               textTransform: "uppercase",
@@ -286,23 +285,23 @@ export default function DesignSystemPage() {
           <SubHeading>Semantic roles</SubHeading>
           <TokenTable
             rows={[
-              ["--color-primary", "var(--color-pink)"],
-              ["--color-primary-strong", "var(--color-pink-strong)"],
-              ["--color-primary-tint", "var(--color-pink-100)"],
-              ["--color-focus-ring", "var(--color-cyan)"],
+              ["--color-primary", "var(--color-tg-pink)"],
+              ["--color-primary-strong", "var(--color-tg-pink-strong)"],
+              ["--color-primary-tint", "var(--color-tg-pink-100)"],
+              ["--color-focus-ring", "var(--color-tg-cyan)"],
               ["--color-hover-darken", "rgba(17,29,69,.14)"],
               ["--color-press-darken", "rgba(17,29,69,.24)"],
             ]}
           />
           <SubHeading>Type</SubHeading>
           <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 24 }}>
-            <div style={{ fontFamily: "var(--font-display)", fontSize: 30, fontWeight: 700 }}>
+            <div style={{ fontFamily: "var(--t-font-heading)", fontSize: 30, fontWeight: 700 }}>
               --font-display · Chakra Petch
             </div>
-            <div style={{ fontFamily: "var(--font-body)", fontSize: 18 }}>
+            <div style={{ fontFamily: "var(--t-font-body)", fontSize: 18 }}>
               --font-body · Sarabun — ตัวอย่างข้อความภาษาไทย
             </div>
-            <div style={{ fontFamily: "var(--font-accent)", fontSize: 22 }}>
+            <div style={{ fontFamily: "var(--t-font-accent)", fontSize: 22 }}>
               --font-accent · SOV Rohan
             </div>
             <div style={{ fontFamily: "var(--font-athiti)", fontSize: 18 }}>
@@ -348,16 +347,16 @@ export default function DesignSystemPage() {
             <SubHeading>Brand & ink</SubHeading>
             <SwatchRow
               swatches={[
-                { name: "ted-red", value: "var(--ted-red)", on: "#E12B06" },
-                { name: "red-600", value: "var(--red-600)", on: "#B32105" },
-                { name: "red-400", value: "var(--red-400)", on: "#EE5C3C" },
-                { name: "red-200", value: "var(--red-200)", on: "#F8B6A6" },
-                { name: "red-50", value: "var(--red-50)", on: "#FDEEE9" },
-                { name: "ink-900", value: "var(--ink-900)", on: "#000" },
-                { name: "ink-600", value: "var(--ink-600)", on: "#4D4D4D" },
-                { name: "ink-300", value: "var(--ink-300)", on: "#C9C9C9" },
-                { name: "ink-100", value: "var(--ink-100)", on: "#EFEDE9" },
-                { name: "paper-0", value: "var(--paper-0)", on: "#FFF" },
+                { name: "ted-red", value: "var(--color-club-red)", on: "#E12B06" },
+                { name: "red-600", value: "var(--color-club-red-600)", on: "#B32105" },
+                { name: "red-400", value: "var(--color-club-red-400)", on: "#EE5C3C" },
+                { name: "red-200", value: "var(--color-club-red-200)", on: "#F8B6A6" },
+                { name: "red-50", value: "var(--color-club-red-050)", on: "#FDEEE9" },
+                { name: "ink-900", value: "var(--color-club-ink-900)", on: "#000" },
+                { name: "ink-600", value: "var(--color-club-ink-600)", on: "#4D4D4D" },
+                { name: "ink-300", value: "var(--color-club-ink-300)", on: "#C9C9C9" },
+                { name: "ink-100", value: "var(--color-club-ink-100)", on: "#EFEDE9" },
+                { name: "paper-0", value: "var(--color-club-paper)", on: "#FFF" },
               ]}
             />
             <SubHeading>Semantic surfaces & text</SubHeading>
@@ -375,9 +374,9 @@ export default function DesignSystemPage() {
             <SubHeading>Type</SubHeading>
             <div
               style={{
-                fontFamily: "var(--font-heading)",
-                fontSize: "var(--size-title-lg)",
-                fontWeight: "var(--weight-bold)",
+                fontFamily: "var(--t-font-heading)",
+                fontSize: "var(--text-title-lg)",
+                fontWeight: "700",
                 marginBottom: 24,
               }}
             >
@@ -425,40 +424,40 @@ export default function DesignSystemPage() {
             <SubHeading>Brand & neutrals</SubHeading>
             <SwatchRow
               swatches={[
-                { name: "red-500 (accent)", value: "var(--main-red-500)", on: "#EB0028" },
-                { name: "red-600", value: "var(--main-red-600)", on: "#C4001F" },
-                { name: "red-700", value: "var(--main-red-700)", on: "#9E0019" },
-                { name: "black", value: "var(--main-black)", on: "#000" },
-                { name: "gray-800", value: "var(--main-gray-800)", on: "#1A1A1A" },
-                { name: "gray-600", value: "var(--main-gray-600)", on: "#4A4A4A" },
-                { name: "gray-400", value: "var(--main-gray-400)", on: "#8A8A8A" },
-                { name: "gray-200", value: "var(--main-gray-200)", on: "#D6D6D6" },
-                { name: "gray-50", value: "var(--main-gray-50)", on: "#F7F7F7" },
-                { name: "white", value: "var(--main-white)", on: "#FFF" },
+                { name: "red-500 (accent)", value: "var(--color-ci-red-500)", on: "#EB0028" },
+                { name: "red-600", value: "var(--color-ci-red-600)", on: "#C4001F" },
+                { name: "red-700", value: "var(--color-ci-red-700)", on: "#9E0019" },
+                { name: "black", value: "var(--color-ci-black)", on: "#000" },
+                { name: "gray-800", value: "var(--color-ci-gray-800)", on: "#1A1A1A" },
+                { name: "gray-600", value: "var(--color-ci-gray-600)", on: "#4A4A4A" },
+                { name: "gray-400", value: "var(--color-ci-gray-400)", on: "#8A8A8A" },
+                { name: "gray-200", value: "var(--color-ci-gray-200)", on: "#D6D6D6" },
+                { name: "gray-50", value: "var(--color-ci-gray-50)", on: "#F7F7F7" },
+                { name: "white", value: "var(--color-ci-white)", on: "#FFF" },
               ]}
             />
             <SubHeading>Type scale</SubHeading>
             <div
               style={{
-                fontFamily: "var(--main-font-sans)",
+                fontFamily: "var(--font-inter), var(--font-ibm-plex-sans-thai), sans-serif",
                 display: "flex",
                 flexDirection: "column",
                 gap: 10,
                 marginBottom: 24,
               }}
             >
-              <div style={{ fontSize: "var(--main-fs-h1)", fontWeight: 700 }}>
+              <div style={{ fontSize: "var(--text-h1)", fontWeight: 700 }}>
                 --main-fs-h1 · Inter / IBM Plex Sans Thai
               </div>
-              <div style={{ fontSize: "var(--main-fs-h3)", fontWeight: 600 }}>
+              <div style={{ fontSize: "var(--text-h4)", fontWeight: 600 }}>
                 --main-fs-h3 · semibold
               </div>
-              <div style={{ fontSize: "var(--main-fs-body)", fontWeight: 400 }}>
+              <div style={{ fontSize: "var(--text-body)", fontWeight: 400 }}>
                 --main-fs-body · regular — ตัวอย่างข้อความ
               </div>
               <div
                 style={{
-                  fontSize: "var(--main-fs-eyebrow)",
+                  fontSize: "var(--text-caption)",
                   textTransform: "uppercase",
                   letterSpacing: "0.1em",
                   fontWeight: 600,
@@ -669,9 +668,9 @@ export default function DesignSystemPage() {
               style={{
                 display: "inline-flex",
                 flexDirection: "column",
-                background: "var(--paper-0)",
-                border: "var(--border-ink) solid var(--ted-black)",
-                borderRadius: "var(--radius-md)",
+                background: "var(--color-club-paper)",
+                border: "var(--bw-ink) solid var(--color-club-ink-900)",
+                borderRadius: "var(--radius-sm)",
                 boxShadow: "var(--shadow-ink)",
                 overflow: "hidden",
               }}
@@ -683,15 +682,15 @@ export default function DesignSystemPage() {
                   style={{
                     appearance: "none",
                     border: 0,
-                    borderTop: i > 0 ? "var(--border-ink) solid var(--ted-black)" : undefined,
+                    borderTop: i > 0 ? "var(--bw-ink) solid var(--color-club-ink-900)" : undefined,
                     background: "none",
                     width: 44,
                     height: 44,
-                    color: "var(--ted-black)",
+                    color: "var(--color-club-ink-900)",
                     cursor: "pointer",
                     fontSize: 16,
                     fontWeight: 700,
-                    transition: "var(--transition-control)",
+                    transition: "all 140ms var(--ease-ink)",
                   }}
                   className="dsx-clubctl"
                 >
@@ -715,7 +714,7 @@ export default function DesignSystemPage() {
               background: checked ? "#00A14B" : "#FFFDF7",
               color: checked ? "#fff" : "#111D45",
               boxShadow: "2px 3px 0 rgba(17,29,69,.9)",
-              fontFamily: "var(--font-display)",
+              fontFamily: "var(--t-font-heading)",
               fontWeight: 700,
               fontSize: 13,
               textTransform: "uppercase",
@@ -731,10 +730,10 @@ export default function DesignSystemPage() {
 
       <style jsx global>{`
         .dsx-clubctl:hover {
-          color: var(--ted-red) !important;
+          color: var(--color-club-red) !important;
         }
         .dsx-clubctl:focus-visible {
-          outline: 2px solid var(--focus-ring);
+          outline: 2px solid var(--t-focus);
           outline-offset: -2px;
         }
       `}</style>

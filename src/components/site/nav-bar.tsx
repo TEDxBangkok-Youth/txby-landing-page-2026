@@ -24,15 +24,15 @@ export function NavBar() {
 
   return (
     <div
-      data-ci="main"
+      data-theme="main"
       style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 60 }}
     >
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background: "var(--main-white)",
-          borderBottom: "1px solid var(--main-border-light)",
+          background: "var(--t-surface-card)",
+          borderBottom: "1px solid var(--t-line)",
           transition: "opacity 140ms ease",
           pointerEvents: "none",
           opacity: scrolled ? 1 : 0,
@@ -45,7 +45,7 @@ export function NavBar() {
           alignItems: "center",
           justifyContent: "space-between",
           padding: "20px 32px",
-          fontFamily: "var(--main-font-sans)",
+          fontFamily: "var(--t-font-body)",
         }}
       >
         <div
@@ -76,9 +76,9 @@ export function NavBar() {
                   <a
                     href={l.href}
                     style={{
-                      color: "var(--main-black)",
+                      color: "var(--t-foreground)",
                       fontSize: 14,
-                      fontWeight: "var(--main-fw-medium)",
+                      fontWeight: "500",
                       textDecoration: "none",
                     }}
                   >
@@ -90,14 +90,14 @@ export function NavBar() {
             <a
               href="#tickets"
               style={{
-                background: "var(--main-accent)",
-                color: "var(--main-white)",
+                background: "var(--t-brand)",
+                color: "var(--t-surface-card)",
                 border: "none",
-                borderRadius: "var(--main-radius-md)",
+                borderRadius: "var(--t-radius-control)",
                 padding: "10px 20px",
                 fontSize: 14,
-                fontWeight: "var(--main-fw-semibold)",
-                fontFamily: "var(--main-font-sans)",
+                fontWeight: "600",
+                fontFamily: "var(--t-font-body)",
                 textDecoration: "none",
                 whiteSpace: "nowrap",
               }}

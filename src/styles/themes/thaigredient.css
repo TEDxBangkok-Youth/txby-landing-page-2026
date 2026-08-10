@@ -1,0 +1,76 @@
+/* ─────────────────────────────────────────────────────────────
+   Tier 3 — Thaigredient ("ส่วนผสมลับ"), the 2026 seasonal skin.
+   The site default: set on <body> in src/app/layout.tsx.
+
+   Chunky sticker language — 2.5px ink borders, hard navy offset
+   shadows, 14px radius, Chakra Petch over Sarabun on warm paper.
+   ───────────────────────────────────────────────────────────── */
+
+[data-theme="thaigredient"] {
+  /* Surfaces */
+  --t-surface: var(--color-tg-paper-050);
+  --t-surface-card: var(--color-tg-paper);
+  --t-surface-raised: var(--color-tg-paper-100);
+  --t-surface-sunken: var(--color-tg-paper-200);
+  --t-surface-wash: var(--color-tg-pink-050);
+  --t-surface-inverse: var(--color-tg-ink);
+
+  /* Text */
+  --t-foreground: var(--color-tg-ink);
+  --t-foreground-secondary: var(--color-tg-ink-soft);
+  --t-foreground-muted: var(--color-tg-navy-500);
+  --t-foreground-faint: var(--color-tg-navy-100);
+  --t-foreground-inverse: var(--color-tg-paper);
+
+  /* Brand */
+  --t-brand: var(--color-tg-pink);
+  --t-brand-hover: var(--color-tg-pink-strong);
+  --t-brand-press: var(--color-tg-pink-700);
+  --t-brand-foreground: var(--color-white);
+
+  /* Lines */
+  --t-line-subtle: var(--color-tg-navy-100);
+  --t-line: var(--color-tg-ink);
+  --t-line-strong: var(--color-tg-ink);
+
+  --t-link: var(--color-tg-red);
+  --t-link-hover: var(--color-tg-red-600);
+
+  --t-focus: var(--color-tg-cyan);
+  --t-destructive: var(--color-tg-red);
+
+  /* Shadow tints — geometry comes from the global scale. */
+  --t-shadow-tint: rgb(17 29 69 / 0.9);
+  --t-shadow-lift-tint: rgb(17 29 69 / 0.18);
+
+  /* Fonts */
+  --t-font-heading: var(--font-chakra), "Chakra Petch", sans-serif;
+  --t-font-body: var(--font-sarabun), "Sarabun", system-ui, sans-serif;
+  --t-font-accent: var(--font-rohan), "Chakra Petch", sans-serif;
+
+  /* Structure — aliases into the global scales. */
+  --t-radius-card: var(--radius-sticker);
+  --t-radius-control: var(--radius-xl);
+  --t-border-card: var(--bw-sticker);
+  --t-border-control: var(--bw-sticker);
+  --t-shadow-geo-card: var(--sh-sticker);
+  --t-shadow-geo-card-hover: var(--sh-sticker-lg);
+  --t-shadow-geo-card-press: var(--sh-sticker-xs);
+  --t-shadow-geo-control: var(--sh-sticker-sm);
+  --t-shadow-geo-control-hover: var(--sh-sticker-lg);
+  --t-shadow-geo-control-press: var(--sh-sticker-xs);
+}
+
+/* Cards sitting on the ink field (the Volunteers photo frame):
+   paper border and a paper-tinted offset shadow. */
+[data-theme="thaigredient"][data-surface="inverse"],
+[data-theme="thaigredient"] [data-surface="inverse"] {
+  --t-surface-card: var(--color-tg-ink-soft);
+  --t-surface-raised: var(--color-tg-ink-soft);
+  --t-foreground: var(--color-tg-paper);
+  --t-foreground-secondary: var(--color-tg-navy-100);
+  --t-foreground-muted: var(--color-tg-navy-100);
+  --t-line: var(--color-tg-paper);
+  --t-line-strong: var(--color-tg-paper);
+  --t-shadow-tint: rgb(255 253 247 / 0.9);
+}

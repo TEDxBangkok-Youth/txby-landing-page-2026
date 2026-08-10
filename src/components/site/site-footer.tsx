@@ -5,11 +5,11 @@ import { footerLinks, social } from "@/lib/site-data";
 export function SiteFooter() {
   return (
     <footer
-      data-ci="main"
+      data-theme="main" data-surface="inverse"
       style={{
-        background: "var(--main-black)",
-        color: "var(--main-white)",
-        fontFamily: "var(--main-font-sans)",
+        background: "var(--t-surface)",
+        color: "var(--t-foreground)",
+        fontFamily: "var(--t-font-body)",
         padding: "64px 32px 32px",
       }}
     >
@@ -36,7 +36,7 @@ export function SiteFooter() {
           />
           <p
             style={{
-              color: "var(--main-gray-400)",
+              color: "var(--t-foreground-muted)",
               fontSize: 13,
               maxWidth: 320,
               lineHeight: 1.6,
@@ -57,7 +57,7 @@ export function SiteFooter() {
                   fontSize: 11,
                   textTransform: "uppercase",
                   letterSpacing: "0.14em",
-                  color: "var(--main-gray-400)",
+                  color: "var(--t-foreground-muted)",
                 }}
               >
                 {group.title}
@@ -67,7 +67,7 @@ export function SiteFooter() {
                   key={it}
                   href="#"
                   style={{
-                    color: "var(--main-white)",
+                    color: "var(--t-foreground)",
                     fontSize: 14,
                     textDecoration: "none",
                   }}
@@ -84,13 +84,13 @@ export function SiteFooter() {
           maxWidth: 1280,
           margin: "48px auto 0",
           paddingTop: 20,
-          borderTop: "1px solid var(--main-gray-800)",
+          borderTop: "1px solid var(--t-line-subtle)",
           display: "flex",
           justifyContent: "space-between",
           flexWrap: "wrap",
           gap: 16,
           fontSize: 12,
-          color: "var(--main-gray-500)",
+          color: "var(--t-foreground-faint)",
         }}
       >
         <span>© 2026 TEDxBangkok Youth</span>
@@ -99,7 +99,7 @@ export function SiteFooter() {
             <a
               key={s}
               href="#"
-              style={{ color: "var(--main-gray-500)", textDecoration: "none" }}
+              style={{ color: "var(--t-foreground-faint)", textDecoration: "none" }}
             >
               {s}
             </a>

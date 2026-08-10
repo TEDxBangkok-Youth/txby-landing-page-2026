@@ -37,7 +37,7 @@ export function ThaiButton({
       href={href}
       className="txby-btn"
       style={{
-        fontFamily: "var(--font-display)",
+        fontFamily: "var(--t-font-heading)",
         fontWeight: 700,
         textTransform: "uppercase",
         letterSpacing: "0.02em",
@@ -100,7 +100,7 @@ export function ThaiTag({
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        fontFamily: "var(--font-display)",
+        fontFamily: "var(--t-font-heading)",
         border: `2.5px solid ${INK}`,
         borderRadius: 6,
         padding: "8px 18px",

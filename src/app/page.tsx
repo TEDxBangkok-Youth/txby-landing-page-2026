@@ -14,7 +14,7 @@ export default function Home() {
     <div
       style={{
         background: "#FBF6E9",
-        fontFamily: "var(--font-body)",
+        fontFamily: "var(--t-font-body)",
         color: "#111D45",
       }}
     >
@@ -65,7 +65,7 @@ export default function Home() {
               left: "23cqw",
               top: "6cqw",
               width: "74cqw",
-              fontFamily: "var(--font-display)",
+              fontFamily: "var(--t-font-heading)",
               fontWeight: 700,
               color: "#111D45",
             }}
@@ -172,7 +172,7 @@ export default function Home() {
               <h2
                 style={{
                   margin: 0,
-                  fontFamily: "var(--font-display)",
+                  fontFamily: "var(--t-font-heading)",
                   fontWeight: 700,
                   textTransform: "uppercase",
                   fontSize: "clamp(2.25rem,6vw,4.25rem)",
@@ -262,7 +262,7 @@ export default function Home() {
             >
               <div
                 style={{
-                  fontFamily: "var(--font-display)",
+                  fontFamily: "var(--t-font-heading)",
                   fontWeight: 700,
                   fontSize: 12,
                   letterSpacing: ".08em",
@@ -275,7 +275,7 @@ export default function Home() {
               <h3
                 style={{
                   margin: 0,
-                  fontFamily: "var(--font-display)",
+                  fontFamily: "var(--t-font-heading)",
                   fontWeight: 700,
                   textTransform: "uppercase",
                   fontSize: "clamp(1.75rem,4vw,2.75rem)",
@@ -348,7 +348,7 @@ export default function Home() {
                 <div style={{ padding: "16px 18px 20px", background: "#FFFDF7", flex: 1 }}>
                   <div
                     style={{
-                      fontFamily: "var(--font-display)",
+                      fontFamily: "var(--t-font-heading)",
                       fontWeight: 700,
                       fontSize: 11,
                       letterSpacing: ".08em",
@@ -360,7 +360,7 @@ export default function Home() {
                   </div>
                   <div
                     style={{
-                      fontFamily: "var(--font-display)",
+                      fontFamily: "var(--t-font-heading)",
                       fontWeight: 700,
                       fontSize: "1.25rem",
                       textTransform: "uppercase",
@@ -390,15 +390,16 @@ export default function Home() {
       {/* ═══════════════ TED CLUB ═══════════════ */}
       <section
         id="club"
+        data-theme="club"
         style={{
           position: "relative",
           overflow: "hidden",
-          background: "var(--surface-page)",
-          color: "var(--text-primary)",
-          fontFamily: "var(--font-body)",
-          padding: "var(--pad-section-y) 32px",
-          borderTop: "var(--border-marker) solid var(--ted-black)",
-          borderBottom: "var(--border-marker) solid var(--ted-black)",
+          background: "var(--t-surface)",
+          color: "var(--t-foreground)",
+          fontFamily: "var(--t-font-body)",
+          padding: "80px 32px",
+          borderTop: "var(--bw-marker) solid var(--t-line-strong)",
+          borderBottom: "var(--bw-marker) solid var(--t-line-strong)",
         }}
       >
         <img
@@ -430,12 +431,12 @@ export default function Home() {
               <h2
                 style={{
                   margin: 0,
-                  fontFamily: "var(--font-heading)",
+                  fontFamily: "var(--t-font-heading)",
                   fontWeight: 700,
-                  fontSize: "clamp(32px,4.6vw,var(--size-display-lg))",
-                  lineHeight: "var(--leading-snug)",
-                  letterSpacing: "var(--tracking-heading)",
-                  color: "var(--text-primary)",
+                  fontSize: "clamp(32px,4.6vw,44px)",
+                  lineHeight: "1.14",
+                  letterSpacing: "-0.015em",
+                  color: "var(--t-foreground)",
                 }}
               >
                 TED Club{" "}
@@ -443,7 +444,7 @@ export default function Home() {
                   style={{
                     position: "relative",
                     display: "inline-block",
-                    color: "var(--ted-red)",
+                    color: "var(--t-brand)",
                   }}
                 >
                   ทั่วประเทศไทย
@@ -465,11 +466,11 @@ export default function Home() {
               <p
                 style={{
                   margin: "20px 0 0",
-                  fontFamily: "var(--font-body)",
+                  fontFamily: "var(--t-font-body)",
                   fontWeight: 400,
-                  fontSize: "var(--size-body-lg)",
-                  lineHeight: "var(--leading-body)",
-                  color: "var(--text-secondary)",
+                  fontSize: "var(--text-body-lg)",
+                  lineHeight: "1.55",
+                  color: "var(--t-foreground-secondary)",
                   maxWidth: 560,
                   textWrap: "pretty",
                 }}
@@ -514,7 +515,7 @@ export default function Home() {
               <h2
                 style={{
                   margin: 0,
-                  fontFamily: "var(--font-display)",
+                  fontFamily: "var(--t-font-heading)",
                   fontWeight: 700,
                   textTransform: "uppercase",
                   fontSize: "clamp(2.25rem,6vw,4rem)",
@@ -590,7 +591,7 @@ export default function Home() {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        fontFamily: "var(--font-display)",
+                        fontFamily: "var(--t-font-heading)",
                         fontWeight: 700,
                         fontSize: 56,
                         color: "#111D45",
@@ -612,7 +613,7 @@ export default function Home() {
                 >
                   <div
                     style={{
-                      fontFamily: "var(--font-display)",
+                      fontFamily: "var(--t-font-heading)",
                       fontWeight: 700,
                       fontSize: "1.0625rem",
                       lineHeight: 1.2,
@@ -668,7 +669,7 @@ export default function Home() {
               <h2
                 style={{
                   margin: 0,
-                  fontFamily: "var(--font-display)",
+                  fontFamily: "var(--t-font-heading)",
                   fontWeight: 700,
                   textTransform: "uppercase",
                   fontSize: "clamp(2.25rem,6vw,4rem)",

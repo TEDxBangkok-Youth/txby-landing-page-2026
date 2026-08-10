@@ -1,0 +1,27 @@
+/* ─────────────────────────────────────────────────────────────
+   Shadow composition.
+
+   Combines the global geometry (--sh-*, chosen per theme via
+   --t-shadow-geo-*) with the scoped tint (--t-shadow-tint) into
+   the finished --t-shadow-* values the utilities consume.
+
+   This has to happen in a rule that matches every scope that can
+   change the tint — hence [data-surface] as well as [data-theme].
+   A custom property's var() references resolve on the element
+   where the property is declared, so an inverse surface must
+   re-run the composition to pick up its own tint rather than
+   inheriting the already-substituted value from its theme root.
+
+   Imported after the three theme files.
+   ───────────────────────────────────────────────────────────── */
+
+[data-theme],
+[data-surface] {
+  --t-shadow-card: var(--t-shadow-geo-card) var(--t-shadow-tint);
+  --t-shadow-card-hover: var(--t-shadow-geo-card-hover) var(--t-shadow-tint);
+  --t-shadow-card-press: var(--t-shadow-geo-card-press) var(--t-shadow-tint);
+  --t-shadow-control: var(--t-shadow-geo-control) var(--t-shadow-tint);
+  --t-shadow-control-hover: var(--t-shadow-geo-control-hover) var(--t-shadow-tint);
+  --t-shadow-control-press: var(--t-shadow-geo-control-press) var(--t-shadow-tint);
+  --t-shadow-lift: var(--sh-lift) var(--t-shadow-lift-tint);
+}

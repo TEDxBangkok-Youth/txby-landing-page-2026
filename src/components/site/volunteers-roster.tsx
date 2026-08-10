@@ -51,7 +51,7 @@ export function VolunteersRoster() {
             </button>
             <div
               style={{
-                fontFamily: "var(--font-display)",
+                fontFamily: "var(--t-font-heading)",
                 fontWeight: 700,
                 textTransform: "uppercase",
                 fontSize: 26,
@@ -91,7 +91,7 @@ export function VolunteersRoster() {
           >
             <div
               style={{
-                fontFamily: "var(--font-display)",
+                fontFamily: "var(--t-font-heading)",
                 fontWeight: 700,
                 textTransform: "uppercase",
                 fontSize: 22,
@@ -125,7 +125,7 @@ export function VolunteersRoster() {
               >
                 <span
                   style={{
-                    fontFamily: "var(--font-display)",
+                    fontFamily: "var(--t-font-heading)",
                     fontWeight: 700,
                     textTransform: "uppercase",
                     fontSize: 15,
