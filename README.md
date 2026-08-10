@@ -54,4 +54,4 @@ pnpm build      # production build
 
 Event details and the placeholder collections live in `src/lib/site-data.ts`.
 Swap the `<ImageSlot>` placeholders in `src/app/page.tsx` for real `<Image>`s
-(speaker portraits, past posters, sponsor logos) as they are confirmed.
+(speaker portraits, past posters, sponsor logos) as they are confirmed. 
