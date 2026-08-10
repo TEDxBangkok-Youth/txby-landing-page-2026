@@ -1,0 +1,94 @@
+/* ─────────────────────────────────────────────────────────────
+   Tier 3 — TEDx main CI.
+   The official TEDxBangkok Youth brand, distinct from the
+   seasonal Thaigredient reskin. Applied with data-theme="main"
+   on the nav and the footer.
+
+   Corporate language — no offset shadows, hairline borders,
+   4px radius, Inter over IBM Plex Sans Thai, TED red.
+   ───────────────────────────────────────────────────────────── */
+
+[data-theme="main"] {
+  /* Surfaces */
+  --t-surface: var(--color-ci-white);
+  --t-surface-card: var(--color-ci-white);
+  --t-surface-raised: var(--color-ci-gray-50);
+  --t-surface-sunken: var(--color-ci-gray-100);
+  --t-surface-wash: var(--color-ci-gray-100);
+  --t-surface-inverse: var(--color-ci-black);
+
+  /* Text */
+  --t-foreground: var(--color-ci-black);
+  --t-foreground-secondary: var(--color-ci-gray-600);
+  --t-foreground-muted: var(--color-ci-gray-400);
+  --t-foreground-faint: var(--color-ci-gray-500);
+  --t-foreground-inverse: var(--color-ci-white);
+  /* Reads on --t-surface-sunken, which stays light when inverted. */
+  --t-foreground-on-sunken: var(--color-ci-black);
+
+  /* Brand */
+  --t-brand: var(--color-ci-red-500);
+  --t-brand-hover: var(--color-ci-red-600);
+  --t-brand-press: var(--color-ci-red-700);
+  --t-brand-foreground: var(--color-ci-white);
+
+  /* Lines */
+  --t-line-subtle: var(--color-ci-gray-100);
+  --t-line: var(--color-ci-gray-200);
+  --t-line-strong: var(--color-ci-gray-700);
+
+  --t-link: var(--color-ci-red-500);
+  --t-link-hover: var(--color-ci-red-600);
+
+  --t-focus: var(--color-ci-red-500);
+  --t-destructive: var(--color-ci-red-500);
+
+  /* The CI has no hard offset shadows. */
+  --t-shadow-tint: transparent;
+  --t-shadow-lift-tint: rgb(0 0 0 / 0.12);
+
+  /* Fonts — Inter Variable + IBM Plex Sans Thai. */
+  --t-font-heading: var(--font-inter), var(--font-ibm-plex-sans-thai),
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --t-font-body: var(--font-inter), var(--font-ibm-plex-sans-thai),
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --t-font-accent: var(--font-inter), var(--font-ibm-plex-sans-thai),
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Control typography + press physics. The CI is flat: sentence
+     case, semibold, no movement. */
+  --t-control-weight: 600;
+  --t-control-transform: none;
+  --t-control-tracking: normal;
+  --t-lift-x: 0px;
+  --t-lift-y: 0px;
+  --t-press-x: 0px;
+  --t-press-y: 0px;
+
+  /* Structure */
+  --t-radius-card: var(--radius-sm);
+  --t-radius-control: var(--radius-sm);
+  --t-border-card: var(--bw-hairline);
+  --t-border-control: 0px;
+  --t-shadow-geo-card: var(--sh-none);
+  --t-shadow-geo-card-hover: var(--sh-none);
+  --t-shadow-geo-card-press: var(--sh-none);
+  --t-shadow-geo-control: var(--sh-none);
+  --t-shadow-geo-control-hover: var(--sh-none);
+  --t-shadow-geo-control-press: var(--sh-none);
+}
+
+/* Inverted CI surface — the site footer. */
+[data-theme="main"][data-surface="inverse"],
+[data-theme="main"] [data-surface="inverse"] {
+  --t-surface: var(--color-ci-black);
+  --t-surface-card: var(--color-ci-gray-900);
+  --t-surface-raised: var(--color-ci-gray-800);
+  --t-foreground: var(--color-ci-white);
+  --t-foreground-secondary: var(--color-ci-gray-200);
+  --t-foreground-muted: var(--color-ci-gray-400);
+  --t-foreground-faint: var(--color-ci-gray-500);
+  --t-line-subtle: var(--color-ci-gray-800);
+  --t-line: var(--color-ci-gray-700);
+  --t-line-strong: var(--color-ci-gray-200);
+}

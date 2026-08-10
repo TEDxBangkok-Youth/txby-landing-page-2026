@@ -1,0 +1,104 @@
+/* ─────────────────────────────────────────────────────────────
+   Tier 1 — primitives.
+
+   Raw brand ramps for the three design systems. These are the
+   source values; nothing in the markup should reference them
+   directly. Semantic roles in src/styles/themes/*.css point here,
+   and components style against those roles.
+
+   Namespaced (tg / club / ci) because the un-prefixed names
+   collide with Tailwind's own ramps: a bare --color-pink-300
+   shadows Tailwind's pink-300 with a different value, so
+   `bg-pink-300` and `bg-pink` end up unrelated colors.
+   ───────────────────────────────────────────────────────────── */
+
+@theme static {
+  /* ── Thaigredient ("ส่วนผสมลับ", the 2026 seasonal skin) ───── */
+  --color-tg-pink: #ef4899;
+  --color-tg-pink-strong: #d6317f;
+  --color-tg-pink-700: #b31f67;
+  --color-tg-pink-300: #f480b8;
+  --color-tg-pink-100: #fbdceb;
+  --color-tg-pink-050: #fef1f7;
+
+  --color-tg-yellow: #f9ef3e;
+  --color-tg-yellow-600: #e0d420;
+  --color-tg-yellow-300: #fbf57e;
+  --color-tg-yellow-100: #fdfbc9;
+  /* The hero field is a deeper yellow than the component yellow. */
+  --color-tg-yellow-field: #f4e31e;
+
+  --color-tg-cyan: #02afda;
+  --color-tg-cyan-600: #0288ab;
+  --color-tg-cyan-300: #5fcbe8;
+  --color-tg-cyan-100: #cff1fa;
+
+  --color-tg-green: #00a14b;
+  --color-tg-green-600: #00803b;
+  --color-tg-green-300: #5bc488;
+  --color-tg-green-100: #cfeedd;
+
+  --color-tg-red: #c82227;
+  --color-tg-red-600: #a11b1f;
+  --color-tg-red-300: #e17a7d;
+  --color-tg-red-100: #f8dadb;
+
+  /* Deep plum — body copy sitting on a pink field. */
+  --color-tg-plum: #5b0e36;
+
+  --color-tg-ink: #111d45;
+  --color-tg-ink-soft: #233064;
+  --color-tg-navy-500: #3e4b7c;
+  --color-tg-navy-100: #dcdfea;
+
+  --color-tg-paper: #fffdf7;
+  --color-tg-paper-050: #fbf6e9;
+  --color-tg-paper-100: #f3ecd8;
+  --color-tg-paper-200: #ede8de;
+  --color-tg-paper-300: #e4dcc6;
+
+  /* ── TED Club ──────────────────────────────────────────────── */
+  --color-club-red: #e12b06;
+  --color-club-red-700: #8e1a04;
+  --color-club-red-600: #b32105;
+  --color-club-red-400: #ee5c3c;
+  --color-club-red-200: #f8b6a6;
+  --color-club-red-100: #fbd9d0;
+  --color-club-red-050: #fdeee9;
+  /* Wash used behind inverted (black-background) Club surfaces. */
+  --color-club-red-950: #2a0a03;
+
+  --color-club-ink-900: #000000;
+  --color-club-ink-800: #151515;
+  --color-club-ink-700: #2e2e2e;
+  --color-club-ink-600: #4d4d4d;
+  --color-club-ink-500: #767676;
+  --color-club-ink-400: #a0a0a0;
+  --color-club-ink-300: #c9c9c9;
+  --color-club-ink-200: #e3e1de;
+  --color-club-ink-100: #efede9;
+
+  --color-club-paper-050: #faf8f5;
+  --color-club-paper: #ffffff;
+
+  --color-club-success: #1e7a47;
+  --color-club-info: #1b5fa8;
+
+  /* ── TEDx main CI (the licensed brand, used by nav + footer) ─ */
+  --color-ci-red-500: #eb0028;
+  --color-ci-red-600: #c4001f;
+  --color-ci-red-700: #9e0019;
+
+  --color-ci-black: #000000;
+  --color-ci-white: #ffffff;
+  --color-ci-gray-50: #f7f7f7;
+  --color-ci-gray-100: #ebebeb;
+  --color-ci-gray-200: #d6d6d6;
+  --color-ci-gray-300: #b3b3b3;
+  --color-ci-gray-400: #8a8a8a;
+  --color-ci-gray-500: #666666;
+  --color-ci-gray-600: #4a4a4a;
+  --color-ci-gray-700: #2e2e2e;
+  --color-ci-gray-800: #1a1a1a;
+  --color-ci-gray-900: #0d0d0d;
+}

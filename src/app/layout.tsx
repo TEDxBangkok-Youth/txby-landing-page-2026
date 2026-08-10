@@ -62,11 +62,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="th"
-      className={`${fontVars} h-full antialiased`}
-    >
-      <body className="min-h-full">{children}</body>
+    <html lang="th" className={`${fontVars} h-full antialiased`}>
+      <body data-theme="thaigredient" className="min-h-full">
+        {children}
+      </body>
     </html>
   );
 }

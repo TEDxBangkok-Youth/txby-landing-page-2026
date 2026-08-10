@@ -1,0 +1,247 @@
+/* ─────────────────────────────────────────────────────────────
+   Tier 2 — global system tokens.
+
+   One set, shared by every theme. Tailwind v4 built-ins are used
+   wherever a value matches, so spacing, font-weight, duration,
+   container, breakpoints and most tracking/leading add nothing
+   here. Custom tokens exist only where v4 has no equivalent:
+   fluid display sizes, the odd px type steps (11/13/15/17/19/21/
+   26/32), the 14px sticker radius, border widths (v4 has no
+   border-width namespace) and the hard offset shadows.
+
+   This file also maps the theme-scoped roles (--t-*, set in
+   src/styles/themes/*.css) into Tailwind's namespaces. The
+   mapping must live in `@theme inline` so utilities emit a
+   var() reference and resolve against whichever [data-theme]
+   scope the element sits in.
+   ───────────────────────────────────────────────────────────── */
+
+@theme static {
+  /* ── Type scale ────────────────────────────────────────────
+     Sizes with a Tailwind equivalent are NOT redefined; use
+     text-xs (12) / text-sm (14) / text-base (16) / text-lg (18)
+     / text-xl (20) / text-2xl (24) directly. */
+
+  --text-display: clamp(3rem, 2.2rem + 3.2vw, 6.5rem);
+  --text-display--line-height: 1.2;
+  --text-display--letter-spacing: -0.02em;
+
+  /* Section titles. Gallery previously topped out at 4.25rem and
+     Speakers/Volunteers at 4rem; they converge here. */
+  --text-h1: clamp(2.25rem, 6vw, 4rem);
+  --text-h1--line-height: 1.02;
+
+  --text-h2: clamp(1.75rem, 4vw, 2.75rem);
+  --text-h2--line-height: 1.3;
+
+  /* TED Club's editorial heading step: 32px → 44px. */
+  --text-h3: clamp(2rem, 4.6vw, 2.75rem);
+  --text-h3--line-height: 1.14;
+  --text-h3--letter-spacing: -0.015em;
+
+  --text-h4: clamp(1.375rem, 1.2rem + 0.6vw, 1.875rem);
+  --text-h4--line-height: 1.3;
+
+  --text-title-lg: 2rem; /* 32px */
+  --text-title-lg--line-height: 1.1;
+  --text-title: 1.625rem; /* 26px */
+  --text-title--line-height: 1.22;
+  --text-title-sm: 1.3125rem; /* 21px */
+  --text-title-sm--line-height: 1.22;
+
+  --text-body-lg: 1.1875rem; /* 19px */
+  --text-body-lg--line-height: 1.55;
+  --text-body: 1.0625rem; /* 17px */
+  --text-body--line-height: 1.6;
+  --text-body-sm: 0.9375rem; /* 15px */
+  --text-body-sm--line-height: 1.5;
+  --text-caption: 0.8125rem; /* 13px */
+  --text-caption--line-height: 1.45;
+  --text-micro: 0.6875rem; /* 11px */
+  --text-micro--line-height: 1.4;
+
+  /* ── Leading ───────────────────────────────────────────────
+     Only steps tighter than Tailwind's --leading-tight (1.25).
+     Everything looser uses the built-ins. */
+  --leading-display: 1.02;
+  --leading-heading: 1.22;
+
+  /* ── Tracking ──────────────────────────────────────────────
+     Collapsed onto Tailwind's tight/normal/wide/wider/widest.
+     These two have no near equivalent and are used widely. */
+  --tracking-eyebrow: 0.08em;
+  --tracking-caps: 0.14em;
+
+  /* ── Radius ────────────────────────────────────────────────
+     Tailwind's ramp is used as-is (xs 2 / sm 4 / md 6 / lg 8 /
+     xl 12 / 2xl 16). The shadcn calc-derived override is gone.
+     Only the signature 14px sticker step is added. */
+  --radius-sticker: 0.875rem;
+
+  /* ── Motion ────────────────────────────────────────────────
+     Durations use Tailwind's numeric utilities (duration-140).
+     Club's and the main CI's curves were near-identical; one
+     token replaces both. */
+  --ease-ink: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ── Border widths ───────────────────────────────────────────
+   Tailwind v4 has no border-width theme namespace, so these are
+   plain custom properties consumed by the @utility rules below. */
+:root {
+  --bw-hairline: 1px;
+  --bw-ink: 1.5px;
+  --bw-sticker: 2.5px;
+  --bw-marker: 3px;
+  --bw-rule: 4px;
+
+  /* ── Shadow geometry ───────────────────────────────────────
+     Offsets only, no color. A custom property containing var()
+     is substituted where it is DECLARED, so a :root token like
+     `3px 4px 0 var(--t-shadow-tint)` would resolve against a
+     :root that has no tint and compute to nothing. Geometry and
+     tint are therefore combined per scope in themes/compose.css. */
+  --sh-sticker-xs: 1px 1px 0;
+  --sh-sticker-sm: 2px 3px 0;
+  --sh-sticker: 3px 4px 0;
+  --sh-sticker-lg: 5px 6px 0;
+  --sh-ink: 2px 2px 0;
+  --sh-ink-press: 1px 1px 0;
+  --sh-lift: 0 10px 30px;
+  --sh-none: 0 0 0;
+}
+
+/* ── Theme-scoped roles → Tailwind namespaces ────────────────
+   `inline` keeps the var() indirection so a single utility
+   resolves differently per [data-theme] scope. */
+@theme inline {
+  /* Surfaces */
+  --color-surface: var(--t-surface);
+  --color-surface-card: var(--t-surface-card);
+  --color-surface-raised: var(--t-surface-raised);
+  --color-surface-sunken: var(--t-surface-sunken);
+  --color-surface-wash: var(--t-surface-wash);
+  --color-surface-inverse: var(--t-surface-inverse);
+
+  /* Text */
+  --color-foreground: var(--t-foreground);
+  --color-foreground-secondary: var(--t-foreground-secondary);
+  --color-foreground-muted: var(--t-foreground-muted);
+  --color-foreground-faint: var(--t-foreground-faint);
+  --color-foreground-inverse: var(--t-foreground-inverse);
+  --color-foreground-on-sunken: var(--t-foreground-on-sunken);
+
+  /* Brand accent. Deliberately NOT named `accent` — shadcn
+     reserves --color-accent for its subtle hover surface. */
+  --color-brand: var(--t-brand);
+  --color-brand-hover: var(--t-brand-hover);
+  --color-brand-press: var(--t-brand-press);
+  --color-brand-foreground: var(--t-brand-foreground);
+
+  /* Lines */
+  --color-line-subtle: var(--t-line-subtle);
+  --color-line: var(--t-line);
+  --color-line-strong: var(--t-line-strong);
+
+  --color-link: var(--t-link);
+  --color-link-hover: var(--t-link-hover);
+
+  --color-focus: var(--t-focus);
+
+  /* Fonts */
+  --font-heading: var(--t-font-heading);
+  --font-body: var(--t-font-body);
+  --font-accent: var(--t-font-accent);
+  --font-sans: var(--t-font-body);
+
+  /* Structural aliases — each points into a global scale above. */
+  --radius-card: var(--t-radius-card);
+  --radius-control: var(--t-radius-control);
+  --shadow-card: var(--t-shadow-card);
+  --shadow-card-hover: var(--t-shadow-card-hover);
+  --shadow-card-press: var(--t-shadow-card-press);
+  --shadow-control: var(--t-shadow-control);
+  --shadow-control-hover: var(--t-shadow-control-hover);
+  --shadow-control-press: var(--t-shadow-control-press);
+  --shadow-lift: var(--t-shadow-lift);
+
+  /* shadcn's own names, so stock primitives inherit the theme. */
+  --color-background: var(--t-surface);
+  --color-card: var(--t-surface-card);
+  --color-card-foreground: var(--t-foreground);
+  --color-popover: var(--t-surface-card);
+  --color-popover-foreground: var(--t-foreground);
+  --color-primary: var(--t-brand);
+  --color-primary-foreground: var(--t-brand-foreground);
+  --color-secondary: var(--t-surface-raised);
+  --color-secondary-foreground: var(--t-foreground);
+  --color-muted: var(--t-surface-raised);
+  --color-muted-foreground: var(--t-foreground-muted);
+  --color-accent: var(--t-surface-wash);
+  --color-accent-foreground: var(--t-foreground);
+  --color-destructive: var(--t-destructive);
+  --color-border: var(--t-line);
+  --color-input: var(--t-line);
+  --color-ring: var(--t-focus);
+}
+
+/* Control typography. Weight, casing and tracking are part of a
+   system's identity — Thaigredient and Club set uppercase bold
+   labels, the main CI uses sentence-case semibold — so they are
+   themed rather than branched on in the component. */
+@utility control-type {
+  font-weight: var(--t-control-weight);
+  text-transform: var(--t-control-transform);
+  letter-spacing: var(--t-control-tracking);
+}
+
+/* ── Border-width utilities ──────────────────────────────────
+   `border-frame` is the themed one: 2.5px ink on Thaigredient,
+   1.5px on Club, 1px on the main CI. The rest are explicit.
+
+   Deliberately NOT called border-card: `card` is a colour name
+   (the shadcn --color-card alias), so Tailwind would also emit
+   `.border-card { border-color: … }` and that colour rule wins,
+   silently repainting the border instead of just sizing it. */
+@utility border-frame {
+  border-width: var(--t-border-card);
+}
+@utility border-control {
+  border-width: var(--t-border-control);
+}
+@utility border-hairline {
+  border-width: var(--bw-hairline);
+}
+@utility border-ink {
+  border-width: var(--bw-ink);
+}
+@utility border-sticker {
+  border-width: var(--bw-sticker);
+}
+@utility border-marker {
+  border-width: var(--bw-marker);
+}
+@utility border-rule {
+  border-width: var(--bw-rule);
+}
+@utility border-b-rule {
+  border-bottom-width: var(--bw-rule);
+}
+@utility border-b-sticker {
+  border-bottom-width: var(--bw-sticker);
+}
+@utility border-t-frame {
+  border-top-width: var(--t-border-card);
+}
+@utility border-b-frame {
+  border-bottom-width: var(--t-border-card);
+}
+@utility border-b-hairline {
+  border-bottom-width: var(--bw-hairline);
+}
+@utility border-t-marker {
+  border-top-width: var(--bw-marker);
+}
+@utility border-b-marker {
+  border-bottom-width: var(--bw-marker);
+}

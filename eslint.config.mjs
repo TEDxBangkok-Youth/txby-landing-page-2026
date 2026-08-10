@@ -2,6 +2,45 @@ import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 
+/**
+ * Design-system guardrails.
+ *
+ * The point of the token layer is that a colour or a piece of chrome
+ * has exactly one definition. These two rules stop the codebase
+ * drifting back: inline styles bypass the tokens entirely, and a hex
+ * literal in a component is a value that no theme can reassign.
+ *
+ * Runtime-computed geometry is the legitimate exception — see the
+ * per-file override below.
+ */
+const designSystemRules = {
+  "no-restricted-syntax": [
+    "error",
+    {
+      selector: "JSXAttribute[name.name='style']",
+      message:
+        "Style with token-driven Tailwind classes, not inline styles. If the value is genuinely computed at runtime, add the file to the allowlist in eslint.config.mjs.",
+    },
+    {
+      selector: "Literal[value=/^#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/]",
+      message:
+        "No hex colours in components. Add the value to src/styles/primitives.css and reference it through a semantic role.",
+    },
+    {
+      selector:
+        "TemplateElement[value.raw=/#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{3})\\b/]",
+      message:
+        "No hex colours in components. Add the value to src/styles/primitives.css and reference it through a semantic role.",
+    },
+    {
+      // Tailwind's arbitrary-value escape hatch: bg-[#00A14B].
+      selector: "Literal[value=/\\[#[0-9a-fA-F]{3,8}\\]/]",
+      message:
+        "No hex colours in arbitrary Tailwind values. Add the value to src/styles/primitives.css and use the generated utility.",
+    },
+  ],
+};
+
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
@@ -13,6 +52,16 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    files: ["src/**/*.tsx"],
+    rules: designSystemRules,
+  },
+  {
+    // The club map positions its tooltip at the pointer, which can
+    // only be known at runtime.
+    files: ["src/components/site/club-map.tsx"],
+    rules: { "no-restricted-syntax": "off" },
+  },
 ]);
 
 export default eslintConfig;

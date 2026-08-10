@@ -1,0 +1,91 @@
+/* ─────────────────────────────────────────────────────────────
+   Tier 3 — TED Club.
+   Applied with data-theme="club" on the Club section.
+
+   Editorial ink language — 1.5px black hairlines, 2px black
+   offset shadows, 2–4px radius, Athiti throughout, TED red.
+   ───────────────────────────────────────────────────────────── */
+
+[data-theme="club"] {
+  /* Surfaces */
+  --t-surface: var(--color-club-paper-050);
+  --t-surface-card: var(--color-club-paper);
+  --t-surface-raised: var(--color-club-ink-100);
+  --t-surface-sunken: var(--color-club-ink-100);
+  --t-surface-wash: var(--color-club-red-050);
+  --t-surface-inverse: var(--color-club-ink-900);
+
+  /* Text */
+  --t-foreground: var(--color-club-ink-900);
+  --t-foreground-secondary: var(--color-club-ink-600);
+  --t-foreground-muted: var(--color-club-ink-500);
+  --t-foreground-faint: var(--color-club-ink-400);
+  --t-foreground-inverse: var(--color-club-paper);
+  /* Reads on --t-surface-sunken, which stays light when inverted. */
+  --t-foreground-on-sunken: var(--color-club-ink-900);
+
+  /* Brand */
+  --t-brand: var(--color-club-red);
+  --t-brand-hover: var(--color-club-red-600);
+  --t-brand-press: var(--color-club-red-700);
+  --t-brand-foreground: var(--color-club-paper);
+
+  /* Lines */
+  --t-line-subtle: var(--color-club-ink-200);
+  --t-line: var(--color-club-ink-300);
+  --t-line-strong: var(--color-club-ink-900);
+
+  --t-link: var(--color-club-red);
+  --t-link-hover: var(--color-club-red-600);
+
+  --t-focus: var(--color-club-red);
+  --t-destructive: var(--color-club-red);
+
+  --t-shadow-tint: var(--color-club-ink-900);
+  --t-shadow-lift-tint: rgb(0 0 0 / 0.14);
+
+  /* Fonts — the Club system runs entirely on Athiti. */
+  --t-font-heading: var(--font-athiti);
+  --t-font-body: var(--font-athiti);
+  --t-font-accent: var(--font-athiti);
+
+  /* Control typography + press physics. Club controls sink on
+     press but do not lift on hover. */
+  --t-control-weight: 700;
+  --t-control-transform: uppercase;
+  --t-control-tracking: 0.09em;
+  --t-lift-x: 0px;
+  --t-lift-y: 0px;
+  --t-press-x: 1px;
+  --t-press-y: 1px;
+
+  /* Structure */
+  --t-radius-card: var(--radius-sm);
+  --t-radius-control: var(--radius-sm);
+  --t-border-card: var(--bw-ink);
+  --t-border-control: var(--bw-ink);
+  --t-shadow-geo-card: var(--sh-ink);
+  --t-shadow-geo-card-hover: var(--sh-ink);
+  --t-shadow-geo-card-press: var(--sh-ink-press);
+  --t-shadow-geo-control: var(--sh-ink);
+  --t-shadow-geo-control-hover: var(--sh-ink);
+  --t-shadow-geo-control-press: var(--sh-ink-press);
+}
+
+/* Inverted (black-background) Club scope. The mark goes white,
+   red accents stay put. */
+[data-theme="club"][data-surface="inverse"],
+[data-theme="club"] [data-surface="inverse"] {
+  --t-surface: var(--color-club-ink-900);
+  --t-surface-card: var(--color-club-ink-800);
+  --t-surface-raised: var(--color-club-ink-700);
+  --t-surface-sunken: var(--color-club-ink-700);
+  --t-surface-wash: var(--color-club-red-950);
+  --t-foreground: var(--color-club-paper);
+  --t-foreground-secondary: var(--color-club-ink-300);
+  --t-foreground-muted: var(--color-club-ink-400);
+  --t-line-subtle: var(--color-club-ink-700);
+  --t-line: var(--color-club-ink-600);
+  --t-line-strong: var(--color-club-paper);
+  --t-shadow-tint: var(--color-club-paper);
+}

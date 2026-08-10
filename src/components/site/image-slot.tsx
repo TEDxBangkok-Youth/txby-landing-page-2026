@@ -20,12 +20,12 @@ export function ImageSlot({
   return (
     <div
       className={cn(
-        "flex h-full w-full items-center justify-center bg-[#ede8de] text-center",
-        shape === "circle" ? "rounded-full" : "rounded-[4px]",
+        "flex size-full items-center justify-center bg-surface-sunken text-center",
+        shape === "circle" ? "rounded-full" : "rounded-sm",
         className
       )}
     >
-      <span className="flex flex-col items-center gap-1 px-2 font-body text-[12px] font-medium leading-tight text-ink/45">
+      <span className="flex flex-col items-center gap-1 px-2 font-body text-xs font-medium leading-tight text-foreground-on-sunken/45">
         <svg
           width="22"
           height="22"
