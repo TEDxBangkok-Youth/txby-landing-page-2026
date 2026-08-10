@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
  * Ported from the Thaigredient DS `.txby-tag`.
  */
 const ticketTag = cva(
-  "relative inline-flex flex-col items-center justify-center border-card border-line-strong rounded-md px-4.5 py-2 font-heading shadow-control",
+  "relative inline-flex flex-col items-center justify-center border-frame border-line-strong rounded-md px-4.5 py-2 font-heading shadow-control",
   {
     variants: {
       tone: {
@@ -23,7 +23,7 @@ const ticketTag = cva(
 );
 
 const notch =
-  "absolute top-1/2 size-3 -translate-y-1/2 rounded-full border-card border-line-strong bg-surface-card";
+  "absolute top-1/2 size-3 -translate-y-1/2 rounded-full border-frame border-line-strong bg-surface-card";
 
 export function TicketTag({
   price,

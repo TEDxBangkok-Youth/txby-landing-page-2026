@@ -3,8 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { MinusIcon, PlusIcon, RotateCcwIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { CLUBS, MAP_DEFAULT_TITLE } from "@/lib/site-data";
+import { cn } from "@/lib/utils";
 
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 6;
@@ -166,43 +166,33 @@ export function ClubMap() {
           }}
         />
 
-        <div className="absolute top-0 right-5 z-10 flex flex-col overflow-hidden rounded-card border-card border-line-strong bg-surface-card shadow-card">
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label="Zoom in"
-            className="rounded-none hover:bg-transparent hover:text-brand"
-            onClick={() => applyZoom(zoom + 0.5)}
-          >
+        <div className="absolute top-0 right-5 z-10 flex flex-col overflow-hidden rounded-card border-frame border-line-strong bg-surface-card shadow-card">
+          <ZoomButton label="Zoom in" onClick={() => applyZoom(zoom + 0.5)}>
             <PlusIcon />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label="Reset zoom"
-            className="rounded-none border-t-line-strong hover:bg-transparent hover:text-brand border-t-card"
+          </ZoomButton>
+          <ZoomButton
+            label="Reset zoom"
+            divider
             onClick={() => {
               applyZoom(1);
               setSelected(null);
             }}
           >
             <RotateCcwIcon />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label="Zoom out"
-            className="rounded-none border-t-line-strong hover:bg-transparent hover:text-brand border-t-card"
+          </ZoomButton>
+          <ZoomButton
+            label="Zoom out"
+            divider
             onClick={() => applyZoom(zoom - 0.5)}
           >
             <MinusIcon />
-          </Button>
+          </ZoomButton>
         </div>
       </div>
 
       {/* List / detail column */}
-      <div className="flex min-h-0 flex-col overflow-hidden rounded-card border-card border-line-strong bg-surface-card shadow-card max-[820px]:hidden">
-        <div className="border-b-card border-line-strong px-6 pt-5 pb-3.5">
+      <div className="flex min-h-0 flex-col overflow-hidden rounded-card border-frame border-line-strong bg-surface-card shadow-card max-[820px]:hidden">
+        <div className="border-b-frame border-line-strong px-6 pt-5 pb-3.5">
           {detail ? (
             <button
               type="button"
@@ -261,6 +251,37 @@ export function ClubMap() {
         </div>
       ) : null}
     </div>
+  );
+}
+
+/**
+ * Toolbar control, not a brand button — the shadcn Button's ghost
+ * variant paints a transparent border on all four sides, which would
+ * erase the divider between the stacked controls.
+ */
+function ZoomButton({
+  label,
+  divider,
+  onClick,
+  children,
+}: {
+  label: string;
+  divider?: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      onClick={onClick}
+      className={cn(
+        "flex size-11 cursor-pointer items-center justify-center text-foreground transition-colors duration-140 ease-ink hover:text-brand focus-visible:-outline-offset-2 focus-visible:outline-2 focus-visible:outline-focus [&_svg]:size-5",
+        divider && "border-t-frame border-line-strong"
+      )}
+    >
+      {children}
+    </button>
   );
 }
 

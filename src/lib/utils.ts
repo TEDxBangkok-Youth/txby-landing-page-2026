@@ -30,7 +30,7 @@ const FONT_SIZES = [
 ]
 
 const BORDER_WIDTHS = [
-  "card",
+  "frame",
   "control",
   "hairline",
   "ink",
@@ -57,12 +57,12 @@ const twMerge = extendTailwindMerge({
       "font-size": FONT_SIZES.map((s) => `text-${s}`),
       "font-family": ["font-heading", "font-body", "font-accent"],
       "border-w": BORDER_WIDTHS.map((s) => `border-${s}`),
-      "border-w-t": ["border-t-marker", "border-t-card"],
+      "border-w-t": ["border-t-marker", "border-t-frame"],
       "border-w-b": [
         "border-b-rule",
         "border-b-sticker",
         "border-b-marker",
-        "border-b-card",
+        "border-b-frame",
         "border-b-hairline",
       ],
       rounded: RADII.map((s) => `rounded-${s}`),

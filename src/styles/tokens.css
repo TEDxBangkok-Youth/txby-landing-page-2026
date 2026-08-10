@@ -196,9 +196,14 @@
 }
 
 /* ── Border-width utilities ──────────────────────────────────
-   `border-card` is the themed one: 2.5px ink on Thaigredient,
-   1.5px on Club, 1px on the main CI. The rest are explicit. */
-@utility border-card {
+   `border-frame` is the themed one: 2.5px ink on Thaigredient,
+   1.5px on Club, 1px on the main CI. The rest are explicit.
+
+   Deliberately NOT called border-card: `card` is a colour name
+   (the shadcn --color-card alias), so Tailwind would also emit
+   `.border-card { border-color: … }` and that colour rule wins,
+   silently repainting the border instead of just sizing it. */
+@utility border-frame {
   border-width: var(--t-border-card);
 }
 @utility border-control {
@@ -225,10 +230,10 @@
 @utility border-b-sticker {
   border-bottom-width: var(--bw-sticker);
 }
-@utility border-t-card {
+@utility border-t-frame {
   border-top-width: var(--t-border-card);
 }
-@utility border-b-card {
+@utility border-b-frame {
   border-bottom-width: var(--t-border-card);
 }
 @utility border-b-hairline {

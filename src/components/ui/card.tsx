@@ -18,7 +18,7 @@ const cardVariants = cva(
         default:
           "gap-(--card-spacing) rounded-xl bg-card py-(--card-spacing) text-card-foreground ring-1 ring-foreground/10 [--card-radius:var(--radius-xl)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:has-data-[slot=card-footer]:pb-0",
         sticker:
-          "border-card border-line-strong rounded-card bg-surface-card text-foreground shadow-card [--card-radius:var(--t-radius-card)]",
+          "border-frame border-line-strong rounded-card bg-surface-card text-foreground shadow-card [--card-radius:var(--t-radius-card)]",
       },
     },
     defaultVariants: {
