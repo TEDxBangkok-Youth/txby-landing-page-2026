@@ -225,6 +225,15 @@
 @utility border-b-sticker {
   border-bottom-width: var(--bw-sticker);
 }
+@utility border-t-card {
+  border-top-width: var(--t-border-card);
+}
+@utility border-b-card {
+  border-bottom-width: var(--t-border-card);
+}
+@utility border-b-hairline {
+  border-bottom-width: var(--bw-hairline);
+}
 @utility border-t-marker {
   border-top-width: var(--bw-marker);
 }

@@ -54,251 +54,28 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Club map — retokenised in place. Phase 5 replaces this whole
-   block with React + Tailwind classes on the same tokens.
+   Club map — the province SVG is fetched at runtime, so its paths
+   cannot carry Tailwind classes. Everything else in the map is
+   ordinary JSX; these are the only rules left.
    ───────────────────────────────────────────────────────────── */
-#clubmap {
-  font-family: var(--t-font-body);
-  color: var(--t-foreground);
+[data-theme="club"] svg path.club {
+  fill: var(--t-brand);
+  cursor: pointer;
+  transition: fill 200ms var(--ease-ink), opacity 200ms var(--ease-ink);
 }
-#clubmap .wrap {
-  display: grid;
-  grid-template-columns: 1fr 380px;
-  grid-template-rows: minmax(0, 1fr);
-  height: 100%;
+[data-theme="club"] svg path.club.on {
+  fill: var(--t-brand-hover);
 }
-#clubmap .mapcol {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 0;
-  overflow: hidden;
+[data-theme="club"] svg path.club.dim {
+  opacity: 0.35;
 }
-#clubmap .mapcol svg {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  transition: transform 140ms var(--ease-ink);
-  cursor: grab;
-}
-#clubmap .mapcol svg.panning {
-  cursor: grabbing;
-  transition: none;
-}
-#clubmap .mapcol svg path {
+[data-theme="club"] svg path:not(.club) {
   fill: var(--t-surface-raised);
   stroke: var(--t-foreground-faint);
   stroke-width: 0.8;
   transition: fill 200ms var(--ease-ink);
 }
-#clubmap .mapcol svg path.club {
-  fill: var(--t-brand);
+[data-theme="club"] svg path.club {
   stroke: var(--t-foreground-faint);
   stroke-width: 0.8;
-  transition: fill 200ms var(--ease-ink), opacity 200ms var(--ease-ink);
-}
-#clubmap .mapcol svg path.club.on {
-  fill: var(--t-brand-hover);
-}
-#clubmap .mapcol svg path.club.dim {
-  opacity: 0.35;
-}
-#clubmap .zoomctl {
-  position: absolute;
-  top: 0;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  background: var(--t-surface-card);
-  border: var(--t-border-card) solid var(--t-line-strong);
-  border-radius: var(--t-radius-card);
-  box-shadow: var(--t-shadow-card);
-  overflow: hidden;
-  z-index: 5;
-}
-#clubmap .zoomctl button {
-  appearance: none;
-  border: 0;
-  background: none;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--t-foreground);
-  cursor: pointer;
-  font-family: inherit;
-  transition: color 140ms var(--ease-ink), background-color 140ms var(--ease-ink);
-}
-#clubmap .zoomctl button:hover {
-  color: var(--t-brand);
-}
-#clubmap .zoomctl button:focus-visible {
-  outline: 2px solid var(--t-focus);
-  outline-offset: -2px;
-}
-#clubmap .zoomctl button + button {
-  border-top: var(--t-border-card) solid var(--t-line-strong);
-}
-#clubmap .zoomctl button svg {
-  display: block;
-  background: none;
-}
-#clubmap .zoomctl button svg path {
-  fill: none;
-  stroke: currentColor;
-}
-#clubmap .listcol {
-  border: var(--t-border-card) solid var(--t-line-strong);
-  border-radius: var(--t-radius-card);
-  overflow: hidden;
-  box-shadow: var(--t-shadow-card);
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-  background: var(--t-surface-card);
-}
-#clubmap .listhead {
-  padding: 20px 24px 14px;
-  border-bottom: var(--t-border-card) solid var(--t-line-strong);
-}
-#clubmap .listtitle {
-  font-family: var(--t-font-heading);
-  font-size: var(--text-title);
-  font-weight: 700;
-  line-height: var(--leading-heading);
-  letter-spacing: -0.015em;
-}
-#clubmap .backbtn {
-  background: none;
-  border: 0;
-  color: var(--t-foreground-muted);
-  font-family: inherit;
-  font-size: var(--text-caption);
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  padding: 0 0 10px;
-  margin: 0;
-  cursor: pointer;
-  text-align: left;
-  display: none;
-  transition: color 140ms var(--ease-ink);
-}
-#clubmap .backbtn.show {
-  display: block;
-}
-#clubmap .backbtn:hover {
-  color: var(--t-brand);
-}
-#clubmap .list {
-  overflow-y: auto;
-  flex: 1;
-  scrollbar-width: thin;
-}
-#clubmap .row {
-  width: 100%;
-  text-align: left;
-  background: none;
-  border: 0;
-  border-bottom: var(--bw-hairline) solid var(--t-line-subtle);
-  color: var(--t-foreground);
-  padding: 14px 24px;
-  cursor: pointer;
-  font-family: inherit;
-  display: block;
-  transition: background-color 140ms var(--ease-ink);
-}
-#clubmap .row:hover {
-  background: var(--t-surface-wash);
-}
-#clubmap .row .city {
-  font-family: var(--t-font-heading);
-  font-size: var(--text-body);
-  font-weight: 700;
-}
-#clubmap .row .meta {
-  font-size: var(--text-body-sm);
-  color: var(--t-foreground-secondary);
-  margin-top: 3px;
-}
-#clubmap .detail {
-  display: none;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-}
-#clubmap .detail.show {
-  display: flex;
-}
-#clubmap .detail.show ~ .list {
-  display: none;
-}
-#clubmap .detailbody {
-  padding: 16px 24px 24px;
-}
-#clubmap .detailbody .stats {
-  display: flex;
-  gap: 24px;
-  padding-top: 16px;
-}
-#clubmap .detailbody .stat b {
-  display: block;
-  font-family: var(--t-font-heading);
-  font-size: var(--text-title-lg);
-  font-weight: 700;
-  color: var(--t-brand);
-  line-height: 1.1;
-}
-#clubmap .detailbody .stat span {
-  font-size: var(--text-caption);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-  color: var(--t-foreground-muted);
-}
-#clubmap .detailbody .note {
-  margin-top: 20px;
-  font-size: var(--text-body);
-  line-height: 1.55;
-  color: var(--t-foreground-secondary);
-}
-@media (max-width: 820px) {
-  #clubmap .wrap {
-    grid-template-columns: 1fr;
-  }
-  #clubmap .listcol {
-    display: none;
-  }
-}
-
-.clubmap-tip {
-  position: fixed;
-  pointer-events: none;
-  background: var(--color-club-paper);
-  color: var(--color-club-ink-900);
-  padding: 8px 12px;
-  border: var(--bw-ink) solid var(--color-club-ink-900);
-  border-radius: var(--radius-sm);
-  font-family: var(--font-athiti), "Athiti", sans-serif;
-  font-size: var(--text-body-sm);
-  font-weight: 700;
-  box-shadow: 2px 2px 0 var(--color-club-ink-900);
-  z-index: 55;
-  opacity: 0;
-  transition: opacity 140ms var(--ease-ink);
-  transform: translate(-50%, -120%);
-  white-space: nowrap;
-}
-.clubmap-tip.show {
-  opacity: 1;
-}
-.clubmap-tip .sub {
-  font-weight: 400;
-  color: var(--color-club-ink-500);
-  font-size: var(--text-xs);
-  margin-top: 2px;
 }

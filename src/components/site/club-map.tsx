@@ -1,254 +1,278 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { MinusIcon, PlusIcon, RotateCcwIcon } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import { CLUBS, MAP_DEFAULT_TITLE } from "@/lib/site-data";
 
-const ICON = {
-  plus: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>',
-  minus:
-    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path></svg>',
-  reset:
-    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>',
-};
+const MIN_ZOOM = 1;
+const MAX_ZOOM = 6;
+const DRAG_THRESHOLD = 4;
+
+type Tip = { x: number; y: number; index: number };
 
 /**
- * Interactive map of Thai provinces with active TED Clubs. Hover highlights a
- * province and shows a tooltip; click drills into that province's detail. The
- * map supports zoom (buttons + wheel) and drag-to-pan. Ported from the design's
- * `_initClubMap`.
+ * Interactive map of Thai provinces with active TED Clubs. Hover
+ * highlights a province and shows a tooltip; click drills into its
+ * detail. Supports zoom (buttons + wheel) and drag-to-pan.
+ *
+ * Everything except the map itself is ordinary JSX. Only the province
+ * SVG is imperative — it is an external file, so it gets injected once
+ * and is then driven by delegated events and a class-sync effect,
+ * rather than by rebuilding markup with innerHTML.
  */
 export function ClubMap() {
-  const rootRef = useRef<HTMLDivElement>(null);
+  const [selected, setSelected] = useState<number | null>(null);
+  const [tip, setTip] = useState<Tip | null>(null);
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
 
+  const hostRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const drag = useRef({ active: false, maybe: false, sx: 0, sy: 0, tx: 0, ty: 0 });
+
+  const detail = selected != null ? CLUBS[selected] : null;
+
+  /* Load the province map once and tag the provinces that have clubs. */
   useEffect(() => {
-    const root = rootRef.current;
-    if (!root || (root as HTMLElement & { _ready?: boolean })._ready) return;
-    (root as HTMLElement & { _ready?: boolean })._ready = true;
-
-    root.innerHTML =
-      '<div class="wrap">' +
-      '<div class="mapcol">' +
-      '<div class="zoomctl">' +
-      '<button class="zin" aria-label="Zoom in">' + ICON.plus + "</button>" +
-      '<button class="zreset" aria-label="Reset zoom">' + ICON.reset + "</button>" +
-      '<button class="zout" aria-label="Zoom out">' + ICON.minus + "</button>" +
-      "</div>" +
-      "</div>" +
-      '<div class="listcol">' +
-      '<div class="listhead">' +
-      '<button class="backbtn">&larr; กลับไปที่รายชื่อทั้งหมด</button>' +
-      '<div class="listtitle">' + MAP_DEFAULT_TITLE + "</div>" +
-      "</div>" +
-      '<div class="detail"><div class="detailbody"></div></div>' +
-      '<div class="list"></div>' +
-      "</div>" +
-      "</div>";
-
-    const mapcol = root.querySelector<HTMLElement>(".mapcol")!;
-    const zoomctl = root.querySelector<HTMLElement>(".zoomctl")!;
-    const listEl = root.querySelector<HTMLElement>(".list")!;
-    const titleEl = root.querySelector<HTMLElement>(".listtitle")!;
-    const backEl = root.querySelector<HTMLElement>(".backbtn")!;
-    const detailEl = root.querySelector<HTMLElement>(".detail")!;
-    const detailBody = root.querySelector<HTMLElement>(".detailbody")!;
-
-    const tipEl = document.createElement("div");
-    tipEl.className = "clubmap-tip";
-    document.body.appendChild(tipEl);
-
-    let selected = -1;
-    const paint = () => {
-      root.querySelectorAll<SVGPathElement>(".mapcol svg path.club").forEach((p) => {
-        const i = +(p.dataset.i || 0);
-        p.classList.toggle("on", i === selected);
-        p.classList.toggle("dim", selected !== -1 && i !== selected);
-      });
-    };
-    const openDetail = (i: number) => {
-      selected = i;
-      paint();
-      const c = CLUBS[i];
-      titleEl.textContent = c.city;
-      backEl.classList.add("show");
-      detailBody.innerHTML =
-        '<div class="stats"><div class="stat"><b>' + c.clubs + "</b><span>ชมรม</span></div>" +
-        '<div class="stat"><b>' + c.since + "</b><span>ตั้งแต่</span></div></div>" +
-        '<div class="note">' + c.note + "</div>";
-      detailEl.classList.add("show");
-    };
-    const deselect = () => {
-      selected = -1;
-      paint();
-      titleEl.textContent = MAP_DEFAULT_TITLE;
-      backEl.classList.remove("show");
-      detailEl.classList.remove("show");
-    };
-    const hover = (i: number, on: boolean) => {
-      const p = root.querySelector<SVGPathElement>(
-        '.mapcol svg path[id="' + CLUBS[i].provinceId + '"]'
-      );
-      if (p) p.classList.toggle("on", on || i === selected);
-    };
-    const moveTip = (e: MouseEvent) => {
-      tipEl.style.left = e.clientX + "px";
-      tipEl.style.top = e.clientY + "px";
-    };
-    const showTip = (e: MouseEvent, c: (typeof CLUBS)[number]) => {
-      tipEl.innerHTML =
-        "<div>" + c.city + '</div><div class="sub">' + c.en + " · " + c.note + "</div>";
-      tipEl.classList.add("show");
-      moveTip(e);
-    };
-    const hideTip = () => tipEl.classList.remove("show");
-
-    CLUBS.forEach((c, i) => {
-      const b = document.createElement("button");
-      b.className = "row";
-      b.innerHTML =
-        '<div class="city">' + c.city + '</div><div class="meta">' +
-        c.en + " · " + c.note + " · ตั้งแต่ " + c.since + "</div>";
-      b.addEventListener("click", () => openDetail(i));
-      b.addEventListener("mouseenter", () => hover(i, true));
-      b.addEventListener("mouseleave", () => hover(i, false));
-      listEl.appendChild(b);
-    });
-    backEl.addEventListener("click", deselect);
-
     let disposed = false;
+
     fetch("/assets/thailand-map.svg")
       .then((r) => r.text())
-      .then((svgText) => {
-        if (disposed) return;
-        const holder = document.createElement("div");
-        holder.innerHTML = svgText;
-        const svgEl = holder.querySelector("svg");
-        if (!svgEl) return;
-        mapcol.insertBefore(svgEl, zoomctl);
-        svgEl.setAttribute("viewBox", "0 0 559.57092 1024.7631");
-        svgEl.removeAttribute("width");
-        svgEl.removeAttribute("height");
-        svgEl.setAttribute("preserveAspectRatio", "xMidYMid meet");
+      .then((text) => {
+        if (disposed || !hostRef.current) return;
+        const parsed = new DOMParser().parseFromString(text, "image/svg+xml");
+        const svg = parsed.querySelector("svg");
+        if (!svg) return;
+
+        svg.setAttribute("viewBox", "0 0 559.57092 1024.7631");
+        svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+        svg.removeAttribute("width");
+        svg.removeAttribute("height");
 
         CLUBS.forEach((c, i) => {
-          const p = svgEl.querySelector<SVGPathElement>(
-            'path[id="' + c.provinceId + '"]'
+          const path = svg.querySelector<SVGPathElement>(
+            `path[id="${c.provinceId}"]`
           );
-          if (!p) return;
-          p.classList.add("club");
-          p.dataset.i = String(i);
-          p.style.cursor = "pointer";
-          p.addEventListener("click", () => openDetail(i));
-          p.addEventListener("mouseenter", (e) => {
-            hover(i, true);
-            showTip(e as MouseEvent, c);
-          });
-          p.addEventListener("mousemove", (e) => moveTip(e as MouseEvent));
-          p.addEventListener("mouseleave", () => {
-            hover(i, false);
-            hideTip();
-          });
-          const t = document.createElementNS("http://www.w3.org/2000/svg", "title");
-          t.textContent = c.city + " · " + c.note;
-          p.appendChild(t);
-        });
-        paint();
-
-        svgEl.addEventListener("click", (e) => {
-          if (!(e.target as Element).classList.contains("club")) deselect();
+          if (!path) return;
+          path.classList.add("club");
+          path.dataset.i = String(i);
+          const title = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "title"
+          );
+          title.textContent = `${c.city} · ${c.note}`;
+          path.appendChild(title);
         });
 
-        let zoom = 1;
-        let tx = 0;
-        let ty = 0;
-        const MIN = 1;
-        const MAX = 6;
-        const apply = () => {
-          (svgEl as unknown as SVGElement).style.transform =
-            "translate(" + tx + "px," + ty + "px) scale(" + zoom + ")";
-        };
-        const setZoom = (next: number) => {
-          zoom = Math.min(MAX, Math.max(MIN, next));
-          if (zoom === MIN) {
-            tx = 0;
-            ty = 0;
-          }
-          apply();
-        };
-        root.querySelector(".zin")!.addEventListener("click", () => setZoom(zoom + 0.5));
-        root.querySelector(".zout")!.addEventListener("click", () => setZoom(zoom - 0.5));
-        root.querySelector(".zreset")!.addEventListener("click", () => {
-          setZoom(1);
-          deselect();
-        });
-        mapcol.addEventListener(
-          "wheel",
-          (e) => {
-            e.preventDefault();
-            setZoom(zoom + (e.deltaY < 0 ? 0.3 : -0.3));
-          },
-          { passive: false }
-        );
-
-        let dragging = false;
-        let maybeDrag = false;
-        let sx = 0;
-        let sy = 0;
-        let stx = 0;
-        let sty = 0;
-        const THRESHOLD = 4;
-        svgEl.addEventListener("pointerdown", (e) => {
-          if (zoom <= MIN) return;
-          maybeDrag = true;
-          dragging = false;
-          sx = e.clientX;
-          sy = e.clientY;
-          stx = tx;
-          sty = ty;
-          try {
-            svgEl.setPointerCapture(e.pointerId);
-          } catch {
-            /* ignore */
-          }
-        });
-        svgEl.addEventListener("pointermove", (e) => {
-          if (!maybeDrag) return;
-          if (!dragging) {
-            if (Math.abs(e.clientX - sx) < THRESHOLD && Math.abs(e.clientY - sy) < THRESHOLD)
-              return;
-            dragging = true;
-            svgEl.classList.add("panning");
-          }
-          tx = stx + (e.clientX - sx);
-          ty = sty + (e.clientY - sy);
-          apply();
-        });
-        const endDrag = () => {
-          maybeDrag = false;
-          dragging = false;
-          svgEl.classList.remove("panning");
-        };
-        svgEl.addEventListener("pointerup", endDrag);
-        svgEl.addEventListener("pointerleave", endDrag);
+        hostRef.current.replaceChildren(svg);
+        svgRef.current = svg as SVGSVGElement;
       });
 
     return () => {
       disposed = true;
-      tipEl.remove();
     };
   }, []);
 
+  /* Sync province highlighting to state. */
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    svg.querySelectorAll<SVGPathElement>("path.club").forEach((p) => {
+      const i = Number(p.dataset.i);
+      p.classList.toggle("on", i === selected || i === tip?.index);
+      p.classList.toggle("dim", selected !== null && i !== selected);
+    });
+  }, [selected, tip]);
+
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (svg) {
+      svg.style.transform = `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`;
+    }
+  }, [zoom, pan]);
+
+  const applyZoom = useCallback((next: number) => {
+    const clamped = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, next));
+    setZoom(clamped);
+    if (clamped === MIN_ZOOM) setPan({ x: 0, y: 0 });
+  }, []);
+
+  /* Wheel zoom needs a non-passive listener so it can preventDefault. */
+  useEffect(() => {
+    const host = hostRef.current;
+    if (!host) return;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      applyZoom(zoom + (e.deltaY < 0 ? 0.3 : -0.3));
+    };
+    host.addEventListener("wheel", onWheel, { passive: false });
+    return () => host.removeEventListener("wheel", onWheel);
+  }, [zoom, applyZoom]);
+
+  const provinceAt = (target: EventTarget | null) => {
+    const el = target as Element | null;
+    if (!el?.classList?.contains("club")) return null;
+    const i = Number((el as SVGPathElement).dataset.i);
+    return Number.isFinite(i) ? i : null;
+  };
+
   return (
     <div
-      id="clubmap"
-      ref={rootRef}
       role="group"
       aria-label="แผนที่ TED Club ในประเทศไทย"
-      style={{
-        position: "relative",
-        height: 620,
-        overflow: "hidden",
-        borderRadius: "var(--t-radius-card)",
-      }}
-    />
+      className="relative grid h-155 grid-cols-[1fr_380px] gap-6 overflow-hidden max-[820px]:grid-cols-1"
+    >
+      {/* Map column */}
+      <div className="relative flex min-h-0 items-center justify-center overflow-hidden">
+        <div
+          ref={hostRef}
+          className="size-full [&_svg]:size-full [&_svg]:max-h-full [&_svg]:max-w-full [&_svg]:cursor-grab [&_svg]:transition-transform [&_svg]:duration-140 [&_svg]:ease-ink"
+          onClick={(e) => setSelected(provinceAt(e.target))}
+          onMouseMove={(e) => {
+            const i = provinceAt(e.target);
+            setTip(i === null ? null : { x: e.clientX, y: e.clientY, index: i });
+          }}
+          onMouseLeave={() => setTip(null)}
+          onPointerDown={(e) => {
+            if (zoom <= MIN_ZOOM) return;
+            drag.current = {
+              active: false,
+              maybe: true,
+              sx: e.clientX,
+              sy: e.clientY,
+              tx: pan.x,
+              ty: pan.y,
+            };
+            e.currentTarget.setPointerCapture(e.pointerId);
+          }}
+          onPointerMove={(e) => {
+            const d = drag.current;
+            if (!d.maybe) return;
+            if (
+              !d.active &&
+              Math.abs(e.clientX - d.sx) < DRAG_THRESHOLD &&
+              Math.abs(e.clientY - d.sy) < DRAG_THRESHOLD
+            ) {
+              return;
+            }
+            d.active = true;
+            setPan({ x: d.tx + (e.clientX - d.sx), y: d.ty + (e.clientY - d.sy) });
+          }}
+          onPointerUp={() => {
+            drag.current.maybe = false;
+            drag.current.active = false;
+          }}
+        />
+
+        <div className="absolute top-0 right-5 z-10 flex flex-col overflow-hidden rounded-card border-card border-line-strong bg-surface-card shadow-card">
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Zoom in"
+            className="rounded-none hover:bg-transparent hover:text-brand"
+            onClick={() => applyZoom(zoom + 0.5)}
+          >
+            <PlusIcon />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Reset zoom"
+            className="rounded-none border-t-line-strong hover:bg-transparent hover:text-brand border-t-card"
+            onClick={() => {
+              applyZoom(1);
+              setSelected(null);
+            }}
+          >
+            <RotateCcwIcon />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Zoom out"
+            className="rounded-none border-t-line-strong hover:bg-transparent hover:text-brand border-t-card"
+            onClick={() => applyZoom(zoom - 0.5)}
+          >
+            <MinusIcon />
+          </Button>
+        </div>
+      </div>
+
+      {/* List / detail column */}
+      <div className="flex min-h-0 flex-col overflow-hidden rounded-card border-card border-line-strong bg-surface-card shadow-card max-[820px]:hidden">
+        <div className="border-b-card border-line-strong px-6 pt-5 pb-3.5">
+          {detail ? (
+            <button
+              type="button"
+              onClick={() => setSelected(null)}
+              className="block cursor-pointer pb-2.5 text-left text-caption font-bold tracking-widest uppercase text-foreground-muted hover:text-brand"
+            >
+              ← กลับไปที่รายชื่อทั้งหมด
+            </button>
+          ) : null}
+          <div className="font-heading text-title leading-heading font-bold tracking-tight">
+            {detail ? detail.city : MAP_DEFAULT_TITLE}
+          </div>
+        </div>
+
+        {detail ? (
+          <div className="min-h-0 flex-1 overflow-y-auto px-6 pt-4 pb-6">
+            <div className="flex gap-6 pt-4">
+              <Stat value={detail.clubs} label="ชมรม" />
+              <Stat value={detail.since} label="ตั้งแต่" />
+            </div>
+            <div className="mt-5 text-body leading-[1.55] text-foreground-secondary">
+              {detail.note}
+            </div>
+          </div>
+        ) : (
+          <div className="flex-1 overflow-y-auto [scrollbar-width:thin]">
+            {CLUBS.map((c, i) => (
+              <button
+                key={c.provinceId}
+                type="button"
+                onClick={() => setSelected(i)}
+                onMouseEnter={() => setTip({ x: -1, y: -1, index: i })}
+                onMouseLeave={() => setTip(null)}
+                className="block w-full cursor-pointer border-b-hairline border-line-subtle px-6 py-3.5 text-left text-foreground hover:bg-surface-wash"
+              >
+                <div className="font-heading text-body font-bold">{c.city}</div>
+                <div className="mt-0.75 text-body-sm text-foreground-secondary">
+                  {c.en} · {c.note} · ตั้งแต่ {c.since}
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {tip && tip.x >= 0 ? (
+        <div
+          role="tooltip"
+          style={{ left: tip.x, top: tip.y }}
+          className="pointer-events-none fixed z-50 -translate-x-1/2 -translate-y-[120%] rounded-sm border-ink border-line-strong bg-surface-card px-3 py-2 font-body text-body-sm font-bold whitespace-nowrap text-foreground shadow-card"
+        >
+          <div>{CLUBS[tip.index].city}</div>
+          <div className="mt-0.5 text-xs font-normal text-foreground-muted">
+            {CLUBS[tip.index].en} · {CLUBS[tip.index].note}
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function Stat({ value, label }: { value: number; label: string }) {
+  return (
+    <div>
+      <b className="block font-heading text-title-lg leading-[1.1] font-bold text-brand">
+        {value}
+      </b>
+      <span className="text-caption font-bold tracking-widest uppercase text-foreground-muted">
+        {label}
+      </span>
+    </div>
   );
 }
