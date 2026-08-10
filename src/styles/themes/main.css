@@ -53,6 +53,16 @@
   --t-font-accent: var(--font-inter), var(--font-ibm-plex-sans-thai),
     "Helvetica Neue", Helvetica, Arial, sans-serif;
 
+  /* Control typography + press physics. The CI is flat: sentence
+     case, semibold, no movement. */
+  --t-control-weight: 600;
+  --t-control-transform: none;
+  --t-control-tracking: normal;
+  --t-lift-x: 0px;
+  --t-lift-y: 0px;
+  --t-press-x: 0px;
+  --t-press-y: 0px;
+
   /* Structure */
   --t-radius-card: var(--radius-sm);
   --t-radius-control: var(--radius-sm);

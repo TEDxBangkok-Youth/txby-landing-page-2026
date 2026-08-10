@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ThaiButton, ThaiTag } from "@/components/site/thai-ui";
-import { StickerButton } from "@/components/site/sticker-button";
+import { ThaiTag } from "@/components/site/thai-ui";
+import { Button } from "@/components/ui/button";
 import { ImageSlot } from "@/components/site/image-slot";
 import { VolunteersRoster } from "@/components/site/volunteers-roster";
 
@@ -485,29 +485,23 @@ export default function DesignSystemPage() {
           title="Components"
           subtitle="Shared UI primitives used across the Thaigredient-scoped sections."
         >
-          <SubHeading>ThaiButton — variants</SubHeading>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 14, marginBottom: 24 }}>
-            <ThaiButton variant="primary">Primary</ThaiButton>
-            <ThaiButton variant="yellow">Yellow</ThaiButton>
-            <ThaiButton variant="cyan">Cyan</ThaiButton>
-            <ThaiButton variant="green">Green</ThaiButton>
-            <ThaiButton variant="red">Red</ThaiButton>
-            <ThaiButton variant="outline">Outline</ThaiButton>
+          <SubHeading>Button — variants (hover to lift, press to sink)</SubHeading>
+          <div className="mb-6 flex flex-wrap gap-3.5">
+            <Button>Primary</Button>
+            <Button variant="yellow">Yellow</Button>
+            <Button variant="cyan">Cyan</Button>
+            <Button variant="green">Green</Button>
+            <Button variant="red">Red</Button>
+            <Button variant="outline">Outline</Button>
+            <Button variant="secondary">Secondary</Button>
+            <Button variant="ghost">Ghost</Button>
+            <Button variant="link">Link</Button>
           </div>
-          <SubHeading>ThaiButton — sizes</SubHeading>
-          <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
-            <ThaiButton size="md">Medium</ThaiButton>
-            <ThaiButton size="lg">Large</ThaiButton>
-          </div>
-
-          <SubHeading>StickerButton — hover to lift, press to sink (cva variants)</SubHeading>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 14, marginBottom: 24 }}>
-            <StickerButton variant="pink">Pink</StickerButton>
-            <StickerButton variant="yellow">Yellow</StickerButton>
-            <StickerButton variant="cyan">Cyan</StickerButton>
-            <StickerButton variant="green">Green</StickerButton>
-            <StickerButton variant="red">Red</StickerButton>
-            <StickerButton variant="outline">Outline</StickerButton>
+          <SubHeading>Button — sizes</SubHeading>
+          <div className="mb-6 flex items-center gap-3.5">
+            <Button size="sm">Small</Button>
+            <Button>Default</Button>
+            <Button size="lg">Large</Button>
           </div>
 
           <SubHeading>ThaiTag</SubHeading>
@@ -610,12 +604,12 @@ export default function DesignSystemPage() {
           title="Interaction states"
           subtitle="Documented per component. Cards are intentionally static (no hover) per the card audit; buttons and controls use hard-shadow lift/press."
         >
-          <SubHeading>StickerButton (real hover/press — try it)</SubHeading>
+          <SubHeading>Button (real hover/press — try it)</SubHeading>
           <p style={{ fontSize: 12.5, marginBottom: 12, opacity: 0.7 }}>
             default → hover (lifts, shadow grows) → active (sinks, shadow shrinks) → focus-visible (cyan ring)
           </p>
           <div style={{ display: "flex", gap: 14, marginBottom: 24 }}>
-            <StickerButton variant="pink">Hover / click me</StickerButton>
+            <Button>Hover / click me</Button>
           </div>
 
           <SubHeading>Static state reference</SubHeading>

@@ -4,7 +4,8 @@ import { NavBar } from "@/components/site/nav-bar";
 import { SiteFooter } from "@/components/site/site-footer";
 import { ClubMap } from "@/components/site/club-map";
 import { VolunteersRoster } from "@/components/site/volunteers-roster";
-import { ThaiButton, ThaiTag } from "@/components/site/thai-ui";
+import { ThaiTag } from "@/components/site/thai-ui";
+import { Button } from "@/components/ui/button";
 import { galleryYears, speakers } from "@/lib/site-data";
 
 const CARD_SHADOW = "3px 4px 0 rgba(17,29,69,.9)";
@@ -301,12 +302,12 @@ export default function Home() {
               <div
                 style={{ display: "flex", flexWrap: "wrap", gap: 14, marginTop: 8 }}
               >
-                <ThaiButton variant="primary" size="md">
-                  ดูรายละเอียดปี 2025
-                </ThaiButton>
-                <ThaiButton variant="outline" size="md">
-                  ดู Talk บน YouTube
-                </ThaiButton>
+                <Button asChild>
+                  <a href="#">ดูรายละเอียดปี 2025</a>
+                </Button>
+                <Button asChild variant="outline">
+                  <a href="#">ดู Talk บน YouTube</a>
+                </Button>
               </div>
             </div>
           </div>

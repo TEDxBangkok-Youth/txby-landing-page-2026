@@ -184,6 +184,16 @@
   --color-ring: var(--t-focus);
 }
 
+/* Control typography. Weight, casing and tracking are part of a
+   system's identity — Thaigredient and Club set uppercase bold
+   labels, the main CI uses sentence-case semibold — so they are
+   themed rather than branched on in the component. */
+@utility control-type {
+  font-weight: var(--t-control-weight);
+  text-transform: var(--t-control-transform);
+  letter-spacing: var(--t-control-tracking);
+}
+
 /* ── Border-width utilities ──────────────────────────────────
    `border-card` is the themed one: 2.5px ink on Thaigredient,
    1.5px on Club, 1px on the main CI. The rest are explicit. */

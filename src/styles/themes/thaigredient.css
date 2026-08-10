@@ -48,6 +48,16 @@
   --t-font-body: var(--font-sarabun), "Sarabun", system-ui, sans-serif;
   --t-font-accent: var(--font-rohan), "Chakra Petch", sans-serif;
 
+  /* Control typography + press physics. The sticker button lifts
+     off the page on hover and sinks on press. */
+  --t-control-weight: 700;
+  --t-control-transform: uppercase;
+  --t-control-tracking: 0.02em;
+  --t-lift-x: -2px;
+  --t-lift-y: -2px;
+  --t-press-x: 1px;
+  --t-press-y: 2px;
+
   /* Structure — aliases into the global scales. */
   --t-radius-card: var(--radius-sticker);
   --t-radius-control: var(--radius-xl);

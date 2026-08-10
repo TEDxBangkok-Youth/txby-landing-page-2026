@@ -1,66 +1,10 @@
 /**
- * Thaigredient design-system primitives, ported from the DS `core.css`
- * (`.txby-btn`, `.txby-tag`) so the page doesn't depend on the web-component
- * bundle.
+ * Thaigredient `.txby-tag` primitive, ported from the DS `core.css`.
+ * The button half now lives in the themed shadcn Button.
  */
 const INK = "#111D45";
 const SHADOW = "3px 4px 0 rgba(17,29,69,0.9)";
 const SHADOW_SM = "2px 3px 0 rgba(17,29,69,0.9)";
-
-const BTN_COLORS: Record<string, { bg: string; fg: string }> = {
-  primary: { bg: "#EF4899", fg: "#fff" },
-  yellow: { bg: "#F9EF3E", fg: INK },
-  cyan: { bg: "#02AFDA", fg: "#fff" },
-  green: { bg: "#00A14B", fg: "#fff" },
-  red: { bg: "#C82227", fg: "#fff" },
-  outline: { bg: "#FFFDF7", fg: INK },
-};
-
-type ButtonProps = {
-  children: React.ReactNode;
-  href?: string;
-  variant?: keyof typeof BTN_COLORS;
-  size?: "md" | "lg";
-};
-
-export function ThaiButton({
-  children,
-  href = "#",
-  variant = "primary",
-  size = "md",
-}: ButtonProps) {
-  const c = BTN_COLORS[variant] ?? BTN_COLORS.primary;
-  const pad = size === "lg" ? "14px 28px" : "10px 20px";
-  const fontSize = size === "lg" ? 18 : 15;
-  return (
-    <a
-      href={href}
-      className="txby-btn"
-      style={{
-        fontFamily: "var(--t-font-heading)",
-        fontWeight: 700,
-        textTransform: "uppercase",
-        letterSpacing: "0.02em",
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 8,
-        border: `2.5px solid ${INK}`,
-        borderRadius: 12,
-        cursor: "pointer",
-        boxShadow: SHADOW_SM,
-        padding: pad,
-        fontSize,
-        background: c.bg,
-        color: c.fg,
-        textDecoration: "none",
-        transition: "transform .12s ease, box-shadow .12s ease",
-      }}
-    >
-      {children}
-    </a>
-  );
-}
 
 const TAG_COLORS: Record<string, { bg: string; fg: string }> = {
   pink: { bg: "#EF4899", fg: "#fff" },

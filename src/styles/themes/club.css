@@ -47,6 +47,16 @@
   --t-font-body: var(--font-athiti);
   --t-font-accent: var(--font-athiti);
 
+  /* Control typography + press physics. Club controls sink on
+     press but do not lift on hover. */
+  --t-control-weight: 700;
+  --t-control-transform: uppercase;
+  --t-control-tracking: 0.09em;
+  --t-lift-x: 0px;
+  --t-lift-y: 0px;
+  --t-press-x: 1px;
+  --t-press-y: 1px;
+
   /* Structure */
   --t-radius-card: var(--radius-sm);
   --t-radius-control: var(--radius-sm);
