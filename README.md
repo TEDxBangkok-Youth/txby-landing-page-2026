@@ -7,10 +7,17 @@ Built with **Next.js (App Router) · TypeScript · Tailwind CSS v4 · shadcn/ui*
 
 ## Getting started
 
+This project uses **pnpm** (pinned via the `packageManager` field). Enable it once with
+Corepack, then install:
+
 ```bash
-npm install
-npm run dev      # http://localhost:3000
-npm run build    # production build
+corepack enable pnpm
+```
+
+```bash
+pnpm install
+pnpm dev        # http://localhost:3000
+pnpm build      # production build
 ```
 
 ## Stack & structure

@@ -1,491 +1,726 @@
 /* eslint-disable @next/next/no-img-element */
-import { StickerButton } from "@/components/site/sticker-button";
 import { ImageSlot } from "@/components/site/image-slot";
-import {
-  eventInfo,
-  navLinks,
-  pastEvents,
-  sponsors,
-  speakers,
-  team,
-} from "@/lib/site-data";
+import { NavBar } from "@/components/site/nav-bar";
+import { SiteFooter } from "@/components/site/site-footer";
+import { ClubMap } from "@/components/site/club-map";
+import { VolunteersRoster } from "@/components/site/volunteers-roster";
+import { ThaiButton, ThaiTag } from "@/components/site/thai-ui";
+import { galleryYears, speakers } from "@/lib/site-data";
 
-const STICKER = "shadow-[4px_5px_0_rgba(17,29,69,0.9)]";
-const STICKER_SM = "shadow-[2px_3px_0_rgba(17,29,69,0.9)]";
+const CARD_SHADOW = "3px 4px 0 rgba(17,29,69,.9)";
 
 export default function Home() {
-  const { ticketUrl, ticketPrice, eventDate } = eventInfo;
-
   return (
-    <div className="max-w-full [overflow-x:clip]">
-      {/* ═══ HERO ═══ */}
+    <div
+      style={{
+        background: "#FBF6E9",
+        fontFamily: "var(--font-body)",
+        color: "#111D45",
+      }}
+    >
+      {/* ═══════════════ HERO ═══════════════ */}
       <section
-        id="top"
-        className="grain-overlay relative overflow-hidden bg-pink"
+        id="hero"
+        className="thai"
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          boxSizing: "border-box",
+          width: "100%",
+          height: "100dvh",
+          minHeight: 560,
+          background: "#F4E31E",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
-        {/* zigzag top strip */}
+        <NavBar />
+
         <div
-          className="h-4 bg-repeat-x"
           style={{
-            backgroundImage: "url('/assets/illustrations/zigzag-strip.png')",
-            backgroundSize: "auto 100%",
+            position: "relative",
+            width: "min(100%, calc((100dvh - 132px) * 1456 / 1010))",
+            maxWidth: 1680,
+            margin: "0 auto",
+            aspectRatio: "1456 / 1010",
+            containerType: "inline-size",
           }}
-        />
+        >
+          <img
+            src="/assets/thaigredient/burst-blue.svg"
+            alt=""
+            style={{
+              position: "absolute",
+              left: "-6cqw",
+              top: "-2cqw",
+              width: "30cqw",
+              height: "auto",
+            }}
+          />
 
-        {/* nav */}
-        <div className="relative z-[2] flex items-center justify-between gap-6 px-[30px] pt-[18px]">
           <div
-            className={`rounded-[10px] border-[2.5px] border-ink bg-paper px-4 py-2 font-display text-[18px] font-bold ${STICKER} [transform:rotate(-1deg)]`}
+            style={{
+              position: "absolute",
+              left: "23cqw",
+              top: "6cqw",
+              width: "74cqw",
+              fontFamily: "var(--font-display)",
+              fontWeight: 700,
+              color: "#111D45",
+            }}
           >
-            <span className="text-red">TEDx</span>
-            <span className="text-ink">BangkokYouth</span>
-          </div>
-          <nav className="flex items-center gap-[26px] font-display text-[14.5px] font-semibold">
-            {navLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="hidden text-paper no-underline transition-colors hover:text-yellow md:inline"
-              >
-                {l.label}
-              </a>
-            ))}
-            <StickerButton href={ticketUrl} size="md" variant="yellow">
-              ซื้อบัตร
-            </StickerButton>
-          </nav>
-        </div>
-
-        {/* floating illustrations */}
-        <img
-          src="/assets/illustrations/basket-cyan.png"
-          alt=""
-          className="pointer-events-none absolute left-[-30px] top-[190px] z-[1] w-[170px] [transform:rotate(-7deg)]"
-        />
-        <img
-          src="/assets/illustrations/flask-sticker.png"
-          alt=""
-          className="pointer-events-none absolute left-[36px] top-[420px] z-[1] w-[110px] [transform:rotate(4deg)]"
-        />
-        <img
-          src="/assets/illustrations/skewer-yellow-floss.png"
-          alt=""
-          className="pointer-events-none absolute left-[-6px] top-[600px] z-[1] w-[96px] [transform:rotate(-5deg)]"
-        />
-        <img
-          src="/assets/illustrations/shorts-tedx.png"
-          alt="กางเกงมวย TEDxBangkok Youth"
-          className="pointer-events-none absolute right-[-24px] top-[170px] z-[1] w-[170px] [transform:rotate(6deg)]"
-        />
-        <img
-          src="/assets/illustrations/fish-sauce-bottle.png"
-          alt=""
-          className="pointer-events-none absolute right-[44px] top-[430px] z-[1] w-[96px] [transform:rotate(-4deg)]"
-        />
-        <img
-          src="/assets/illustrations/basket-yellow.png"
-          alt=""
-          className="pointer-events-none absolute right-[-34px] top-[590px] z-[1] w-[170px] [transform:rotate(5deg)]"
-        />
-
-        {/* hero content */}
-        <div className="relative z-[2] flex flex-col items-center gap-[14px] px-[clamp(24px,14vw,180px)] pt-[42px] text-center">
-          <h1 className="m-0 font-display font-bold uppercase leading-[0.98]">
-            <span
-              className="block whitespace-nowrap text-paper [transform:rotate(-1.2deg)]"
-              style={{ fontSize: "min(106px,10.5vw)" }}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "1cqw",
+                fontSize: "9.8cqw",
+                lineHeight: 1.12,
+                letterSpacing: "-0.01em",
+              }}
             >
-              ส่วนผสม
-              <span className="inline-block rounded-[12px] border-[3px] border-ink bg-yellow px-[18px] pb-[6px] text-ink shadow-[4px_5px_0_rgba(17,29,69,0.9)] [transform:rotate(-2.5deg)]">
+              <span>ส่วนผสม</span>
+              <span
+                style={{
+                  display: "inline-block",
+                  background: "#02AFDA",
+                  border: "0.38cqw solid #111D45",
+                  borderRadius: "1.2cqw",
+                  padding: "0 1cqw 0.5cqw",
+                  transform: "rotate(-1.5deg)",
+                }}
+              >
                 ลับ
               </span>
-            </span>
-            <span
-              className="block whitespace-nowrap text-transparent [-webkit-text-stroke:2.5px_#111D45] [transform:rotate(0.6deg)]"
-              style={{ fontSize: "min(74px,7.3vw)" }}
+            </div>
+            <div
+              style={{
+                marginLeft: "9.8cqw",
+                marginTop: "-0.4cqw",
+                fontSize: "9.5cqw",
+                lineHeight: 1.3,
+                letterSpacing: "0.01em",
+                color: "transparent",
+                WebkitTextStroke: "0.3cqw #111D45",
+              }}
             >
               ฉบับคนไทย
-            </span>
-          </h1>
-
-          <div className="mt-1 flex items-center justify-center gap-[14px]">
-            <span
-              className={`inline-block rounded-[8px] border-[2.5px] border-ink bg-paper px-4 py-[5px] font-display text-[20px] font-bold text-ink ${STICKER} [transform:rotate(2deg)]`}
-            >
-              TEDxBANGKOK YOUTH
-            </span>
-            <span
-              className={`inline-block rounded-[8px] border-[2.5px] border-ink bg-cyan px-4 py-[5px] font-display text-[20px] font-bold text-paper ${STICKER} [transform:rotate(-2deg)]`}
-            >
-              2026 · {eventDate}
-            </span>
-          </div>
-
-          <p className="mt-1.5 max-w-[640px] font-body text-[17px] leading-[1.6] text-paper">
-            เวทีของไอเดียจากคนรุ่นใหม่ หยิบวัตถุดิบธรรมดาในชีวิตแบบไทย ๆ
-            มาผสมใหม่ให้กลายเป็นสูตร(ไม่)ลับของความคิดสร้างสรรค์
-          </p>
-
-          <div className="mt-2.5 flex flex-wrap justify-center gap-4">
-            <StickerButton href={ticketUrl} size="lg" variant="yellow">
-              ซื้อบัตรเลย · ฿ {ticketPrice}
-            </StickerButton>
-            <StickerButton href="#speakers" size="lg" variant="outline">
-              ดู Speakers 2026
-            </StickerButton>
-          </div>
-
-          {/* recap video card */}
-          <div className="mt-[26px] w-[760px] max-w-full overflow-hidden rounded-[16px] border-[3px] border-ink bg-ink shadow-[5px_6px_0_rgba(17,29,69,0.9)] [transform:rotate(-0.6deg)]">
-            <div className="flex items-center justify-between border-b-[3px] border-ink bg-yellow px-4 py-2">
-              <span className="font-display text-[15px] font-bold uppercase text-ink">
-                Recap · TEDxBangkok Youth ปีที่ผ่านมา
-              </span>
-              <span className="font-display text-[13px] font-semibold text-ink">
-                ▶ 02:26
-              </span>
             </div>
-            <div className="relative flex aspect-video flex-col items-center justify-center gap-[18px] bg-panel">
-              <button
-                type="button"
-                aria-label="เล่นวิดีโอ recap"
-                className="flex h-[84px] w-[84px] items-center justify-center rounded-full border-[3px] border-paper bg-pink text-paper shadow-[4px_5px_0_rgba(2,175,218,0.8)] transition-[transform,box-shadow] duration-[120ms] [transform:rotate(-2deg)] hover:shadow-[7px_8px_0_rgba(2,175,218,0.8)] active:shadow-[1px_2px_0_rgba(2,175,218,0.8)]"
+          </div>
+
+          <img
+            src="/assets/thaigredient/skewer-pork.png"
+            alt=""
+            style={{
+              position: "absolute",
+              left: "5cqw",
+              top: "20cqw",
+              width: "19cqw",
+              height: "auto",
+              transform: "rotate(-4deg)",
+            }}
+          />
+          <img
+            src="/assets/thaigredient/bowl-mix-hero.png"
+            alt="ชามส่วนผสมลับ"
+            style={{
+              position: "absolute",
+              left: "7cqw",
+              top: "22cqw",
+              width: "82cqw",
+              height: "auto",
+            }}
+          />
+          <img
+            src="/assets/thaigredient/tag-price-67.png"
+            alt="฿67.00 เท็ด x บางกอก"
+            style={{
+              position: "absolute",
+              left: "70cqw",
+              top: "48cqw",
+              width: "12cqw",
+              height: "auto",
+              transform: "rotate(-3deg)",
+            }}
+          />
+        </div>
+      </section>
+
+      {/* ═══════════════ GALLERY ═══════════════ */}
+      <section
+        id="gallery"
+        className="thai grain-overlay"
+        style={{
+          background: "#FBF6E9",
+          padding: "104px 32px",
+          borderBottom: "4px solid #111D45",
+        }}
+      >
+        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              gap: 40,
+              flexWrap: "wrap",
+              marginBottom: 56,
+            }}
+          >
+            <div style={{ maxWidth: 660 }}>
+              <h2
+                style={{
+                  margin: 0,
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  fontSize: "clamp(2.25rem,6vw,4.25rem)",
+                  lineHeight: 1.02,
+                  letterSpacing: ".01em",
+                  color: "#111D45",
+                }}
               >
-                <svg
-                  width="34"
-                  height="34"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="ml-[5px]"
-                  aria-hidden
-                >
-                  <path d="M5 3.5v17l15-8.5z" />
-                </svg>
-              </button>
-              <span className="px-4 text-center font-body text-[15px] text-cyan-300">
-                วิดีโอ recap ใส่ลิงก์ YouTube/ไฟล์จริงภายหลัง (TBA)
-              </span>
+                TED Youth
+                <br />
+                Gallery
+              </h2>
+              <p
+                style={{
+                  margin: "18px 0 0",
+                  fontSize: "1.125rem",
+                  lineHeight: 1.5,
+                  maxWidth: 520,
+                  color: "#233064",
+                  textWrap: "pretty",
+                }}
+              >
+                ทุกปีคือหนึ่งสูตร ย้อนดูธีม ผู้พูด และรสชาติของแต่ละรุ่นที่ผ่านเวทีนี้
+              </p>
+            </div>
+            <img
+              src="/assets/thaigredient/bowl-rooster.png"
+              alt=""
+              style={{ width: 170, height: "auto", transform: "rotate(6deg)" }}
+            />
+          </div>
+
+          {/* featured 2025 */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit,minmax(380px,1fr))",
+              alignItems: "center",
+              gap: 56,
+            }}
+          >
+            <div style={{ position: "relative", transform: "rotate(-1.4deg)" }}>
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  aspectRatio: "16 / 9",
+                  border: "2.5px solid #111D45",
+                  borderRadius: 14,
+                  overflow: "hidden",
+                  background: "#F3ECD8",
+                  boxShadow: CARD_SHADOW,
+                }}
+              >
+                <img
+                  src="/assets/gallery-2025-cover.jpg"
+                  alt="บรรยากาศงานปี 2025"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  position: "absolute",
+                  top: -26,
+                  right: -18,
+                  transform: "rotate(8deg)",
+                }}
+              >
+                <ThaiTag price="2025" color="pink">
+                  ปีล่าสุด
+                </ThaiTag>
+              </div>
+            </div>
+
+            <div
+              style={{
+                minWidth: 0,
+                display: "flex",
+                flexDirection: "column",
+                gap: 18,
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 700,
+                  fontSize: 12,
+                  letterSpacing: ".08em",
+                  textTransform: "uppercase",
+                  color: "#D6317F",
+                }}
+              >
+                12 talks · หอศิลปกรุงเทพฯ
+              </div>
+              <h3
+                style={{
+                  margin: 0,
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  fontSize: "clamp(1.75rem,4vw,2.75rem)",
+                  lineHeight: 1.3,
+                  color: "#111D45",
+                }}
+              >
+                เย็บปักถักทอล์ก
+              </h3>
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: "1.0625rem",
+                  lineHeight: 1.6,
+                  color: "#233064",
+                  textWrap: "pretty",
+                }}
+              >
+                พบกับ 12 เรื่องเล่า จาก 12 เสียงต่างวัย ต่างเส้นทาง ที่ถักทอมาจากประสบการณ์
+                ความฝัน ความหวัง และความเจ็บปวด โดยร้อยเรียงและถ่ายทอดอย่างพิถีพิถัน
+                เพื่อให้หัวใจของคุณกลับมาพองโตอีกครั้ง
+              </p>
+              <div
+                style={{ display: "flex", flexWrap: "wrap", gap: 14, marginTop: 8 }}
+              >
+                <ThaiButton variant="primary" size="md">
+                  ดูรายละเอียดปี 2025
+                </ThaiButton>
+                <ThaiButton variant="outline" size="md">
+                  ดู Talk บน YouTube
+                </ThaiButton>
+              </div>
             </div>
           </div>
 
-          <div className="flex justify-center py-4 pb-[30px]">
-            <span className="font-display text-[13px] font-semibold uppercase tracking-[0.08em] text-ink">
-              วัตถุดิบพร้อม · Speakers พร้อม · เหลือแค่คุณ
-            </span>
+          {/* year archive */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit,minmax(210px,1fr))",
+              gap: 28,
+              marginTop: 72,
+            }}
+          >
+            {galleryYears.map((y) => (
+              <a
+                key={y.year}
+                href="#"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  background: y.bg,
+                  border: "2.5px solid #111D45",
+                  borderRadius: 14,
+                  boxShadow: CARD_SHADOW,
+                  overflow: "hidden",
+                  color: "#111D45",
+                }}
+              >
+                <div
+                  style={{
+                    position: "relative",
+                    aspectRatio: "16 / 10",
+                    background: y.panelDark,
+                    borderBottom: "2.5px solid #111D45",
+                  }}
+                >
+                  <ImageSlot shape="rect" placeholder={y.placeholder} />
+                </div>
+                <div style={{ padding: "16px 18px 20px", background: "#FFFDF7", flex: 1 }}>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 700,
+                      fontSize: 11,
+                      letterSpacing: ".08em",
+                      textTransform: "uppercase",
+                      color: y.chip,
+                    }}
+                  >
+                    {y.year} · {y.talks}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 700,
+                      fontSize: "1.25rem",
+                      textTransform: "uppercase",
+                      marginTop: 8,
+                      lineHeight: 1.15,
+                    }}
+                  >
+                    {y.title}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: ".875rem",
+                      color: "#3E4B7C",
+                      marginTop: 8,
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {y.desc}
+                  </div>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ═══ PAST EVENTS ═══ */}
+      {/* ═══════════════ TED CLUB ═══════════════ */}
       <section
-        id="past"
-        className="grain-overlay scroll-mt-5 bg-bg-page px-[60px] pb-[60px] pt-[70px]"
+        id="club"
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          background: "var(--surface-page)",
+          color: "var(--text-primary)",
+          fontFamily: "var(--font-body)",
+          padding: "var(--pad-section-y) 32px",
+          borderTop: "var(--border-marker) solid var(--ted-black)",
+          borderBottom: "var(--border-marker) solid var(--ted-black)",
+        }}
       >
-        <div className="flex flex-col items-center gap-2.5 text-center">
-          <span
-            className={`inline-block rounded-[10px] border-[3px] border-ink bg-green px-[26px] py-2 font-display text-[38px] font-bold uppercase text-paper ${STICKER} [transform:rotate(-1deg)]`}
+        <img
+          src="/assets/tedclub/scribbles/field-texture.svg"
+          alt=""
+          aria-hidden
+          style={{
+            position: "absolute",
+            right: -150,
+            bottom: 24,
+            width: 380,
+            height: "auto",
+            opacity: 0.3,
+            pointerEvents: "none",
+          }}
+        />
+        <div style={{ position: "relative", maxWidth: 1280, margin: "0 auto" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              gap: 48,
+              flexWrap: "wrap",
+              marginBottom: 48,
+            }}
           >
-            งานปีก่อน ๆ
-          </span>
-          <p className="mt-2.5 max-w-[560px] font-body text-[17px] leading-[1.6] text-ink">
-            กว่า 5 ปีของเวที TEDxBangkok Youth ทุกปีคือการทดลองสูตรใหม่
-          </p>
-        </div>
+            <div style={{ maxWidth: 640 }}>
+              <h2
+                style={{
+                  margin: 0,
+                  fontFamily: "var(--font-heading)",
+                  fontWeight: 700,
+                  fontSize: "clamp(32px,4.6vw,var(--size-display-lg))",
+                  lineHeight: "var(--leading-snug)",
+                  letterSpacing: "var(--tracking-heading)",
+                  color: "var(--text-primary)",
+                }}
+              >
+                TED Club{" "}
+                <span
+                  style={{
+                    position: "relative",
+                    display: "inline-block",
+                    color: "var(--ted-red)",
+                  }}
+                >
+                  ทั่วประเทศไทย
+                  <img
+                    src="/assets/tedclub/scribbles/underline-red.svg"
+                    alt=""
+                    aria-hidden
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      right: 0,
+                      bottom: -10,
+                      width: "100%",
+                      height: "auto",
+                    }}
+                  />
+                </span>
+              </h2>
+              <p
+                style={{
+                  margin: "20px 0 0",
+                  fontFamily: "var(--font-body)",
+                  fontWeight: 400,
+                  fontSize: "var(--size-body-lg)",
+                  lineHeight: "var(--leading-body)",
+                  color: "var(--text-secondary)",
+                  maxWidth: 560,
+                  textWrap: "pretty",
+                }}
+              >
+                ชมรมในโรงเรียนและมหาวิทยาลัยที่จัดเวทีของตัวเองตลอดทั้งปี
+                ทุกกิจกรรมออกแบบให้ครูหนึ่งคนจัดได้เอง ด้วยคู่มือและสไลด์ที่เตรียมไว้ให้
+              </p>
+            </div>
+            <img
+              src="/assets/tedclub/logo.png"
+              alt="TED Club · TEDxBangkok Youth"
+              style={{ height: 140, width: "auto", flexShrink: 0 }}
+            />
+          </div>
 
-        <div className="mx-auto mt-11 max-w-[1240px]">
-          <div className="relative z-[1] flex flex-wrap items-end justify-center gap-[30px]">
-            {pastEvents.map((y) => (
+          <ClubMap />
+        </div>
+      </section>
+
+      {/* ═══════════════ SPEAKERS ═══════════════ */}
+      <section
+        id="speakers"
+        className="thai grain-overlay"
+        style={{
+          background: "#EF4899",
+          padding: "104px 32px",
+          borderBottom: "4px solid #111D45",
+        }}
+      >
+        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              gap: 40,
+              flexWrap: "wrap",
+              marginBottom: 48,
+            }}
+          >
+            <div style={{ maxWidth: 620 }}>
+              <h2
+                style={{
+                  margin: 0,
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  fontSize: "clamp(2.25rem,6vw,4rem)",
+                  lineHeight: 1.02,
+                  color: "#FFFDF7",
+                }}
+              >
+                Speakers
+              </h2>
+              <p
+                style={{
+                  margin: "18px 0 0",
+                  fontSize: "1.125rem",
+                  lineHeight: 1.5,
+                  color: "#5B0E36",
+                  maxWidth: 520,
+                  textWrap: "pretty",
+                }}
+              >
+                ผู้พูดทุกคนบนเวที TEDxBangkok Youth ปีนี้
+              </p>
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill,minmax(180px,1fr))",
+              gap: "32px 24px",
+              maxWidth: "100%",
+            }}
+          >
+            {speakers.map((s) => (
               <div
-                key={y.id}
-                className="flex w-[210px] flex-col"
-                style={{ transform: `rotate(${y.rot}deg)` }}
+                key={s.name}
+                style={{
+                  minWidth: 0,
+                  background: "#FFFDF7",
+                  border: "2.5px solid #111D45",
+                  borderRadius: 14,
+                  boxShadow: CARD_SHADOW,
+                  overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
               >
                 <div
-                  className={`overflow-hidden rounded-[12px] border-[3px] border-ink bg-paper ${STICKER}`}
+                  style={{
+                    position: "relative",
+                    aspectRatio: "1 / 1",
+                    borderBottom: "2.5px solid #111D45",
+                    background: s.tint,
+                    overflow: "hidden",
+                  }}
                 >
-                  <div className="aspect-[3/4] w-full">
-                    <ImageSlot
-                      placeholder={`โปสเตอร์ปีที่ ${y.id}`}
-                      shape="rect"
+                  {s.hasPhoto ? (
+                    <div
+                      role="img"
+                      aria-label={s.name}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        backgroundImage: `url(${s.photo})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
                     />
+                  ) : (
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontFamily: "var(--font-display)",
+                        fontWeight: 700,
+                        fontSize: 56,
+                        color: "#111D45",
+                        opacity: 0.55,
+                      }}
+                    >
+                      {s.initial}
+                    </div>
+                  )}
+                </div>
+                <div
+                  style={{
+                    padding: "14px 16px 18px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 6,
+                    flex: 1,
+                  }}
+                >
+                  <div
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 700,
+                      fontSize: "1.0625rem",
+                      lineHeight: 1.2,
+                      color: "#111D45",
+                    }}
+                  >
+                    {s.name}
+                  </div>
+                  <div style={{ fontSize: ".8125rem", lineHeight: 1.45, color: "#3E4B7C" }}>
+                    {s.role}
+                  </div>
+                  <div
+                    style={{
+                      marginTop: "auto",
+                      paddingTop: 10,
+                      fontSize: ".8125rem",
+                      fontWeight: 600,
+                      color: "#D6317F",
+                      lineHeight: 1.4,
+                    }}
+                  >
+                    “{s.talk}”
                   </div>
                 </div>
-                <span
-                  className="relative z-[2] mt-[-14px] self-center rounded-[8px] border-[2.5px] border-ink px-[14px] py-0.5 font-display text-[16px] font-bold shadow-[2px_3px_0_rgba(17,29,69,0.9)]"
-                  style={{ background: y.color, color: y.text }}
-                >
-                  {y.label}
-                </span>
               </div>
             ))}
           </div>
-          <div className="mt-1.5 h-[18px] rounded-[6px] border-[3px] border-ink bg-pink shadow-[0_6px_0_rgba(17,29,69,0.35)]" />
         </div>
       </section>
 
-      {/* ═══ TED CLUB ═══ */}
+      {/* ═══════════════ VOLUNTEERS ═══════════════ */}
       <section
-        id="club"
-        className="grain-overlay relative scroll-mt-5 overflow-hidden bg-cyan px-[60px] py-[64px]"
+        id="volunteers"
+        className="thai grain-overlay"
+        style={{
+          background: "#111D45",
+          padding: "104px 32px",
+          borderBottom: "4px solid #111D45",
+        }}
       >
-        <img
-          src="/assets/illustrations/lime-slice.png"
-          alt=""
-          className="pointer-events-none absolute right-[-20px] top-[-24px] w-[150px] [transform:rotate(12deg)]"
-        />
-        <img
-          src="/assets/illustrations/chili-red.png"
-          alt=""
-          className="pointer-events-none absolute bottom-[-20px] left-[-16px] w-[130px] [transform:rotate(-10deg)]"
-        />
-        <div className="relative z-[1] mx-auto grid max-w-[1140px] grid-cols-1 items-center gap-11 md:grid-cols-[1.1fr_0.9fr]">
-          <div className="flex flex-col items-start gap-4">
-            <span
-              className={`inline-block rounded-[10px] border-[3px] border-ink bg-paper px-[26px] py-2 font-display text-[38px] font-bold uppercase text-ink ${STICKER} [transform:rotate(-1deg)]`}
-            >
-              TED Club
-            </span>
-            <p className="mt-1.5 max-w-[520px] font-body text-[17px] leading-[1.7] text-paper">
-              ห้องทดลองย่อยของ TEDxBangkok Youth
-              วงคุยขนาดเล็กสำหรับนักเรียนที่อยากฝึกคิด
-              ฝึกเล่าไอเดียของตัวเองก่อนขึ้นเวทีจริง จัดต่อเนื่องตลอดปี
-            </p>
-            <ul className="m-0 list-disc pl-[22px] font-body text-[16px] font-semibold leading-[1.9] text-ink">
-              <li>เวิร์กช็อปการเล่าเรื่องและ public speaking</li>
-              <li>วงแลกเปลี่ยนไอเดียประจำเดือน</li>
-              <li>เส้นทางสู่การเป็น speaker บนเวทีใหญ่</li>
-            </ul>
-            <StickerButton href="#" size="lg" variant="pink">
-              สมัครเข้า TED Club · TBA
-            </StickerButton>
-          </div>
-          <div className="overflow-hidden rounded-[16px] border-[3px] border-ink bg-paper shadow-[5px_6px_0_rgba(17,29,69,0.9)] [transform:rotate(1deg)]">
-            <div className="aspect-[4/3] w-full">
-              <ImageSlot placeholder="รูปบรรยากาศ TED Club" shape="rect" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ SPEAKERS ═══ */}
-      <section
-        id="speakers"
-        className="grain-overlay scroll-mt-5 bg-ink px-[60px] py-[70px]"
-      >
-        <div className="flex flex-col items-center gap-2.5 text-center">
-          <span className="inline-block rounded-[10px] border-[3px] border-paper bg-yellow px-[26px] py-2 font-display text-[38px] font-bold uppercase text-ink shadow-[4px_5px_0_rgba(239,72,153,0.8)] [transform:rotate(-1deg)]">
-            Speakers 2026
-          </span>
-          <p className="mt-2.5 max-w-[560px] font-body text-[17px] leading-[1.6] text-navy-100">
-            วัตถุดิบหลักของปีนี้ 8 นักเล่าเรื่องกับส่วนผสมที่ไม่เหมือนใคร
-          </p>
-        </div>
-
-        <div className="mx-auto mt-11 grid max-w-[1180px] grid-cols-2 gap-[26px] sm:grid-cols-3 lg:grid-cols-4">
-          {speakers.map((sp) => (
-            <div
-              key={sp.id}
-              className="flex flex-col items-center gap-3 rounded-[14px] border-[3px] border-ink bg-paper px-4 pb-[18px] pt-[22px] text-center shadow-[4px_5px_0_rgba(239,72,153,0.8)]"
-              style={{ transform: `rotate(${sp.rot}deg)` }}
-            >
-              <div className="h-[140px] w-[140px] overflow-hidden rounded-full border-[3px] border-ink bg-[#ede8de]">
-                <ImageSlot placeholder="รูป speaker" shape="circle" />
-              </div>
-              <div className="font-display text-[19px] font-bold text-ink">
-                Speaker TBA
-              </div>
-              <span
-                className="rounded-[8px] border-[2.5px] border-ink px-3 py-[3px] font-display text-[13px] font-semibold shadow-[2px_3px_0_rgba(17,29,69,0.9)]"
-                style={{ background: sp.tagColor, color: sp.tagText }}
-              >
-                หัวข้อ · TBA
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ═══ TEAM / VOLUNTEERS ═══ */}
-      <section
-        id="team"
-        className="grain-overlay scroll-mt-5 bg-bg-page px-[60px] py-[70px]"
-      >
-        <div className="flex flex-col items-center gap-2.5 text-center">
-          <span
-            className={`inline-block rounded-[10px] border-[3px] border-ink bg-pink px-[26px] py-2 font-display text-[38px] font-bold uppercase text-paper ${STICKER} [transform:rotate(1deg)]`}
+        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              gap: 40,
+              flexWrap: "wrap",
+              marginBottom: 48,
+            }}
           >
-            ทีมงานอาสา
-          </span>
-          <p className="mt-2.5 max-w-[560px] font-body text-[17px] leading-[1.6] text-ink">
-            กำแพงกรอบรูปของคนหลังบ้าน อาสาสมัครทุกคนที่ช่วยกันปรุงงานนี้ขึ้นมา
-          </p>
-        </div>
-
-        <div className="mx-auto mt-10 grid max-w-[1180px] grid-cols-3 gap-6 sm:grid-cols-4 lg:grid-cols-6">
-          {team.map((tm) => (
-            <div
-              key={tm.id}
-              className="flex flex-col items-center gap-2"
-              style={{ transform: `rotate(${tm.rot}deg)` }}
-            >
-              <div
-                className={`box-border w-full rounded-[10px] border-[3px] border-ink bg-paper px-2 pb-1.5 pt-2 ${STICKER}`}
+            <div style={{ maxWidth: 620 }}>
+              <h2
+                style={{
+                  margin: 0,
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  fontSize: "clamp(2.25rem,6vw,4rem)",
+                  lineHeight: 1.02,
+                  color: "#FFFDF7",
+                }}
               >
-                <div className="box-border aspect-square w-full overflow-hidden rounded-[6px] border-2 border-ink bg-[#ede8de]">
-                  <ImageSlot placeholder="รูปทีม" shape="rect" />
-                </div>
-                <div className="pt-1.5 text-center font-display text-[13.5px] font-bold text-ink">
-                  ชื่อ TBA
-                </div>
-              </div>
-              <span
-                className="rounded-[6px] border-2 border-ink px-2.5 py-px font-display text-[12px] font-semibold shadow-[2px_2px_0_rgba(17,29,69,0.9)]"
-                style={{ background: tm.tagColor, color: tm.tagText }}
+                Volunteers
+              </h2>
+              <p
+                style={{
+                  margin: "18px 0 0",
+                  fontSize: "1.125rem",
+                  lineHeight: 1.5,
+                  color: "#DCDFEA",
+                  maxWidth: 560,
+                  textWrap: "pretty",
+                }}
               >
-                {tm.role}
-              </span>
+                ทุกงานเกิดขึ้นได้เพราะอาสาสมัคร นี่คือรายชื่อทีมงานครบทุกคนของปีนี้
+              </p>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
 
-      {/* ═══ SPONSORS ═══ */}
-      <section
-        id="sponsors"
-        className="grain-overlay scroll-mt-5 border-t-[3px] border-ink bg-paper px-[60px] py-[64px]"
-      >
-        <div className="flex flex-col items-center gap-2.5 text-center">
-          <span
-            className={`inline-block rounded-[10px] border-[3px] border-ink bg-red px-[26px] py-2 font-display text-[38px] font-bold uppercase text-paper ${STICKER} [transform:rotate(-1deg)]`}
+          <div
+            className="volunteers-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "minmax(0, 1fr) 400px",
+              gap: 32,
+              alignItems: "stretch",
+            }}
           >
-            Sponsors
-          </span>
-          <p className="mt-2.5 max-w-[560px] font-body text-[17px] leading-[1.6] text-ink">
-            ผู้สนับสนุนที่ช่วยให้สูตรลับนี้เกิดขึ้นจริง
-          </p>
-        </div>
-
-        <div className="mx-auto mt-[38px] grid max-w-[1080px] grid-cols-2 gap-[22px] sm:grid-cols-3 lg:grid-cols-4">
-          {sponsors.map((s) => (
             <div
-              key={s.id}
-              className={`h-[120px] overflow-hidden rounded-[12px] border-[3px] border-ink bg-bg-page ${STICKER_SM}`}
-              style={{ transform: `rotate(${s.rot}deg)` }}
+              style={{
+                position: "relative",
+                minWidth: 0,
+                border: "2.5px solid #FFFDF7",
+                borderRadius: 14,
+                overflow: "hidden",
+                background: "#233064",
+                boxShadow: "3px 4px 0 rgba(255,253,247,.9)",
+              }}
             >
-              <ImageSlot placeholder="โลโก้ผู้สนับสนุน TBA" fit="contain" />
+              <ImageSlot shape="rect" placeholder="รูปทีมอาสาสมัคร" />
             </div>
-          ))}
+            <VolunteersRoster />
+          </div>
         </div>
       </section>
 
-      {/* ═══ FINAL CTA ═══ */}
-      <section
-        id="tickets"
-        className="grain-overlay relative scroll-mt-5 overflow-hidden border-t-[3px] border-ink bg-yellow px-[60px] py-[64px]"
-      >
-        <img
-          src="/assets/illustrations/starburst-red.png"
-          alt=""
-          className="pointer-events-none absolute left-[60px] top-[-30px] w-[140px] [transform:rotate(-8deg)]"
-        />
-        <img
-          src="/assets/illustrations/basket-pink.png"
-          alt=""
-          className="pointer-events-none absolute bottom-[-36px] right-[40px] w-[180px] [transform:rotate(6deg)]"
-        />
-        <div className="relative z-[1] flex flex-col items-center gap-[18px] text-center">
-          <h2 className="m-0 font-display text-[clamp(34px,7vw,56px)] font-bold uppercase text-ink [transform:rotate(-0.8deg)]">
-            พร้อมชิมสูตรลับหรือยัง?
-          </h2>
-          <p className="m-0 max-w-[520px] font-body text-[18px] leading-[1.6] text-ink">
-            TEDxBangkok Youth 2026 · {eventDate} · สถานที่ TBA · บัตร ฿{" "}
-            {ticketPrice}
-          </p>
-          <StickerButton href={ticketUrl} size="lg" variant="pink">
-            ซื้อบัตรตอนนี้
-          </StickerButton>
-          <span className="font-display text-[14px] font-semibold tracking-[0.04em] text-ink">
-            #TEDxBangkokYouth2026 #ส่วนผสมลับฉบับคนไทย
-          </span>
-        </div>
-      </section>
-
-      {/* ═══ FOOTER ═══ */}
-      <footer className="grain-overlay bg-ink px-[60px] pb-10 pt-[54px]">
-        <div className="mx-auto flex max-w-[1180px] flex-wrap items-start justify-between gap-10">
-          <div className="flex max-w-[380px] flex-col gap-4">
-            <div className="flex flex-col gap-1">
-              <span className="font-display text-[38px] font-bold leading-[1.1] text-pink [transform:rotate(-1deg)]">
-                เท็ด x บางกอก ยุธ
-              </span>
-              <span className="font-display text-[17px] font-bold uppercase tracking-[0.14em] text-paper">
-                TEDxBangkok Youth
-              </span>
-            </div>
-            <p className="m-0 font-body text-[14px] leading-[1.7] text-navy-100">
-              This independent TEDx event is operated under license from TED.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-[60px]">
-            <FooterCol title="เมนู">
-              {navLinks.map((l) => (
-                <FooterLink key={l.href} href={l.href}>
-                  {l.label}
-                </FooterLink>
-              ))}
-            </FooterCol>
-            <FooterCol title="ติดตาม">
-              <FooterLink href="#">Instagram · TBA</FooterLink>
-              <FooterLink href="#">Facebook · TBA</FooterLink>
-              <FooterLink href="#">TikTok · TBA</FooterLink>
-              <FooterLink href="#">YouTube · TBA</FooterLink>
-            </FooterCol>
-            <FooterCol title="ติดต่อ">
-              <FooterLink href="mailto:hello@tedxbangkokyouth.com">
-                hello@tedxbangkokyouth.com
-              </FooterLink>
-            </FooterCol>
-          </div>
-        </div>
-        <div className="mx-auto mt-9 flex max-w-[1180px] flex-wrap justify-between gap-5 border-t-2 border-dashed border-paper/30 pt-[18px] font-body text-[13px] text-muted-slate">
-          <span>© 2026 TEDxBangkok Youth</span>
-          <span>Mix the Ordinary, Create the Extraordinary</span>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
-  );
-}
-
-function FooterCol({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="flex flex-col gap-2.5 font-body text-[15px]">
-      <span className="font-display text-[16px] font-bold uppercase text-yellow">
-        {title}
-      </span>
-      {children}
-    </div>
-  );
-}
-
-function FooterLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <a
-      href={href}
-      className="text-paper no-underline transition-colors hover:text-pink"
-    >
-      {children}
-    </a>
   );
 }

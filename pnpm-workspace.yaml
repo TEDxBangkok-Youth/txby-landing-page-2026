@@ -1,0 +1,7 @@
+# pnpm settings (pnpm 11 reads config from here, not the "pnpm" field in package.json)
+# Native deps allowed to run their build/postinstall step:
+#   sharp         — next/image optimization
+#   unrs-resolver — eslint-config-next import resolver
+allowBuilds:
+  sharp: true
+  unrs-resolver: true

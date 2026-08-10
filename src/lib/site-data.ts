@@ -1,72 +1,186 @@
 /**
- * Content + generated collections for the TEDxBangkok Youth 2026 page.
- * Mirrors the `renderVals()` logic and the editable props from the
- * original Claude Design document.
+ * Content for the TEDxBangkok Youth 2026 landing page (v3).
+ * Mirrors the data + renderVals() logic from the Claude Design document
+ * "TEDxBangkokYouth Landing v3".
  */
 
-export const eventInfo = {
-  ticketUrl: "#tickets",
-  ticketPrice: "TBA",
-  eventDate: "TBA",
+export const navLinks = [
+  { label: "Gallery", href: "#gallery" },
+  { label: "TED Club", href: "#club" },
+  { label: "Speakers", href: "#speakers" },
+  { label: "Volunteers", href: "#volunteers" },
+];
+
+// ─── Gallery ────────────────────────────────────────────────
+export type GalleryYear = {
+  bg: string;
+  chip: string;
+  panelDark: string;
+  year: string;
+  talks: string;
+  title: string;
+  desc: string;
+  slotId: string;
+  placeholder: string;
 };
 
-export const navLinks = [
-  { href: "#past", label: "งานปีก่อน ๆ" },
-  { href: "#club", label: "TED Club" },
-  { href: "#speakers", label: "SPEAKERS" },
-  { href: "#team", label: "ทีมงาน" },
-  { href: "#sponsors", label: "SPONSORS" },
+export const galleryYears: GalleryYear[] = [
+  {
+    bg: "#02AFDA",
+    panelDark: "#CFF1FA",
+    chip: "#0288AB",
+    year: "2024",
+    talks: "10 talks",
+    title: "คัมมิ่งโฮม",
+    desc: "กลับสู่บ้านแสนอบอุ่น ค้นหาตัวตนและพลังแห่งวัยเยาว์",
+    slotId: "v3-gallery-2024-cover",
+    placeholder: "รูปปี 2024",
+  },
+  {
+    bg: "#F9EF3E",
+    panelDark: "#FDFBC9",
+    chip: "#A11B1F",
+    year: "2023",
+    talks: "9 talks",
+    title: "UnleashXpression",
+    desc: "ปลดพันธนาการ ปล่อยตัวตนและความเป็นเด็ก",
+    slotId: "v3-gallery-2023-cover",
+    placeholder: "รูปปี 2023",
+  },
+  {
+    bg: "#00A14B",
+    panelDark: "#CFEEDD",
+    chip: "#00803B",
+    year: "2022",
+    talks: "8 talks",
+    title: "You(th) Matter!",
+    desc: "สะท้อนเสียงของเด็กมีของและคุณครูไฟแรงให้ดังก้องไปทั่วสังคม",
+    slotId: "v3-gallery-2022-cover",
+    placeholder: "รูปปี 2022",
+  },
+  {
+    bg: "#EF4899",
+    panelDark: "#FBDCEB",
+    chip: "#D6317F",
+    year: "2019",
+    talks: "8 talks",
+    title: "Playing From Playlist",
+    desc: "เพลย์ลิสต์ของชีวิตที่เราเลือกเปิดเอง",
+    slotId: "v3-gallery-2019-cover",
+    placeholder: "รูปปี 2019",
+  },
+  {
+    bg: "#C82227",
+    panelDark: "#F8DADB",
+    chip: "#A11B1F",
+    year: "2018",
+    talks: "6 talks",
+    title: "TEDx Youth 2018",
+    desc: "เวทีที่สปีกเกอร์เป็นเด็กทั้งหมด",
+    slotId: "v3-gallery-2018-cover",
+    placeholder: "รูปปี 2018",
+  },
 ];
 
-type Swatch = { tagColor: string; tagText: string };
+// ─── Speakers ───────────────────────────────────────────────
+type SpeakerSource = {
+  name: string;
+  role: string;
+  talk: string;
+  photo: string;
+};
 
-const swatches: Swatch[] = [
-  { tagColor: "#EF4899", tagText: "#FFFDF7" },
-  { tagColor: "#F9EF3E", tagText: "#111D45" },
-  { tagColor: "#02AFDA", tagText: "#FFFDF7" },
-  { tagColor: "#00A14B", tagText: "#FFFDF7" },
-  { tagColor: "#C82227", tagText: "#FFFDF7" },
+const SPEAKERS: SpeakerSource[] = [
+  { name: "ปุณณ์ อริยะวงศ์", role: "นักเรียน ม.6 · นักพัฒนาเกม", talk: "เกมที่สอนให้ฉันล้มเหลว", photo: "2025-01" },
+  { name: "ญาดา เตชะวิบูลย์", role: "นักวิจัยเยาวชนด้านคุณภาพอากาศ", talk: "ฝุ่นที่เราหายใจร่วมกัน", photo: "2025-02" },
+  { name: "กันต์ ศรีวรกุล", role: "ผู้ก่อตั้งวงดนตรีในโรงเรียน", talk: "เสียงรบกวนก็เป็นดนตรีได้", photo: "2025-04" },
+  { name: "พิมพ์ชนก โชติวัฒน์", role: "นักเรียนพยาบาล", talk: "ดูแลคนอื่นก่อนดูแลตัวเอง", photo: "2025-03" },
+  { name: "ธีรัตม์ นิลกำแหง", role: "อาสาสมัครกู้ภัยอายุ 19", talk: "สิบสองนาทีแรก", photo: "2025-06" },
+  { name: "อรณิชา บุญมาก", role: "ช่างภาพสารคดี", talk: "เมืองที่ไม่มีใครถ่าย", photo: "2025-05" },
+  { name: "ปวีณ์นุช ทองประเสริฐ", role: "นักเรียนละครเวที ม.5", talk: "หัวเราะทั้งที่ยังไม่หายเจ็บ", photo: "2025-07" },
+  { name: "ชยากร ไวยกิจ", role: "นักออกแบบเสื้อผ้ารีไซเคิล", talk: "เศษผ้าที่กลายเป็นตัวตน", photo: "2025-08" },
+  { name: "ณิชาภัทร วงศ์เจริญ", role: "ประธานชมรมโต้วาที", talk: "แพ้บนเวทีไม่ใช่จบ", photo: "2025-09" },
+  { name: "ภัสสร ดำรงพันธุ์", role: "นักออกแบบเกมกระดาน", talk: "กติกาที่ฉันเขียนเอง", photo: "2025-10" },
+  { name: "กมลชนก ศรีสวัสดิ์", role: "นักเรียนแลกเปลี่ยนกลับบ้าน", talk: "บ้านที่เปลี่ยนไปตอนฉันไม่อยู่", photo: "2025-11" },
+  { name: "สุพิชญา ธรรมวัฒน์", role: "ผู้ประกาศข่าวโรงเรียน", talk: "ไมโครโฟนที่มือฉันสั่น", photo: "2025-12" },
 ];
 
-const rots = [-1.5, 1, -0.8, 1.5, -1, 0.8, -1.2, 1.2, -0.6, 1.4, -1.4, 0.6];
+const TINTS = ["#FBDCEB", "#FDFBC9", "#CFF1FA", "#CFEEDD", "#F8DADB"];
 
-const roles = [
-  "Curation",
-  "Production",
-  "Design",
-  "Marketing",
-  "Partnership",
-  "Experience",
-  "Curation",
-  "Production",
-  "Design",
-  "Marketing",
-  "Partnership",
-  "Experience",
+// The design only has speaker photos 01–03 and 05–12 available; the card
+// for a missing photo falls back to the speaker's initial on a tinted panel.
+const AVAILABLE_PHOTOS = new Set([
+  "2025-01", "2025-02", "2025-03", "2025-05", "2025-06",
+  "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12",
+]);
+
+export const speakers = SPEAKERS.map((s, i) => {
+  const hasPhoto = AVAILABLE_PHOTOS.has(s.photo);
+  return {
+    name: s.name,
+    role: s.role,
+    talk: s.talk,
+    hasPhoto,
+    photo: hasPhoto ? `/assets/speakers/${s.photo}.jpg` : null,
+    initial: (s.name || "?").trim().charAt(0),
+    tint: TINTS[i % TINTS.length],
+  };
+});
+
+// ─── Volunteers roster ──────────────────────────────────────
+const TEAM_NAMES = [
+  "Producer", "Advisor", "Director", "Production",
+  "People", "Finance", "Sponsor", "IT",
 ];
 
-export const pastEvents = [
-  { id: 1, label: "ปี 1 · 20XX", color: "#EF4899", text: "#FFFDF7", rot: -2 },
-  { id: 2, label: "ปี 2 · 20XX", color: "#02AFDA", text: "#FFFDF7", rot: 1.5 },
-  { id: 3, label: "ปี 3 · 20XX", color: "#F9EF3E", text: "#111D45", rot: -1 },
-  { id: 4, label: "ปี 4 · 20XX", color: "#C82227", text: "#FFFDF7", rot: 2 },
-  { id: 5, label: "ปี 5 · 20XX", color: "#00A14B", text: "#FFFDF7", rot: -1.5 },
+const ROSTER: string[][] = [
+  ["ปาล์ม ธีรเดช", "มายด์ ณัฐชยา", "บีม ศุภกร", "ฟ้า ปวีณา", "โอ๊ต ธนดล", "พราว ชญานิษฐ์"],
+  ["กัน วรวุฒิ", "เจน จิรัชญา", "ต้น ปรเมศวร์", "ไอซ์ อิศราภรณ์", "นิว นวพล", "พีท พีรพัฒน์", "แนน นันทวัน"],
+  ["มิ้นท์ มนัสวี", "ปอ ภูวดล", "จูน จุฑามาศ", "เต๋า ธนวัฒน์", "แพร แพรววนิต"],
+  ["ตูน ธีรภัทร", "หญิง ญาณิศา", "แบงค์ ภาณุพงศ์", "อาย อัยยา", "โอม โอฬาร", "ปันปัน ปุณิกา"],
+  ["ฟลุค กฤตเมธ", "เมย์ เมธาวี", "จ๋า จรรยพร", "ดิว ดนุพล"],
+  ["บอส บวรพจน์", "ขนม ขวัญชนก", "ปิง พิชญุตม์", "ตาล ธัญวรัตน์", "กี้ กีรติ", "หนึ่ง อนุชา", "มิว มุทิตา"],
+  ["โฟม ภูมิพัฒน์", "พีพี ปพน", "เกม เกียรติศักดิ์", "ลูกหมี ลลิตา", "ซัน ศุภณัฐ"],
+  ["ใบตอง กัญญาณัฐ", "แทน ธนกร", "หมิว ธมลวรรณ", "จิ๊บ จิรภัทร", "ปุ๊ก ปุณยวีร์", "นาย นภัส"],
 ];
 
-export const speakers = Array.from({ length: 8 }, (_, i) => ({
-  id: i + 1,
-  rot: rots[i],
-  ...swatches[i % swatches.length],
+export const teams = TEAM_NAMES.map((name, i) => ({
+  name,
+  names: ROSTER[i] ?? [],
 }));
 
-export const team = Array.from({ length: 12 }, (_, i) => ({
-  id: i + 1,
-  rot: rots[i],
-  role: roles[i],
-  ...swatches[i % swatches.length],
-}));
+// ─── Footer ─────────────────────────────────────────────────
+export const footerLinks = [
+  { title: "Event", items: ["Gallery", "Speakers", "Schedule", "Venue"] },
+  { title: "Community", items: ["TED Club", "Volunteers", "Sponsors"] },
+  { title: "Info", items: ["About", "FAQ", "Contact"] },
+];
 
-export const sponsors = Array.from({ length: 8 }, (_, i) => ({
-  id: i + 1,
-  rot: rots[i] * 0.5,
-}));
+export const social = ["Instagram", "Facebook", "YouTube", "TikTok"];
+
+// ─── TED Club map ───────────────────────────────────────────
+export type Club = {
+  city: string;
+  en: string;
+  clubs: number;
+  since: number;
+  note: string;
+  provinceId: string;
+};
+
+export const CLUBS: Club[] = [
+  { city: "กรุงเทพมหานคร", en: "Bangkok", clubs: 6, since: 2019, note: "ศูนย์กลางเครือข่าย · 6 ชมรม", provinceId: "TH-10" },
+  { city: "นนทบุรี", en: "Nonthaburi", clubs: 1, since: 2024, note: "1 ชมรม", provinceId: "TH-12" },
+  { city: "ชลบุรี", en: "Chonburi", clubs: 2, since: 2023, note: "2 ชมรม", provinceId: "TH-20" },
+  { city: "เชียงใหม่", en: "Chiang Mai", clubs: 3, since: 2021, note: "3 ชมรม", provinceId: "TH-50" },
+  { city: "เชียงราย", en: "Chiang Rai", clubs: 1, since: 2024, note: "1 ชมรม", provinceId: "TH-57" },
+  { city: "พิษณุโลก", en: "Phitsanulok", clubs: 1, since: 2023, note: "1 ชมรม", provinceId: "TH-65" },
+  { city: "ขอนแก่น", en: "Khon Kaen", clubs: 2, since: 2022, note: "2 ชมรม", provinceId: "TH-40" },
+  { city: "นครราชสีมา", en: "Nakhon Ratchasima", clubs: 2, since: 2022, note: "2 ชมรม", provinceId: "TH-30" },
+  { city: "อุบลราชธานี", en: "Ubon Ratchathani", clubs: 1, since: 2024, note: "1 ชมรม", provinceId: "TH-34" },
+  { city: "สุราษฎร์ธานี", en: "Surat Thani", clubs: 1, since: 2024, note: "1 ชมรม", provinceId: "TH-84" },
+  { city: "ภูเก็ต", en: "Phuket", clubs: 1, since: 2023, note: "1 ชมรม", provinceId: "TH-83" },
+  { city: "หาดใหญ่ สงขลา", en: "Hat Yai", clubs: 2, since: 2022, note: "2 ชมรม", provinceId: "TH-90" },
+];
+
+export const MAP_DEFAULT_TITLE = "จังหวัดที่มี TED Club";
