@@ -21,7 +21,7 @@ content, not a message.
 - ICU plurals for anything with a count: `{count, plural, one {# talk} other {# talks}}`.
   Thai has one plural form; use `other` only in `th.json`.
 - Interpolation uses named args: `{year}`, `{count}`, `{date}`.
-- Keys are camelCase, nested by section, max three levels deep.
+- Keys are snake_case, nested by section, max three levels deep.
 - No trailing punctuation in button labels.
 - `aria-*` strings are real copy and get real translations, not transliterations.
 
@@ -36,19 +36,19 @@ content, not a message.
 | `nav.speakers` | `Speakers` | |
 | `nav.volunteers` | `Volunteers` | |
 | `nav.tickets` | `ซื้อบัตรเข้าชม` | primary CTA |
-| `nav.openMenu` | `เปิดเมนู` | aria-label on the mobile trigger |
-| `nav.homeAlt` | `TEDxBangkok Youth — กลับหน้าแรก` | logo alt, also used by `event-nav.tsx` |
-| `nav.menuTitle` | — | mobile sheet heading; had no visible string before |
+| `nav.open_menu` | `เปิดเมนู` | aria-label on the mobile trigger |
+| `nav.home_alt` | `TEDxBangkok Youth — กลับหน้าแรก` | logo alt, also used by `event-nav.tsx` |
+| `nav.menu_title` | — | mobile sheet heading; had no visible string before |
 
 ## `hero` — landing hero (`app/[locale]/page.tsx`)
 
 | Key | Current Thai source | Notes |
 |---|---|---|
-| `hero.titleLine1` | `ส่วนผสม` | |
-| `hero.titleHighlight` | `ลับ` | the cyan boxed word |
-| `hero.titleLine2` | `ฉบับคนไทย` | the outlined line |
-| `hero.bowlAlt` | `ชามส่วนผสมลับ` | |
-| `hero.priceTagAlt` | `฿67.00 เท็ด x บางกอก` | |
+| `hero.title_line1` | `ส่วนผสม` | |
+| `hero.title_highlight` | `ลับ` | the cyan boxed word |
+| `hero.title_line2` | `ฉบับคนไทย` | the outlined line |
+| `hero.bowl_alt` | `ชามส่วนผสมลับ` | |
+| `hero.price_tag_alt` | `฿67.00 เท็ด x บางกอก` | |
 
 **Design constraint:** the three title parts are separately positioned and
 styled — they are not one string with markup. Keep them as three keys. The
@@ -60,13 +60,13 @@ long. Treat this as a headline-writing problem, not a translation problem.
 
 | Key | Current Thai source | Notes |
 |---|---|---|
-| `gallery.titleLine1` | `TED Youth` | rendered above a `<br/>` |
-| `gallery.titleLine2` | `Gallery` | |
+| `gallery.title_line1` | `TED Youth` | rendered above a `<br/>` |
+| `gallery.title_line2` | `Gallery` | |
 | `gallery.lead` | `ทุกปีคือหนึ่งสูตร ย้อนดูธีม ผู้พูด และรสชาติของแต่ละรุ่นที่ผ่านเวทีนี้` | |
 | `gallery.featured.badge` | `ปีล่าสุด` | ticket tag |
-| `gallery.featured.coverAlt` | `บรรยากาศงานปี 2025` | takes `{year}` |
+| `gallery.featured.cover_alt` | `บรรยากาศงานปี 2025` | takes `{year}` |
 | `gallery.featured.cta` | `ดูรายละเอียดปี {year}` | also used as the `sr-only` label |
-| `gallery.featured.youtubeCta` | `ดู Talk บน YouTube` | |
+| `gallery.featured.youtube_cta` | `ดู Talk บน YouTube` | |
 | `gallery.card.talks` | `10 talks` etc. | **ICU plural on `{count}`** |
 | `gallery.card.placeholder` | `รูปปี 2024` | takes `{year}` |
 
@@ -79,25 +79,25 @@ content — read them from that year's entry instead of duplicating them.
 
 | Key | Current Thai source |
 |---|---|
-| `club.titlePrefix` | `TED Club` |
-| `club.titleHighlight` | `ทั่วประเทศไทย` |
+| `club.title_prefix` | `TED Club` |
+| `club.title_highlight` | `ทั่วประเทศไทย` |
 | `club.lead` | `ชมรมในโรงเรียนและมหาวิทยาลัยที่จัดเวทีของตัวเองตลอดทั้งปี ทุกกิจกรรมออกแบบให้ครูหนึ่งคนจัดได้เอง ด้วยคู่มือและสไลด์ที่เตรียมไว้ให้` |
-| `club.logoAlt` | `TED Club · TEDxBangkok Youth` |
+| `club.logo_alt` | `TED Club · TEDxBangkok Youth` |
 
-## `clubMap` — interactive map (`club-map.tsx`, a client component)
+## `club_map` — interactive map (`club-map.tsx`, a client component)
 
 | Key | Current Thai source | Notes |
 |---|---|---|
-| `clubMap.label` | `แผนที่ TED Club ในประเทศไทย` | aria-label on the group |
-| `clubMap.defaultTitle` | `จังหวัดที่มี TED Club` | was `MAP_DEFAULT_TITLE` |
-| `clubMap.back` | `← กลับไปที่รายชื่อทั้งหมด` | keep the arrow outside the message |
-| `clubMap.zoomIn` | `ซูมเข้า` | aria-label |
-| `clubMap.zoomOut` | `ซูมออก` | aria-label |
-| `clubMap.zoomReset` | `รีเซ็ตซูม` | aria-label |
-| `clubMap.statClubs` | `ชมรม` | stat caption |
-| `clubMap.statSince` | `ตั้งแต่` | stat caption |
-| `clubMap.clubCount` | `6 ชมรม` | **ICU plural on `{count}`** |
-| `clubMap.since` | `ตั้งแต่ {year}` | list row |
+| `club_map.label` | `แผนที่ TED Club ในประเทศไทย` | aria-label on the group |
+| `club_map.default_title` | `จังหวัดที่มี TED Club` | was `MAP_DEFAULT_TITLE` |
+| `club_map.back` | `← กลับไปที่รายชื่อทั้งหมด` | keep the arrow outside the message |
+| `club_map.zoom_in` | `ซูมเข้า` | aria-label |
+| `club_map.zoom_out` | `ซูมออก` | aria-label |
+| `club_map.zoom_reset` | `รีเซ็ตซูม` | aria-label |
+| `club_map.stat_clubs` | `ชมรม` | stat caption |
+| `club_map.stat_since` | `ตั้งแต่` | stat caption |
+| `club_map.club_count` | `6 ชมรม` | **ICU plural on `{count}`** |
+| `club_map.since` | `ตั้งแต่ {year}` | list row |
 
 `Club.city` / `Club.en` hold the Thai and English province names — keep both
 fields and pick by locale rather than moving them into messages. Only the
@@ -105,7 +105,7 @@ current locale's name is rendered; the other one is not shown as a subtitle.
 
 There is no "network hub" label. `Club.note` (a pre-composed Thai string,
 `"ศูนย์กลางเครือข่าย · 6 ชมรม"`) became a boolean `isHub` during the i18n
-pass and was then dropped along with `clubMap.hub` — Bangkok is now listed
+pass and was then dropped along with `club_map.hub` — Bangkok is now listed
 like every other province. Restoring it means a new key plus a flag on the
 record; nothing in the data marks the hub any more.
 
@@ -117,9 +117,9 @@ record; nothing in the data marks the hub any more.
 | `speakers.lead` | `{count} คนที่จะขึ้นเวทีปีนี้ พร้อมเรื่องที่ไม่เคยเล่าที่ไหนมาก่อน` | ICU plural |
 | `volunteers.title` | `Volunteers` | |
 | `volunteers.lead` | `ทุกงานเกิดขึ้นได้เพราะอาสาสมัคร นี่คือรายชื่อทีมงานครบทุกคนของปีนี้` | |
-| `volunteers.photoPlaceholder` | `รูปทีมอาสาสมัคร` | |
+| `volunteers.photo_placeholder` | `รูปทีมอาสาสมัคร` | |
 | `volunteers.teams.producer` … | `Producer`, `Advisor`, `Director`, `Production`, `People`, `Finance`, `Sponsor`, `IT` | eight keys, currently English-only; Thai values needed |
-| `volunteers.rosterTitle` | — | roster panel heading |
+| `volunteers.roster_title` | — | roster panel heading |
 | `volunteers.back` | — | roster back-link |
 
 ## `footer` — `site-footer.tsx`
@@ -130,10 +130,10 @@ record; nothing in the data marks the hub any more.
 | `footer.groups.community` | `Community` |
 | `footer.groups.info` | `Info` |
 | `footer.links.gallery` / `speakers` / `schedule` / `venue` | `Gallery`, `Speakers`, `Schedule`, `Venue` |
-| `footer.links.tedClub` / `volunteers` / `sponsors` | `TED Club`, `Volunteers`, `Sponsors` |
+| `footer.links.ted_club` / `volunteers` / `sponsors` | `TED Club`, `Volunteers`, `Sponsors` |
 | `footer.links.about` / `faq` / `contact` | `About`, `FAQ`, `Contact` |
 | `footer.copyright` | `© 2026 TEDxBangkok Youth` |
-| `footer.logoAlt` | `TEDxBangkok Youth` |
+| `footer.logo_alt` | `TEDxBangkok Youth` |
 | `footer.disclaimer` | — | **new copy, not in the original design** — the standard TEDx independent-licence line. Added during implementation; drop the key and its usage in `site-footer.tsx` if it is not wanted. |
 
 Social names (`Instagram`, `Facebook`, `YouTube`, `TikTok`) are proper nouns —
@@ -149,20 +149,20 @@ leave them out of the catalog.
 | `event.meta.date` | `วันที่จัดงาน` | |
 | `event.meta.venue` | `สถานที่` | |
 | `event.meta.talks` | `จำนวน Talk` | |
-| `event.meta.talksValue` | `12 talks` | **ICU plural on `{count}`** |
-| `event.cta.watchAll` | `ดู Talk ทั้งหมดบน YouTube` | |
+| `event.meta.talks_value` | `12 talks` | **ICU plural on `{count}`** |
+| `event.cta.watch_all` | `ดู Talk ทั้งหมดบน YouTube` | |
 | `event.cta.photos` | `รูปบรรยากาศในงาน` | |
-| `event.coverPlaceholder` | `ภาพหลักของปี {year}` | |
+| `event.cover_placeholder` | `ภาพหลักของปี {year}` | |
 | `event.speakers.title` | `{count} เสียงบนเวทีปี {year}` | ICU plural + `{year}` |
 | `event.speakers.lead` | `ชื่อเล่น ชื่อจริง และหนึ่งบรรทัดที่บอกว่าเขาเป็นใคร ก่อนจะขึ้นไปเล่าเรื่องของตัวเองบนวงกลมสีแดง` | see note |
 | `event.photos.title` | `รูปบรรยากาศในงาน` | |
 | `event.photos.lead` | `ภาพจากวันงาน {date} ตั้งแต่คิวลงทะเบียนหน้าห้อง จนถึงภาพหมู่สุดท้ายหลังไฟบนเวทีดับลง` | takes `{date}` |
 | `event.talks.title` | `ดู Talk ย้อนหลัง` | |
 | `event.talks.lead` | `ทุก Talk ของปีนี้ ดูฟรีบน YouTube ไม่ต้องสมัครสมาชิก` | |
-| `event.talks.playlistCta` | `เปิดเพลย์ลิสต์ทั้งปี` | |
-| `event.talks.comingSoon` | `เร็ว ๆ นี้` | unpublished talk |
+| `event.talks.playlist_cta` | `เปิดเพลย์ลิสต์ทั้งปี` | |
+| `event.talks.coming_soon` | `เร็ว ๆ นี้` | unpublished talk |
 | `event.nav.watch` | `ดู Talk` | compact playlist button in the bar |
-| `event.nav.watchSuffix` | ` ทั้งหมด` | **leading space is deliberate** — appended on `sm:` and up |
+| `event.nav.watch_suffix` | ` ทั้งหมด` | **leading space is deliberate** — appended on `sm:` and up |
 
 `event.speakers.lead` describes a Thai naming convention (ชื่อเล่น = nickname,
 ชื่อจริง = full name) that does not carry into English. Rewrite it for an
@@ -182,8 +182,8 @@ pages override them in their own `generateMetadata` from event content.
 
 | Key | Current Thai source |
 |---|---|
-| `common.imagePlaceholder` | `รูปภาพ` (the `ImageSlot` default) |
-| `common.languageLabel` | new — aria-label for the language switcher group |
+| `common.image_placeholder` | `รูปภาพ` (the `ImageSlot` default) |
+| `common.language_label` | new — aria-label for the language switcher group |
 
 The switcher shows the ISO codes (`TH | EN`), which read the same in either
 language, so the locale names themselves are not messages.

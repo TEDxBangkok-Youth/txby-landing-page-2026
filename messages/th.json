@@ -9,26 +9,26 @@
     "speakers": "สปีกเกอร์",
     "volunteers": "อาสาสมัคร",
     "tickets": "ซื้อบัตรเข้าชม",
-    "openMenu": "เปิดเมนู",
-    "menuTitle": "เมนู",
-    "homeAlt": "TEDxBangkok Youth — กลับหน้าแรก"
+    "open_menu": "เปิดเมนู",
+    "menu_title": "เมนู",
+    "home_alt": "TEDxBangkok Youth — กลับหน้าแรก"
   },
   "hero": {
-    "titleLine1": "ส่วนผสม",
-    "titleHighlight": "ลับ",
-    "titleLine2": "ฉบับคนไทย",
-    "bowlAlt": "ชามส่วนผสมลับ",
-    "priceTagAlt": "฿67.00 เท็ด x บางกอก"
+    "title_line1": "ส่วนผสม",
+    "title_highlight": "ลับ",
+    "title_line2": "ฉบับคนไทย",
+    "bowl_alt": "ชามส่วนผสมลับ",
+    "price_tag_alt": "฿67.00 เท็ด x บางกอก"
   },
   "gallery": {
-    "titleLine1": "TED Youth",
-    "titleLine2": "Gallery",
+    "title_line1": "TED Youth",
+    "title_line2": "Gallery",
     "lead": "ทุกปีคือหนึ่งสูตร ย้อนดูธีม ผู้พูด และรสชาติของแต่ละรุ่นที่ผ่านเวทีนี้",
     "featured": {
       "badge": "ปีล่าสุด",
-      "coverAlt": "บรรยากาศงานปี {year}",
+      "cover_alt": "บรรยากาศงานปี {year}",
       "cta": "ดูรายละเอียดปี {year}",
-      "youtubeCta": "ดู Talk บน YouTube"
+      "youtube_cta": "ดู Talk บน YouTube"
     },
     "card": {
       "talks": "{count, plural, other {# talks}}",
@@ -36,21 +36,21 @@
     }
   },
   "club": {
-    "titlePrefix": "TED Club",
-    "titleHighlight": "ทั่วประเทศไทย",
+    "title_prefix": "TED Club",
+    "title_highlight": "ทั่วประเทศไทย",
     "lead": "ชมรมในโรงเรียนและมหาวิทยาลัยที่จัดเวทีของตัวเองตลอดทั้งปี ทุกกิจกรรมออกแบบให้ครูหนึ่งคนจัดได้เอง ด้วยคู่มือและสไลด์ที่เตรียมไว้ให้",
-    "logoAlt": "TED Club · TEDxBangkok Youth"
+    "logo_alt": "TED Club · TEDxBangkok Youth"
   },
-  "clubMap": {
+  "club_map": {
     "label": "แผนที่ TED Club ในประเทศไทย",
-    "defaultTitle": "จังหวัดที่มี TED Club",
+    "default_title": "จังหวัดที่มี TED Club",
     "back": "กลับไปที่รายชื่อทั้งหมด",
-    "zoomIn": "ซูมเข้า",
-    "zoomOut": "ซูมออก",
-    "zoomReset": "รีเซ็ตซูม",
-    "statClubs": "ชมรม",
-    "statSince": "ตั้งแต่",
-    "clubCount": "{count, plural, other {# ชมรม}}",
+    "zoom_in": "ซูมเข้า",
+    "zoom_out": "ซูมออก",
+    "zoom_reset": "รีเซ็ตซูม",
+    "stat_clubs": "ชมรม",
+    "stat_since": "ตั้งแต่",
+    "club_count": "{count, plural, other {# ชมรม}}",
     "since": "ตั้งแต่ {year}"
   },
   "speakers": {
@@ -60,8 +60,8 @@
   "volunteers": {
     "title": "Volunteers",
     "lead": "ทุกงานเกิดขึ้นได้เพราะอาสาสมัคร นี่คือรายชื่อทีมงานครบทุกคนของปีนี้",
-    "photoPlaceholder": "รูปทีมอาสาสมัคร",
-    "rosterTitle": "รายชื่อทีม Volunteers",
+    "photo_placeholder": "รูปทีมอาสาสมัคร",
+    "roster_title": "รายชื่อทีม Volunteers",
     "back": "กลับไปที่รายชื่อทีม",
     "teams": {
       "producer": "โปรดิวเซอร์",
@@ -85,7 +85,7 @@
       "speakers": "Speakers",
       "schedule": "Schedule",
       "venue": "Venue",
-      "tedClub": "TED Club",
+      "ted_club": "TED Club",
       "volunteers": "Volunteers",
       "sponsors": "Sponsors",
       "about": "About",
@@ -93,7 +93,7 @@
       "contact": "Contact"
     },
     "copyright": "© 2026 TEDxBangkok Youth",
-    "logoAlt": "TEDxBangkok Youth",
+    "logo_alt": "TEDxBangkok Youth",
     "disclaimer": "งาน TEDx อิสระนี้จัดขึ้นภายใต้ใบอนุญาตจาก TED"
   },
   "event": {
@@ -102,19 +102,19 @@
       "photos": "บรรยากาศในงาน",
       "talks": "Talks",
       "watch": "ดู Talk",
-      "watchSuffix": " ทั้งหมด"
+      "watch_suffix": " ทั้งหมด"
     },
     "meta": {
       "date": "วันที่จัดงาน",
       "venue": "สถานที่",
       "talks": "จำนวน Talk",
-      "talksValue": "{count, plural, other {# talks}}"
+      "talks_value": "{count, plural, other {# talks}}"
     },
     "cta": {
-      "watchAll": "ดู Talk ทั้งหมดบน YouTube",
+      "watch_all": "ดู Talk ทั้งหมดบน YouTube",
       "photos": "รูปบรรยากาศในงาน"
     },
-    "coverPlaceholder": "ภาพหลักของปี {year}",
+    "cover_placeholder": "ภาพหลักของปี {year}",
     "speakers": {
       "title": "{count, plural, other {#}} เสียงบนเวทีปี {year}",
       "lead": "ชื่อเล่น ชื่อจริง และหนึ่งบรรทัดที่บอกว่าเขาเป็นใคร ก่อนจะขึ้นไปเล่าเรื่องของตัวเองบนวงกลมสีแดง"
@@ -126,12 +126,12 @@
     "talks": {
       "title": "ดู Talk ย้อนหลัง",
       "lead": "ทุก Talk ของปีนี้ ดูฟรีบน YouTube ไม่ต้องสมัครสมาชิก",
-      "playlistCta": "เปิดเพลย์ลิสต์ทั้งปี",
-      "comingSoon": "เร็ว ๆ นี้"
+      "playlist_cta": "เปิดเพลย์ลิสต์ทั้งปี",
+      "coming_soon": "เร็ว ๆ นี้"
     }
   },
   "common": {
-    "imagePlaceholder": "รูปภาพ",
-    "languageLabel": "เปลี่ยนภาษา"
+    "image_placeholder": "รูปภาพ",
+    "language_label": "เปลี่ยนภาษา"
   }
 }

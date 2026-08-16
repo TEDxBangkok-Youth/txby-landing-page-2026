@@ -46,7 +46,7 @@ export function ClubMap() {
   const drag = useRef({ active: false, maybe: false, sx: 0, sy: 0, tx: 0, ty: 0 });
 
   const locale = useLocale() as Locale;
-  const t = useTranslations("clubMap");
+  const t = useTranslations("club_map");
   const CLUBS = getClubs();
 
   const detail = selected != null ? CLUBS[selected] : null;
@@ -104,7 +104,7 @@ export function ClubMap() {
       const club = CLUBS[i];
       const title = p.querySelector("title");
       if (club && title) {
-        title.textContent = `${primaryName(club, locale)} · ${t("clubCount", {
+        title.textContent = `${primaryName(club, locale)} · ${t("club_count", {
           count: club.clubs,
         })}`;
       }
@@ -204,11 +204,11 @@ export function ClubMap() {
         />
 
         <div className="absolute top-0 right-5 z-10 flex flex-col overflow-hidden rounded-card border-frame border-line-strong bg-surface-card shadow-card">
-          <ZoomButton label={t("zoomIn")} onClick={() => applyZoom(zoom + 0.5)}>
+          <ZoomButton label={t("zoom_in")} onClick={() => applyZoom(zoom + 0.5)}>
             <PlusIcon />
           </ZoomButton>
           <ZoomButton
-            label={t("zoomReset")}
+            label={t("zoom_reset")}
             divider
             onClick={() => {
               applyZoom(1);
@@ -218,7 +218,7 @@ export function ClubMap() {
             <RotateCcwIcon/>
           </ZoomButton>
           <ZoomButton
-            label={t("zoomOut")}
+            label={t("zoom_out")}
             divider
             onClick={() => applyZoom(zoom - 0.5)}
           >
@@ -240,7 +240,7 @@ export function ClubMap() {
             </button>
           ) : null}
           <div className="font-heading text-2xl leading-heading font-bold tracking-tight">
-            {detail ? primaryName(detail, locale) : t("defaultTitle")}
+            {detail ? primaryName(detail, locale) : t("default_title")}
           </div>
         </div>
 
@@ -250,8 +250,8 @@ export function ClubMap() {
                 them used to carry the "network hub" label; without it it
                 only repeated the club count back at the reader. */}
             <div className="flex gap-6 pt-4">
-              <Stat value={detail.clubs} label={t("statClubs")} />
-              <Stat value={detail.since} label={t("statSince")} />
+              <Stat value={detail.clubs} label={t("stat_clubs")} />
+              <Stat value={detail.since} label={t("stat_since")} />
             </div>
           </div>
         ) : (
@@ -269,7 +269,7 @@ export function ClubMap() {
                   {primaryName(c, locale)}
                 </div>
                 <div className="mt-0.75 text-sm leading-normal text-foreground-secondary">
-                  {t("clubCount", { count: c.clubs })} ·{" "}
+                  {t("club_count", { count: c.clubs })} ·{" "}
                   {t("since", { year: c.since })}
                 </div>
               </button>
@@ -286,7 +286,7 @@ export function ClubMap() {
         >
           <div>{primaryName(CLUBS[tip.index], locale)}</div>
           <div className="mt-0.5 text-xs font-normal text-foreground-muted">
-            {t("clubCount", { count: CLUBS[tip.index].clubs })}
+            {t("club_count", { count: CLUBS[tip.index].clubs })}
           </div>
         </div>
       ) : null}

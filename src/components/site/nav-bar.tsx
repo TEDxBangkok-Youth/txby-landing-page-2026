@@ -45,7 +45,7 @@ export function NavBar() {
     <SiteNav
       className="fixed inset-x-0 top-0 z-50"
       links={links}
-      brand={<SiteNavLogo href="#hero" alt={t("homeAlt")} />}
+      brand={<SiteNavLogo href="#hero" alt={t("home_alt")} />}
       backdrop={
         <div
           aria-hidden
@@ -65,13 +65,13 @@ export function NavBar() {
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon-sm" aria-label={t("openMenu")}>
+              <Button variant="ghost" size="icon-sm" aria-label={t("open_menu")}>
                 <MenuIcon />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" data-theme="main" className="w-72">
               <SheetTitle className="px-6 pt-6 font-heading text-xl leading-heading">
-                {t("menuTitle")}
+                {t("menu_title")}
               </SheetTitle>
               <ul className="flex flex-col px-6 py-4">
                 {links.map((l) => (

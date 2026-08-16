@@ -86,7 +86,7 @@ async function Hero({ locale, event }: { locale: Locale; event: EventYear }) {
     { label: t("meta.venue"), value: event.venue },
     {
       label: t("meta.talks"),
-      value: t("meta.talksValue", { count: event.speakers.length }),
+      value: t("meta.talks_value", { count: event.speakers.length }),
     },
   ];
 
@@ -132,7 +132,7 @@ async function Hero({ locale, event }: { locale: Locale; event: EventYear }) {
                   rel="noreferrer noopener"
                 >
                   <PlayIcon />
-                  {t("cta.watchAll")}
+                  {t("cta.watch_all")}
                 </a>
               </Button>
             ) : null}
@@ -160,7 +160,7 @@ async function Hero({ locale, event }: { locale: Locale; event: EventYear }) {
           ) : (
             <ImageSlot
               shape="rect"
-              placeholder={t("coverPlaceholder", { year: event.year })}
+              placeholder={t("cover_placeholder", { year: event.year })}
             />
           )}
         </div>
@@ -255,7 +255,7 @@ async function Talks({
                   rel="noreferrer noopener"
                 >
                   <PlayIcon />
-                  {t("talks.playlistCta")}
+                  {t("talks.playlist_cta")}
                 </a>
               </Button>
             ) : null

@@ -9,26 +9,26 @@
     "speakers": "Speakers",
     "volunteers": "Volunteers",
     "tickets": "Get Tickets",
-    "openMenu": "Open menu",
-    "menuTitle": "Menu",
-    "homeAlt": "TEDxBangkok Youth — back to home"
+    "open_menu": "Open menu",
+    "menu_title": "Menu",
+    "home_alt": "TEDxBangkok Youth — back to home"
   },
   "hero": {
-    "titleLine1": "Secret",
-    "titleHighlight": "Sauce",
-    "titleLine2": "Thai Edition",
-    "bowlAlt": "The secret sauce mixing bowl",
-    "priceTagAlt": "฿67.00 · TED x Bangkok"
+    "title_line1": "Secret",
+    "title_highlight": "Sauce",
+    "title_line2": "Thai Edition",
+    "bowl_alt": "The secret sauce mixing bowl",
+    "price_tag_alt": "฿67.00 · TED x Bangkok"
   },
   "gallery": {
-    "titleLine1": "TED Youth",
-    "titleLine2": "Gallery",
+    "title_line1": "TED Youth",
+    "title_line2": "Gallery",
     "lead": "Every year is its own recipe. Look back at the themes, the speakers, and the flavor each edition brought to this stage.",
     "featured": {
       "badge": "Latest Year",
-      "coverAlt": "Atmosphere at the {year} event",
+      "cover_alt": "Atmosphere at the {year} event",
       "cta": "See the {year} lineup",
-      "youtubeCta": "Watch the Talks on YouTube"
+      "youtube_cta": "Watch the Talks on YouTube"
     },
     "card": {
       "talks": "{count, plural, one {# talk} other {# talks}}",
@@ -36,21 +36,21 @@
     }
   },
   "club": {
-    "titlePrefix": "TED Club",
-    "titleHighlight": "Across Thailand",
+    "title_prefix": "TED Club",
+    "title_highlight": "Across Thailand",
     "lead": "School and university clubs that run their own stage all year round. Every activity is built so one teacher can run it solo, with a guide and slides ready to go.",
-    "logoAlt": "TED Club · TEDxBangkok Youth"
+    "logo_alt": "TED Club · TEDxBangkok Youth"
   },
-  "clubMap": {
+  "club_map": {
     "label": "Map of TED Clubs in Thailand",
-    "defaultTitle": "Provinces with a TED Club",
+    "default_title": "Provinces with a TED Club",
     "back": "Back to the full list",
-    "zoomIn": "Zoom in",
-    "zoomOut": "Zoom out",
-    "zoomReset": "Reset zoom",
-    "statClubs": "Clubs",
-    "statSince": "Since",
-    "clubCount": "{count, plural, one {# club} other {# clubs}}",
+    "zoom_in": "Zoom in",
+    "zoom_out": "Zoom out",
+    "zoom_reset": "Reset zoom",
+    "stat_clubs": "Clubs",
+    "stat_since": "Since",
+    "club_count": "{count, plural, one {# club} other {# clubs}}",
     "since": "Since {year}"
   },
   "speakers": {
@@ -60,8 +60,8 @@
   "volunteers": {
     "title": "Volunteers",
     "lead": "Every part of this event runs on volunteers. Here's the full crew, every team, this year.",
-    "photoPlaceholder": "Volunteer team photo",
-    "rosterTitle": "Volunteer team list",
+    "photo_placeholder": "Volunteer team photo",
+    "roster_title": "Volunteer team list",
     "back": "Back to team list",
     "teams": {
       "producer": "Producer",
@@ -85,7 +85,7 @@
       "speakers": "Speakers",
       "schedule": "Schedule",
       "venue": "Venue",
-      "tedClub": "TED Club",
+      "ted_club": "TED Club",
       "volunteers": "Volunteers",
       "sponsors": "Sponsors",
       "about": "About",
@@ -93,7 +93,7 @@
       "contact": "Contact"
     },
     "copyright": "© 2026 TEDxBangkok Youth",
-    "logoAlt": "TEDxBangkok Youth",
+    "logo_alt": "TEDxBangkok Youth",
     "disclaimer": "This independent TEDx event is operated under license from TED."
   },
   "event": {
@@ -102,19 +102,19 @@
       "photos": "Photos",
       "talks": "Talks",
       "watch": "Watch",
-      "watchSuffix": " All"
+      "watch_suffix": " All"
     },
     "meta": {
       "date": "Event date",
       "venue": "Venue",
       "talks": "Number of talks",
-      "talksValue": "{count, plural, one {# talk} other {# talks}}"
+      "talks_value": "{count, plural, one {# talk} other {# talks}}"
     },
     "cta": {
-      "watchAll": "Watch All Talks on YouTube",
+      "watch_all": "Watch All Talks on YouTube",
       "photos": "Event Photos"
     },
-    "coverPlaceholder": "Cover photo for {year}",
+    "cover_placeholder": "Cover photo for {year}",
     "speakers": {
       "title": "{count, plural, one {# voice} other {# voices}} on stage in {year}",
       "lead": "A name, a face, and one line about who they are — before they step onto the red circle to tell their story."
@@ -126,12 +126,12 @@
     "talks": {
       "title": "Watch the Talks",
       "lead": "Every talk from this year, free on YouTube — no sign-up required.",
-      "playlistCta": "Open the Full Playlist",
-      "comingSoon": "Coming Soon"
+      "playlist_cta": "Open the Full Playlist",
+      "coming_soon": "Coming Soon"
     }
   },
   "common": {
-    "imagePlaceholder": "Image",
-    "languageLabel": "Change language"
+    "image_placeholder": "Image",
+    "language_label": "Change language"
   }
 }

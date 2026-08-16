@@ -42,7 +42,7 @@ export async function TalkList({ speakers }: { speakers: EventSpeaker[] }) {
                   className="size-6 text-brand transition-[translate] duration-140 ease-ink group-hover/row:translate-x-0.5 group-hover/row:-translate-y-0.5"
                 />
               ) : (
-                <span>{t("comingSoon")}</span>
+                <span>{t("coming_soon")}</span>
               )}
             </div>
           </>

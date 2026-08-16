@@ -51,7 +51,7 @@ export function VolunteersRoster() {
   return (
     <Card variant="sticker" className="gap-0">
       <div className={`${header} pb-4`}>
-        <div className="text-xl leading-snug">{t("volunteers.rosterTitle")}</div>
+        <div className="text-xl leading-snug">{t("volunteers.roster_title")}</div>
       </div>
       <div className="overflow-y-auto">
         {teams.map((team, i) => (

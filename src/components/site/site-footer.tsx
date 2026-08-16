@@ -18,7 +18,7 @@ export async function SiteFooter() {
         <div className="flex flex-col gap-4">
           <Image
             src="/assets/logos/tedxbangkokyouth-lockup-white.png"
-            alt={t("logoAlt")}
+            alt={t("logo_alt")}
             width={259}
             height={40}
             className="h-10 w-auto self-start object-contain"

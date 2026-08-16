@@ -80,7 +80,7 @@ export function SiteNavLogo({
   alt,
 }: {
   href: string;
-  /** Real copy — pass the `nav.homeAlt` translation from the caller. */
+  /** Real copy — pass the `nav.home_alt` translation from the caller. */
   alt: string;
 }) {
   const logo = (

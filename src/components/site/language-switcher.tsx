@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
  * Display order is fixed rather than current-first, so the pair doesn't
  * swap places when the language changes. The visible labels are the ISO
  * codes, which read the same in either language and so aren't messages;
- * the group carries `common.languageLabel` for screen readers.
+ * the group carries `common.language_label` for screen readers.
  *
  * These are real links, not buttons: `usePathname` here is next-intl's,
  * which returns the path with the locale prefix stripped, and `Link`
@@ -45,7 +45,7 @@ export function LanguageSwitcher() {
   return (
     <div
       role="group"
-      aria-label={t("languageLabel")}
+      aria-label={t("language_label")}
       className="flex items-center gap-1.5 text-sm leading-normal font-medium"
     >
       {LOCALE_ORDER.map((locale, i) => (

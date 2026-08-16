@@ -15,7 +15,7 @@ type ImageSlotProps = {
  * Placeholder image drop-zone, ported from the design's `<image-slot>`
  * web component. Renders a dashed frame with a caption until a real
  * asset is wired in. `placeholder` is optional and falls back to the
- * generic `common.imagePlaceholder` message — this is a client component
+ * generic `common.image_placeholder` message — this is a client component
  * (rather than requiring every caller to pass the translation down) so
  * server components can render it directly without doing that lookup
  * themselves.
@@ -26,7 +26,7 @@ export function ImageSlot({
   className,
 }: ImageSlotProps) {
   const t = useTranslations("common");
-  const label = placeholder ?? t("imagePlaceholder");
+  const label = placeholder ?? t("image_placeholder");
 
   return (
     <div

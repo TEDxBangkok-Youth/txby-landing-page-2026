@@ -170,7 +170,7 @@ export const footerGroups: Array<{
   {
     key: "community",
     items: [
-      { key: "tedClub", href: "#" },
+      { key: "ted_club", href: "#" },
       { key: "volunteers", href: "#" },
       { key: "sponsors", href: "#" },
     ],
@@ -220,7 +220,7 @@ export const CLUBS: Club[] = [
  * here instead of moving into src/lib/content/. Unlike the other accessors
  * this one takes no locale: each record already carries both its Thai
  * (`city`) and English (`en`) name, and club-map.tsx picks the one to show
- * and counts up from `clubMap.clubCount` at render time.
+ * and counts up from `club_map.club_count` at render time.
  */
 export function getClubs(): Club[] {
   return CLUBS;

@@ -33,7 +33,7 @@ export async function EventNav({
       links={sectionLinks}
       brand={
         <>
-          <SiteNavLogo href="/" alt={tNav("homeAlt")} />
+          <SiteNavLogo href="/" alt={tNav("home_alt")} />
           {/* On a narrow screen the lockup and the playlist button take
               the whole bar; the hero repeats the year immediately below. */}
           <span
@@ -55,7 +55,7 @@ export async function EventNav({
                     two words instead of a single space. */}
                 <span>
                   {t("watch")}
-                  <span className="hidden sm:inline">{t("watchSuffix")}</span>
+                  <span className="hidden sm:inline">{t("watch_suffix")}</span>
                 </span>
               </a>
             </Button>

@@ -89,15 +89,15 @@ async function Hero({ locale }: { locale: Locale }) {
           <div
             className={`flex items-center gap-[1cqw] ${type.line1} leading-[1.12] tracking-[-0.01em]`}
           >
-            <span>{t("titleLine1")}</span>
+            <span>{t("title_line1")}</span>
             <span className="inline-block rotate-[-1.5deg] rounded-[1.2cqw] border-[0.38cqw] border-line-strong bg-tg-cyan px-[1cqw] pb-[0.5cqw]">
-              {t("titleHighlight")}
+              {t("title_highlight")}
             </span>
           </div>
           <div
             className={`mt-[-0.4cqw] ml-[9.8cqw] ${type.line2} leading-[1.3] tracking-[0.01em] text-transparent ${type.stroke}`}
           >
-            {t("titleLine2")}
+            {t("title_line2")}
           </div>
         </div>
 
@@ -110,7 +110,7 @@ async function Hero({ locale }: { locale: Locale }) {
         />
         <Image
           src="/assets/thaigredient/bowl-mix-hero.png"
-          alt={t("bowlAlt")}
+          alt={t("bowl_alt")}
           width={2557}
           height={1352}
           preload
@@ -118,7 +118,7 @@ async function Hero({ locale }: { locale: Locale }) {
         />
         <Image
           src="/assets/thaigredient/tag-price-67.png"
-          alt={t("priceTagAlt")}
+          alt={t("price_tag_alt")}
           width={480}
           height={393}
           className="absolute top-[48cqw] left-[70cqw] h-auto w-[12cqw] rotate-[-3deg]"
@@ -146,9 +146,9 @@ async function Gallery({ locale }: { locale: Locale }) {
         leadMeasure="max-w-[520px]"
         title={
           <>
-            {t("titleLine1")}
+            {t("title_line1")}
             <br />
-            {t("titleLine2")}
+            {t("title_line2")}
           </>
         }
         lead={t("lead")}
@@ -174,7 +174,7 @@ async function Gallery({ locale }: { locale: Locale }) {
           >
             <Image
               src="/assets/gallery-2025-cover.jpg"
-              alt={t("featured.coverAlt", { year: FEATURED_YEAR })}
+              alt={t("featured.cover_alt", { year: FEATURED_YEAR })}
               fill
               sizes="(max-width: 768px) 100vw, 600px"
               className="object-cover"
@@ -212,7 +212,7 @@ async function Gallery({ locale }: { locale: Locale }) {
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  {t("featured.youtubeCta")}
+                  {t("featured.youtube_cta")}
                 </a>
               </Button>
             ) : null}
@@ -261,9 +261,9 @@ async function Club({ locale }: { locale: Locale }) {
         leadMeasure="max-w-[560px]"
         title={
           <>
-            {t("titlePrefix")}{" "}
+            {t("title_prefix")}{" "}
             <span className="relative inline-block text-brand">
-              {t("titleHighlight")}
+              {t("title_highlight")}
               <Image
                 src="/assets/tedclub/scribbles/underline-red.svg"
                 alt=""
@@ -279,7 +279,7 @@ async function Club({ locale }: { locale: Locale }) {
         aside={
           <Image
             src="/assets/tedclub/logo.png"
-            alt={t("logoAlt")}
+            alt={t("logo_alt")}
             width={512}
             height={507}
             className="h-35 w-auto shrink-0"
@@ -336,7 +336,7 @@ async function Volunteers({ locale }: { locale: Locale }) {
           data-surface="inverse"
           className="relative min-w-0 overflow-hidden rounded-card border-sticker border-line-strong bg-surface-card shadow-card"
         >
-          <ImageSlot shape="rect" placeholder={t("photoPlaceholder")} />
+          <ImageSlot shape="rect" placeholder={t("photo_placeholder")} />
         </div>
         <VolunteersRoster />
       </div>
