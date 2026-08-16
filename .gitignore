@@ -45,3 +45,6 @@ next-env.d.ts
 # and their scripts otherwise flood `pnpm lint` with warnings
 .agents/skills/impeccable/
 .claude/skills/impeccable/
+
+# i18n sync artifact — downloaded fresh by scripts/i18n-sync.sh each run
+/i18n-translations.csv
