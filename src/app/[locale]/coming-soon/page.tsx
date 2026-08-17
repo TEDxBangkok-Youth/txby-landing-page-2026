@@ -124,27 +124,20 @@ export default async function ComingSoonPage(
           // The stage owns the flank geometry, and both the walls and the
           // type read it from here:
           //
-          //   --wall-w      how much of each side a wall covers
-          //   --wall-bleed  how far a wall hangs off the screen edge
+          //   --wall-w      the flank each wall occupies, edge to edge
+          //   --tilt-sweep  width surrendered inside it so the leaning
+          //                 column never touches the flank's edges
           //   --gutter      the clear band between a wall and the type
           //
-          // The walls are drawn from the first two; the stage's own inline
-          // padding is the first plus the third. So widening a wall walks
-          // the headline inward with it, rather than quietly sliding under
-          // it because two numbers stopped agreeing.
-          //
-          // A wall's footprint is exactly --wall-w, tilt included: the lean
-          // happens inside a box clipped to that width, so the gutter is
-          // free to be a plain design decision instead of an allowance for
-          // how far a rotated rectangle reaches. See ingredient-wall.tsx.
-          "[--wall-w:clamp(66px,15vw,210px)]",
+          // A wall's footprint is exactly --wall-w and nothing crosses it:
+          // no bleed off the screen edge, and no cards clipped on the inner
+          // side. The stage's own inline padding is --wall-w plus --gutter,
+          // so widening a flank walks the headline inward with it rather
+          // than quietly sliding under it because two numbers stopped
+          // agreeing.
+          "[--wall-w:clamp(84px,15vw,220px)]",
+          "[--tilt-sweep:3.5vh]",
           "[--gutter:clamp(20px,4vw,64px)]",
-          // The bleed is the wireframe's tiles crossing the frame edge, and
-          // it is a desktop luxury: on a phone a wall is one column wide, so
-          // bleeding it would crop a fifth off the only tile you can see and
-          // the wall would read as fragments rather than as a grid. Whole
-          // tiles first; the flourish once there is room for it.
-          "[--wall-bleed:0px] min-[860px]:[--wall-bleed:clamp(14px,3.5vw,52px)]",
           "px-[calc(var(--wall-w)+var(--gutter))]",
           // Vertical rhythm: the headline at the top, the bowl at the
           // bottom, and the middle of the screen left clear between them,

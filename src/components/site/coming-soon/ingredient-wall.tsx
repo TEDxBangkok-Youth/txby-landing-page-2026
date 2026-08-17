@@ -3,34 +3,28 @@ import type { CSSProperties } from "react";
 
 import { toneField } from "@/components/site/tones";
 import type {
-  IngredientColumn,
   IngredientTile,
   IngredientWall as Wall,
 } from "@/lib/content/coming-soon";
 import { cn } from "@/lib/utils";
 
 /**
- * One of the two walls of Thaigredient ingredient tiles flanking the
- * Coming Soon headline: columns of framed paper-cut art drifting
- * forever, each at its own tempo, the whole wall leaning a few degrees.
+ * One of the two walls flanking the Coming Soon headline: a single column
+ * of framed paper-cut cards drifting forever, the left one travelling up
+ * and the right one down, so the pair counter-slides against itself
+ * instead of sliding as one slab.
  *
- * The left wall travels up and the right one travels down, so the pair
- * counter-slides against itself instead of sliding as one slab.
+ * Purely decorative — the page's meaning is in the headline and the bowl —
+ * so the whole wall is hidden from assistive tech and every card carries
+ * an empty alt rather than sixteen near-meaningless labels.
  *
- * Purely decorative — the page's meaning is in the headline and the
- * bowl — so the whole wall is hidden from assistive tech and every tile
- * carries an empty alt rather than twelve near-meaningless labels.
- *
- * Each column's tiles are rendered `COPIES` times, and the `wall-up`
- * keyframes move the column by exactly one copy. When the animation
- * restarts, the next copy is sitting precisely where the previous one
- * began, so the jump is invisible. This is why the columns must not use
- * flex `gap` for their spacing — the gap between copies would be one
- * short and the seam would show. Each tile carries its own `mb-*`
- * instead, making every tile exactly `height + gap` tall.
- *
- * This is not CSS multi-column: `columns-2` balances its own content and
- * cannot animate each column separately.
+ * The card list is rendered `COPIES` times and the `wall-up` keyframes
+ * move the column by exactly one copy. When the animation restarts, the
+ * next copy is sitting precisely where the previous one began, so the jump
+ * is invisible. This is why the column must not use flex `gap` for its
+ * spacing — the gap between copies would be one short and the seam would
+ * show. Each card carries its own `mb-*` instead, making every card
+ * exactly `height + gap` tall.
  */
 export function IngredientWall({
   wall,
@@ -39,126 +33,86 @@ export function IngredientWall({
   wall: Wall;
   side: "left" | "right";
 }) {
-  const [outer, inner] = wall.columns;
-
   return (
     <div
       aria-hidden
       className={cn(
-        // The wall's FOOTPRINT — and it is exactly `--wall-w` wide plus the
-        // bleed it hangs off the screen edge, no more. `--wall-w` is set by
-        // the stage, not here, because the stage's own inline padding is
-        // measured from the same value; widening a wall in one place would
-        // otherwise slide it under the headline without anything saying so.
-        //
-        // This box clips, and the tilt happens INSIDE it (see below). That
-        // is the whole reason the footprint is knowable. Tilting this box
-        // instead would make the wall reach inward by half its height times
-        // sin(tilt) — about 20px on a phone, 32px on a tall desktop window
-        // — an excursion that grows with the viewport's *height*, so the
-        // gutter beside it would have to carry a `vh` term to survive it,
-        // and on a 390px screen that term plus the wall ate 60% of the
-        // width. Clipping here costs a straight edge on the inner side and
-        // buys a layout that composes.
-        "pointer-events-none absolute inset-y-0 overflow-hidden",
-        "w-[calc(var(--wall-w)+var(--wall-bleed))]",
-        side === "left"
-          ? "left-[calc(-1*var(--wall-bleed))]"
-          : "right-[calc(-1*var(--wall-bleed))]",
-        // Fades top and bottom so tiles dissolve at both edges instead of
+        // The flank: exactly `--wall-w` wide, flush to the screen edge,
+        // clipping whatever runs past it. `--wall-w` is set by the stage,
+        // not here, because the stage's own inline padding is measured from
+        // the same value — widening a wall in one place would otherwise
+        // slide it under the headline with nothing to say so.
+        "pointer-events-none absolute inset-y-0 w-[var(--wall-w)] overflow-hidden",
+        side === "left" ? "left-0" : "right-0",
+        // Fades top and bottom so cards dissolve at both edges instead of
         // being guillotined where they meet the header row and the tagline
         // band.
         //
         // `black` here is a stencil, not a colour: only the alpha of a mask
         // is read, so this says "opaque" and no theme has any say over it.
         // Nothing to route through a token.
-        "[mask-image:linear-gradient(to_bottom,transparent_0,black_10%,black_90%,transparent_100%)]",
-        "[-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_10%,black_90%,transparent_100%)]"
+        "[mask-image:linear-gradient(to_bottom,transparent_0,black_9%,black_91%,transparent_100%)]",
+        "[-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_9%,black_91%,transparent_100%)]"
       )}
     >
-      {/* The tilted content, inflated past the clip on every side so the
-          lean cannot swing a bare corner into view. A box rotated by θ
-          inside a clip cut to its own size uncovers `H·sinθ/2`
-          horizontally and `W·sinθ/2` vertically; the horizontal term
-          tracks the wall's height, hence the `vh`, and the vertical one is
-          small because a wall is never wide.
+      {/* The leaning column, held clear of the flank's edges by exactly the
+          distance its lean can carry it.
 
-          The horizontal inflation is then given straight back as padding.
-          Without that the columns inherit the extra width — they are
-          `flex-1` of whatever box holds them — so each tile is drawn wider
-          than the wall and the clip takes a slice off its inner edge. The
-          symptom is a wall of half-tiles, worst on a phone where a wall is
-          one column wide and the slice is a fifth of the only tile there
-          is. One variable sets both halves so they cannot disagree. */}
+          This inset is the whole reason cards are no longer clipped. A box
+          rotated by θ about its centre displaces a point at distance d from
+          that centre sideways by d·sinθ, so over a visible band as tall as
+          the viewport the column sweeps ±(V/2)·sinθ. Run the column at the
+          full flank width and that sweep pushes its corners straight
+          through the clip, taking a slice off every card near the top and
+          bottom — which is what a full-height 3deg lean was doing before.
+
+          `--tilt-sweep` is that budget, in `vh` because the sweep scales
+          with the viewport's HEIGHT and not its width. Half goes to each
+          side. It is deliberately generous for a 1.5deg lean: being wrong
+          here costs a visibly chopped card, being over-generous costs a
+          slightly narrower one. */}
       <div
         className={cn(
-          "absolute -inset-y-4 [--tilt-pad:calc(3vh+16px)]",
-          "-left-[var(--tilt-pad)] -right-[var(--tilt-pad)]",
-          "px-[var(--tilt-pad)]",
-          "flex items-start gap-x-2 min-[860px]:gap-x-3",
+          "absolute inset-x-[calc(var(--tilt-sweep)/2)] inset-y-0",
           wall.tilt
         )}
       >
-        {/* The outer column is the one that bleeds off the edge. On the
-            mobile frame the wall is barely wider than one column, so the
-            inner one is dropped rather than squeezed — two 40px columns
-            read as noise, and a single wider column also gives the
-            marquee a taller copy to cover the viewport with. */}
-        <Column column={outer} />
-        <Column column={inner} className="hidden min-[860px]:block" />
+        <div
+          className={cn("w-full", wall.column.marquee)}
+          // What the keyframes divide the travel by, so the distance and
+          // the number of copies rendered cannot drift apart: change COPIES
+          // and the animation follows. Inline is safe for this one — it is
+          // a length the animation reads, not the animation itself, so it
+          // is not what the reduced-motion rule has to override.
+          style={{ "--wall-copies": COPIES } as CSSProperties}
+        >
+          {Array.from({ length: COPIES }).flatMap((_, copy) =>
+            wall.column.tiles.map((tile, position) => (
+              <Card key={`${copy}-${position}`} tile={tile} />
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
 }
 
-function Column({
-  column,
-  className,
-}: {
-  column: IngredientColumn;
-  className?: string;
-}) {
-  return (
-    <div
-      className={cn("flex-1", column.marquee, className)}
-      // `--wall-copies` is what the keyframes divide by, so the travel
-      // distance and the number of copies can never drift apart: change
-      // COPIES and the animation follows. Inline is safe for this one —
-      // it is a length the animation reads, not the animation itself,
-      // so it is not what the reduced-motion rule has to override.
-      style={{ "--wall-copies": COPIES } as CSSProperties}
-    >
-      {Array.from({ length: COPIES }).flatMap((_, copy) =>
-        column.tiles.map((tile, position) => (
-          <Tile key={`${copy}-${position}`} tile={tile} />
-        ))
-      )}
-    </div>
-  );
-}
-
 /**
- * How many times each column's list is repeated.
+ * How many times the card list is repeated.
  *
- * Five, which is more than it looks. The animation travels one copy, so
- * what has to cover the wall is the remaining `COPIES - 1`. A copy is
- * only about 3.7 column-widths tall and a column is half of a wall that
- * is at most 210px wide, so one copy tops out around 460px while the wall
- * is as tall as the viewport. Four spare copies are what keeps a
- * 1440px-tall window from running out of tiles at the bottom; three
- * clears an 800px one but not that.
+ * Three. The animation travels one copy, so what has to cover the flank is
+ * the remaining `COPIES - 1`. A copy is about 7.3 card-widths tall now that
+ * a wall is one card wide instead of two — roughly 1300px on a desktop
+ * frame against a flank of 670 — so two copies clear a laptop on their
+ * own, and the third is what covers a 1440px-tall window, where the flank
+ * grows at the same time as the cards get narrower.
  *
  * A gap at the foot of a wall is the failure this prevents, and it only
- * appears on tall windows — so if these numbers are ever retuned, check
- * them by measuring travel against wall height on a tall viewport, not by
- * looking at a laptop.
- *
- * The cost is bounded: only the copies actually on screen are fetched
- * (`next/image` lazy-loads by default, and every copy after the first
- * hits a warm cache for the same URL), so this buys height in DOM nodes
- * rather than in bytes.
+ * appears on tall windows — so if these numbers are retuned, check them by
+ * measuring travel against flank height on a tall viewport, not by looking
+ * at a laptop.
  */
-const COPIES = 5;
+const COPIES = 3;
 
 /** Paper is a surface, not one of the five accent tones. */
 function fieldClass(tone: IngredientTile["tone"]) {
@@ -166,18 +120,19 @@ function fieldClass(tone: IngredientTile["tone"]) {
   return tone === "paper" ? "bg-tg-paper" : toneField[tone];
 }
 
-function Tile({ tile }: { tile: IngredientTile }) {
+function Card({ tile }: { tile: IngredientTile }) {
   return (
     <div
       className={cn(
         "relative flex items-center justify-center overflow-hidden",
-        // The gap between tiles lives here, not on the column — the
+        // The gap between cards lives here, not on the column — the
         // marquee's seamlessness depends on it.
-        "mb-2 min-[860px]:mb-3",
+        "mb-3 min-[860px]:mb-4",
         // The sticker frame: ink border, hard offset shadow, no blur.
         "border-sticker border-line-strong shadow-control min-[860px]:shadow-card",
         "rounded-lg min-[860px]:rounded-sticker",
         tile.ratio,
+        tile.tilt,
         fieldClass(tile.tone)
       )}
     >
@@ -187,7 +142,7 @@ function Tile({ tile }: { tile: IngredientTile }) {
             src={tile.src}
             alt=""
             fill
-            sizes={TILE_SIZES}
+            sizes={CARD_SIZES}
             className="object-contain"
           />
         </div>
@@ -196,7 +151,7 @@ function Tile({ tile }: { tile: IngredientTile }) {
           src={tile.src}
           alt=""
           fill
-          sizes={TILE_SIZES}
+          sizes={CARD_SIZES}
           className="object-cover"
         />
       )}
@@ -205,9 +160,8 @@ function Tile({ tile }: { tile: IngredientTile }) {
 }
 
 /**
- * A tile is half a wall on the desktop frame and a whole one on mobile,
- * and a wall is 21vw — so these are the two real widths. Viewport-
- * relative rather than a fixed px hint: the tiles scale with the screen,
- * so a fixed hint under-serves the art on large displays.
+ * A card is as wide as its flank less the lean's budget, and a flank is
+ * 15vw. Viewport-relative rather than a fixed px hint: the cards scale
+ * with the screen, so a fixed hint under-serves the art on large displays.
  */
-const TILE_SIZES = "(min-width: 860px) 11vw, 21vw";
+const CARD_SIZES = "15vw";
