@@ -54,6 +54,60 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Coming Soon — the ingredient walls' marquee.
+
+   Each column renders its tile list --wall-copies times and travels
+   exactly one copy, so the next copy arrives where the previous one
+   started and the loop has no seam. The count is read from the
+   element rather than baked in here, so the travel distance cannot
+   drift out of step with how many copies the component renders.
+
+   The seam only stays hidden while every tile carries its gap as
+   margin-bottom rather than the column using `gap`: with `gap`, the
+   space between copies is one short and the seam jumps. See
+   coming-soon/ingredient-wall.tsx.
+
+   The left wall plays this forwards (travelling up) and the right
+   wall plays it `reverse` (travelling down) — played backwards it
+   *is* the downward loop, and it stays seamless for the same
+   reason, because the two ends are one whole copy apart.
+
+   The reduced-motion query at the bottom of this file stops it.
+   ───────────────────────────────────────────────────────────── */
+@keyframes wall-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% / var(--wall-copies)));
+  }
+}
+
+/* The tagline band at the foot of the Coming Soon screen: identical
+   runs in a max-content row travelling exactly one run, so the next
+   run arrives where the last one started and the loop has no seam.
+
+   Same shape as wall-up above, and for the same reason — the travel
+   is divided by the number of runs the component rendered, read off
+   the element, so the two cannot drift apart.
+
+   Why the count matters beyond the seam: at the end of a cycle the
+   row has slid one run to the left, so what still covers the band is
+   the OTHER runs. Coverage needs (runs - 1) × runWidth >= band width.
+   With two runs that reduces to "one run must be wider than the
+   viewport", which quietly fails on a wide screen — a 1278px run in a
+   1280px band leaves 2px of bare pink at the loop point. The count is
+   set high enough that the margin is not close. */
+@keyframes tg-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% / var(--marquee-runs)));
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
    Club map — the province SVG is fetched at runtime, so its paths
    cannot carry Tailwind classes. Everything else in the map is
    ordinary JSX; these are the only rules left.

@@ -130,6 +130,15 @@
       "comingSoon": "Coming Soon"
     }
   },
+  "comingSoon": {
+    "meta": {
+      "title": "Coming soon · TEDxBangkok Youth 2026",
+      "description": "TEDxBangkok Youth 2026 is on its way. The theme: Secret Thaigredient — everyday Thai life, remixed."
+    },
+    "heading": "Coming soon — TEDxBangkok Youth 2026: Secret Thaigredient",
+    "logoAlt": "TEDxBangkok Youth",
+    "lab": "Lab no. 2026"
+  },
   "common": {
     "imagePlaceholder": "Image",
     "languageLabel": "Change language"

@@ -65,6 +65,11 @@
      Club's and the main CI's curves were near-identical; one
      token replaces both. */
   --ease-ink: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* The Coming Soon headline's 3D flip. Slower in and out than
+     --ease-ink, which is what makes it read as a sticker turning
+     over rather than a UI element easing. */
+  --ease-flip: cubic-bezier(0.62, 0.02, 0.28, 1);
 }
 
 /* ── Border widths ───────────────────────────────────────────

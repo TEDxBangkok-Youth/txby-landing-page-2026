@@ -168,6 +168,30 @@ leave them out of the catalog.
 ชื่อจริง = full name) that does not carry into English. Rewrite it for an
 English reader rather than translating it literally.
 
+## `comingSoon` — the standalone teaser (`app/[locale]/coming-soon/page.tsx`)
+
+| Key | Value | Notes |
+|---|---|---|
+| `comingSoon.meta.title` | `Coming soon · TEDxBangkok Youth 2026` | overrides the root layout's title |
+| `comingSoon.meta.description` | — | real SEO copy, not a translation of the headline |
+| `comingSoon.heading` | `Coming soon — TEDxBangkok Youth 2026: Secret Thaigredient` | the `sr-only` `<h1>` |
+| `comingSoon.logoAlt` | `TEDxBangkok Youth` | |
+| `comingSoon.lab` | `Lab no. 2026` | the rotated sticker, top right |
+
+**Why the headline itself is not here.** The visible headline is a sticker that
+flips between English and Thai on a five-second timer, so *both* languages are
+on screen in the same session whichever locale is active — picking one by
+locale would delete half the design. Both faces, and the edition theme line
+under them, live in `src/lib/content/coming-soon.ts`. The locale decides only
+which face shows first. `comingSoon.heading` exists because that flipping text
+is `aria-hidden`: a screen reader needs one stable headline in the active
+locale rather than a label that rewrites itself every five seconds, so this key
+is the accessible counterpart, not a duplicate.
+
+`comingSoonTagline` ("MIX THE ORDINARY, CREATE THE EXTRAORDINARY") is also not
+a message — it is English in both locales, because it is a lockup rather than a
+sentence.
+
 ## `meta` — document metadata (`generateMetadata` in the root layout)
 
 | Key | Current Thai source | Notes |

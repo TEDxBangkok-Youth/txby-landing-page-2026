@@ -130,6 +130,15 @@
       "comingSoon": "เร็ว ๆ นี้"
     }
   },
+  "comingSoon": {
+    "meta": {
+      "title": "เร็ว ๆ นี้ · TEDxBangkok Youth 2026",
+      "description": "TEDxBangkok Youth 2026 กำลังจะมาถึง ธีมของปีนี้คือ ส่วนผสมลับ ฉบับคนไทย วัตถุดิบธรรมดาในชีวิตแบบไทย ๆ ที่ผสมใหม่ให้ไม่เหมือนเดิม"
+    },
+    "heading": "เร็ว ๆ นี้ — TEDxBangkok Youth 2026: ส่วนผสมลับ ฉบับคนไทย",
+    "logoAlt": "TEDxBangkok Youth",
+    "lab": "Lab no. 2026"
+  },
   "common": {
     "imagePlaceholder": "รูปภาพ",
     "languageLabel": "เปลี่ยนภาษา"
