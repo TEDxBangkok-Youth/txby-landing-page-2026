@@ -54,6 +54,31 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Coming Soon — the ingredient wall's upward marquee.
+
+   Each column renders its tile list --wall-copies times and travels
+   exactly one copy, so the next copy arrives where the previous one
+   started and the loop has no seam. The count is read from the
+   element rather than baked in here, so the travel distance cannot
+   drift out of step with how many copies the component renders.
+
+   The seam only stays hidden while every tile carries its gap as
+   margin-bottom rather than the column using `gap`: with `gap`, the
+   space between copies is one short and the seam jumps. See
+   ingredient-wall.tsx.
+
+   The reduced-motion query at the bottom of this file stops it.
+   ───────────────────────────────────────────────────────────── */
+@keyframes wall-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% / var(--wall-copies)));
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
    Club map — the province SVG is fetched at runtime, so its paths
    cannot carry Tailwind classes. Everything else in the map is
    ordinary JSX; these are the only rules left.

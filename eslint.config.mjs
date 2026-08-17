@@ -59,7 +59,16 @@ const eslintConfig = defineConfig([
   {
     // The club map positions its tooltip at the pointer, which can
     // only be known at runtime.
-    files: ["src/components/site/club-map.tsx"],
+    //
+    // The Coming Soon headline accumulates its flip angle (180deg,
+    // 360deg, 540deg, …) rather than toggling between two values, so
+    // there is no finite set of classes to switch between. Its timing
+    // and easing are still tokens (--ease-flip); only the angle is
+    // inline.
+    files: [
+      "src/components/site/club-map.tsx",
+      "src/components/site/coming-soon-flip.tsx",
+    ],
     rules: { "no-restricted-syntax": "off" },
   },
 ]);
