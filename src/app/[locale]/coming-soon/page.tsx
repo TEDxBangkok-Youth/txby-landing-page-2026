@@ -84,7 +84,10 @@ export default async function ComingSoonPage(
           alt={t("logoAlt")}
           width={2849}
           height={440}
-          priority
+          // Eager, not preloaded: the brand mark has to be there on first
+          // paint rather than fading in late, but the bowl is this page's
+          // LCP element and preloading two images only makes them compete.
+          loading="eager"
           // The red lockup, not the white one — white reads badly on the
           // yellow field.
           className="h-auto w-[clamp(112px,16vw,196px)]"

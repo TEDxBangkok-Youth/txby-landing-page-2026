@@ -152,7 +152,7 @@ export type IngredientWall = {
  * just down a column.
  *
  * Sixteen is also all there is. The set has eighteen usable pieces, and
- * two are spoken for elsewhere on this screen: `bowl-rooster` is the bowl
+ * two are spoken for elsewhere on this screen: `bowl-mix-hero` is the bowl
  * at the centre and `burst-blue` is the corner burst. Putting either in a
  * wall as well turns the centrepiece into wallpaper. So the walls are
  * eight cards deep because that is what the art divides into, not because
@@ -239,9 +239,11 @@ export const ingredientWalls: readonly [IngredientWall, IngredientWall] = [
       marquee: "animate-[wall-up_72s_linear_infinite_reverse]",
       tiles: [
         {
-          // A wide crop of the hero bowl — the asset is 2557×1352, so it
-          // needs a tile shaped like it.
-          src: "/assets/thaigredient/bowl-mix-hero.png",
+          // The rooster bowl, which used to be the centrepiece and traded
+          // places with the hero bowl when the centre switched to the
+          // landing page's art. A wide, shallow bowl, so it takes a tile
+          // shaped like one.
+          src: "/assets/thaigredient/bowl-rooster.png",
           tone: "cyan",
           ratio: "aspect-[220/160]",
           box: "h-full w-[86%]",
