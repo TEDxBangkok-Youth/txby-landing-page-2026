@@ -27,76 +27,89 @@ export const eventsEn: LocalizedEventYear[] = [
     coverAlt: "Atmosphere at TEDxBangkok Youth 2025",
     speakers: [
       {
-        nickname: "Poon",
-        fullName: "Poon Ariyawong",
-        oneLiner: "The back-row kid who built a whole world out of losing.",
-        talkTitle: "The Game That Taught Me How to Lose",
+        nickname: "JangJang",
+        fullName: "Jantarapim Sungnimit",
+        oneLiner:
+          "A girl who wants us to look at the \"dinner table\" again — not just a place to set plates, but a place to set a family's trust. Sometimes the understanding we've searched for our whole lives starts with sitting back down at that same table.",
+        talkTitle: "Family Ties",
       },
       {
-        nickname: "Yada",
-        fullName: "Yada Techawiboon",
-        oneLiner: "The girl who went out to measure air everyone said was invisible.",
-        talkTitle: "The Dust We All Breathe",
+        nickname: "Khunpol",
+        fullName: "Khunpol Charoenlapnumchai",
+        oneLiner:
+          "A young person who believes finding yourself isn't a race, but growing at your own pace — so we can pause, reflect, and move forward with understanding.",
+        talkTitle: "Finding Yourself",
       },
       {
-        nickname: "Pim",
-        fullName: "Pimchanok Chotiwat",
-        oneLiner: "The nursing student who learned to care for others before she learned to rest.",
-        talkTitle: "Caring for Everyone Except Myself",
+        nickname: "Khaimoog",
+        fullName: "Chananya Lertwatthanamongkol",
+        oneLiner:
+          "From a girl who grew up amid stage lights and expectations, to learning to see her own worth in every small step of growing up.",
+        talkTitle: "Seeing My Own Worth, Right Now",
       },
       {
-        nickname: "Kan",
-        fullName: "Kan Sriworakul",
-        oneLiner: "The boy who hears melody in the noise everyone else calls annoying.",
-        talkTitle: "Noise Can Be Music Too",
+        nickname: "Paint",
+        fullName: "Warintorn Sengsuwan",
+        oneLiner:
+          "A young person who believes in the power of \"teachers\" and stands up to defend the value of a profession that's too often overlooked.",
+        talkTitle: "Teacher Empowerment",
       },
       {
-        nickname: "Nich",
-        fullName: "Oranicha Boonmak",
-        oneLiner: "An 18-year-old photographer chasing the city nobody wants to photograph.",
-        talkTitle: "The City Nobody Photographs",
+        nickname: "Mookmix",
+        fullName: "Natcha Boonroj",
+        oneLiner:
+          "A 'star conservationist' who wants the stars to stay in Thailand's sky, because she believes city people can still 'see' the stars — if we all help.",
+        talkTitle: "Conserving the Stars",
       },
       {
-        nickname: "Tam",
-        fullName: "Teerat Nilkamhaeng",
-        oneLiner: "The kid who grew up with siren sounds and other people's first minutes of life.",
-        talkTitle: "The First Twelve Minutes",
+        nickname: "Oon-Oon",
+        fullName: "Termoon Sanpakaew",
+        oneLiner:
+          "A 20-year-old who once survived because of \"books,\" and learned that reading doesn't just give you \"knowledge\" — it adds to \"life\" itself.",
+        talkTitle: "Preserving the Reading Culture",
       },
       {
-        nickname: "Maprang",
-        fullName: "Paweenuch Thongprasert",
-        oneLiner: "A girl who grew up under stage lights and everyone's expectations.",
-        talkTitle: "Laughing Before the Hurt Was Over",
+        nickname: "Saint",
+        fullName: "Phoomphat Wilachuenphon",
+        oneLiner:
+          "A young person who grew up inside the \"boxes\" others drew, to the day he learned that being yourself starts with daring to step outside them and question them.",
+        talkTitle: "Self Love / LGBTQ+",
+      },
+
+      {
+        nickname: "Bamboo",
+        fullName: "Onwara Thumrongphonsawad",
+        oneLiner:
+          "From someone who never felt confident, always compared to everyone around her, to seeing her own worth again through one simple thing: a compliment.",
+        talkTitle: "A Compliment, a Small Happiness",
       },
       {
-        nickname: "Focus",
-        fullName: "Chayakorn Waiyakit",
-        oneLiner: "A designer stitching a new self out of fabric scraps other people threw away.",
-        talkTitle: "The Scraps That Became Me",
+        nickname: "Faaef",
+        fullName: "Asfan Yusoh",
+        oneLiner:
+          "A young man from Yala who champions \"building an art community,\" believing the power of community can change a city.",
+        talkTitle: "Building an Art Community",
       },
       {
-        nickname: "Ice",
-        fullName: "Nichapat Wongcharoen",
-        oneLiner: "A debater better at losing than winning.",
-        talkTitle: "Losing on Stage Isn't the End",
+        nickname: "Bayla",
+        fullName: "Chanya Somboonvechakarn",
+        oneLiner:
+          "A 13-year-old who picked up the piano at age three, now a young artist who's learned that perfection doesn't come from talent alone.",
+        talkTitle: "Music and Becoming Yourself",
       },
       {
-        nickname: "Prae",
-        fullName: "Passorn Damrongphan",
-        oneLiner: "A girl tired of the old rules, so she rewrote the whole rulebook.",
-        talkTitle: "The Rules I Wrote Myself",
+        nickname: "Unda",
+        fullName: "Kulteera Yordchang",
+        oneLiner:
+          "A girl who grew up in showbiz from a young age, to discovering that the \"performing arts\" are more than beauty — they can truly \"heal\" people.",
+        talkTitle: "The Performing Arts",
       },
       {
-        nickname: "June",
-        fullName: "Kamonchanok Srisawat",
-        oneLiner: "An exchange student who came home to the same house in a city that wasn't the same anymore.",
-        talkTitle: "The Home That Changed While I Was Gone",
-      },
-      {
-        nickname: "Por",
-        fullName: "Supitchaya Thammawat",
-        oneLiner: "The school's daily announcer whose hands still shake every time she picks up the mic.",
-        talkTitle: "The Microphone My Hands Still Shake For",
+        nickname: "Peach",
+        fullName: "Penpitcha Prasongcharon",
+        oneLiner:
+          "A life that once saw only emptiness — she wove faith and her mother's teachings, hidden in the small things she gathered, into a 'safe space' in the present.",
+        talkTitle: "Faith and the Safe Space Woven From My Mother's Teachings",
       },
     ],
     photos: [
