@@ -172,6 +172,7 @@ const SHARED_EVENTS: SharedEventYear[] = [
       { youtubeId: null, duration: "11:08", photo: null },
       { youtubeId: null, duration: "12:24", photo: null },
       { youtubeId: null, duration: "14:03", photo: null },
+      { youtubeId: null, duration: "00:00", photo: null },
     ],
     photos: [
       { src: null, ratio: "video" },

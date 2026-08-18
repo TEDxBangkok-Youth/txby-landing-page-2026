@@ -132,64 +132,80 @@ export const eventsEn: LocalizedEventYear[] = [
       "Ten stories about coming home — a new generation who traveled far to find themselves, only to discover the answer was waiting right where they started.",
     speakers: [
       {
-        nickname: "Um",
-        fullName: "Nattida Pongpipat",
-        oneLiner: "The rice-shop owner's daughter who ran far away and walked herself back.",
-        talkTitle: "Coming Home Before I'd Made It",
+        nickname: "Primus",
+        fullName: "Aritus Lowthammatus",
+        oneLiner:
+          "A young dreamer who believes there's a scientist inside all of us, ready to chase your dreams with a scientist's mind.",
+        talkTitle: "Unleash the Scientist Within You",
       },
       {
-        nickname: "Ball",
-        fullName: "Poramin Sukcharoen",
-        oneLiner: "A kid from the provinces who spent three years learning how to know Bangkok.",
-        talkTitle: "The City That Never Learned My Name",
+        nickname: "Nonny",
+        fullName: "Methawee Chonwilai",
+        oneLiner:
+          "From a 9-year-old YouTuber to a confident influencer — her journey of growing up and building an identity online since childhood.",
+        talkTitle: "The Challenges of Growing Up",
       },
       {
-        nickname: "Nan",
-        fullName: "Sasiwimon Chaiprasert",
-        oneLiner: "The eldest sister who grew up years faster than her age.",
-        talkTitle: "Grown Up Before My Birthday",
+        nickname: "Pach",
+        fullName: "Panpornpach Musika",
+        oneLiner:
+          "A hearing person inviting everyone to see the Deaf community in a new light, for a society that embraces every kind of difference.",
+        talkTitle: "A Hearing Person Who Listens",
       },
       {
-        nickname: "Ta",
-        fullName: "Kittipop Wandee",
-        oneLiner: "A school footballer who stopped running after everyone else's expectations.",
-        talkTitle: "Leaving a Field That Was Never Mine",
+        nickname: "Anus",
+        fullName: "Theerathep Chitlang",
+        oneLiner:
+          "Seeing the world through an anthropological lens, to understand and respect the diversity of life in society.",
+        talkTitle: "Understanding Society Through an Anthropological Lens",
       },
       {
-        nickname: "Im",
-        fullName: "Thanchanok Ruangsri",
-        oneLiner: "A girl who wrote home every week and never mailed a single letter.",
-        talkTitle: "The Letters I Never Sent",
+        nickname: "Angoon",
+        fullName: "Tinthai Bootseeta",
+        oneLiner:
+          "If the Mekong is dying, how will we let it end? It's time for AI and satellite imagery to play a key role in disaster response.",
+        talkTitle: "Navigating Mekong Geopolitical and Climate Crisis with AI Remote Sensing",
       },
       {
-        nickname: "Phum",
-        fullName: "Phumrapee Insuk",
-        oneLiner: "A grandson who started learning his grandmother's dialect one year too late.",
-        talkTitle: "The Language That Left With My Grandmother",
+        nickname: "Toon",
+        fullName: "Preamporn Boonin",
+        oneLiner:
+          "A cartoonist who believes age is no barrier to cartoon art — everyone can access and interpret it in their own way.",
+        talkTitle: "Art of Cartoon",
       },
       {
-        nickname: "Fern",
-        fullName: "Chanisara Boonyong",
-        oneLiner: "An art student who drew her own house over and over until she could remember it right.",
-        talkTitle: "Drawing Home From Memory",
+        nickname: "Big",
+        fullName: "Thananutt Thumthanasiri",
+        oneLiner:
+          "Water Footprints — the invisible imprint every drop of water we consume, at home and in industry, leaves behind.",
+        talkTitle: "The Choices That Makes Tomorrow",
       },
       {
-        nickname: "Korn",
-        fullName: "Thanakorn Apichart",
-        oneLiner: "A boy who changed schools six times before he turned fifteen.",
-        talkTitle: "New Friends Every School Year",
+        nickname: "Ming Ming",
+        fullName: "Isaya Banpalitanon",
+        oneLiner: "Belief is the magic power that drives humans to create and change the world.",
+        talkTitle: "The Magic of Belief",
       },
       {
-        nickname: "Mook",
-        fullName: "Pornchanok Theerawat",
-        oneLiner: "Caught between two cultures, it took her years to realize she didn't have to pick one.",
-        talkTitle: "I Get to Be Both",
+        nickname: "ST",
+        fullName: "Veeraya Sukasem",
+        oneLiner:
+          "A 12-year-old on her road to the Olympics, who believes every dream has a price — and that we all deserve respect for the path we choose.",
+        talkTitle: "GO-lympic",
       },
       {
-        nickname: "Jay",
-        fullName: "Jirayu Sathapornkul",
-        oneLiner: "A boy who was taking care of his parents before he'd even finished high school.",
-        talkTitle: "Head of the Family at Seventeen",
+        nickname: "Minseo",
+        fullName: "Patavee Micha Pattakullaya",
+        oneLiner:
+          "Love doesn't only come from parents — an invitation to explore whether real love might come from within ourselves.",
+        talkTitle: "The Price of Love",
+      },
+      {
+        nickname: "Ting Ting",
+        fullName: "Anunya Siriudomsait",
+        oneLiner:
+          "Life's uncertainty teaches us to love and value ourselves starting today — because when we care for ourselves, life gives back.",
+        talkTitle: "The (Un)Lucky One",
       },
     ],
     photos: [
