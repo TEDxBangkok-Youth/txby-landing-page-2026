@@ -78,7 +78,7 @@ export default async function ComingSoonPage(
         className="pointer-events-none absolute -top-[15%] -left-[9%] z-[1] w-[clamp(150px,22vw,262px)]"
       />
 
-      <header className="relative z-[6] flex items-start justify-between gap-4 px-[clamp(16px,3.2vw,44px)] pt-[clamp(18px,3vw,40px)]">
+      <header className="relative z-[6] flex items-start px-[clamp(16px,3.2vw,44px)] pt-[clamp(18px,3vw,40px)]">
         <Image
           src="/assets/logos/tedxbangkokyouth-lockup-red.png"
           alt={t("logoAlt")}
@@ -94,17 +94,6 @@ export default async function ComingSoonPage(
           // visitor bounced between the two sees one consistent mark.
           className="block h-8.5 w-auto"
         />
-
-        <span
-          className={cn(
-            "flex-none rounded-lg border-sticker border-line-strong bg-tg-paper",
-            "px-[11px] pt-[6px] pb-[7px] font-heading text-[clamp(9px,1.1vw,13px)]",
-            "font-bold leading-none tracking-[0.09em] text-foreground uppercase",
-            "rotate-[2.5deg] shadow-card"
-          )}
-        >
-          {t("lab")}
-        </span>
       </header>
 
       {/* The stage.
