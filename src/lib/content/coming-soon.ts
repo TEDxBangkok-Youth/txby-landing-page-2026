@@ -87,23 +87,32 @@ export type IngredientTile = {
 
 export type IngredientColumn = {
   /**
-   * The column's marquee: one `wall-up` animation, at its own tempo, and
-   * in its own direction. The outer columns travel up and the middle one
-   * runs `reverse` to travel down, so the wall counter-slides against
-   * itself instead of sliding as one slab.
-   *
-   * `reverse` rather than a second set of keyframes: `wall-up` played
-   * backwards *is* the downward loop, and it stays seamless for the same
-   * reason the forward one does — the start and end positions are one
-   * whole copy apart, so the two are visually identical and the restart
-   * is invisible whichever way it is played.
+   * The column layout's tempo (side by side, 860px up): `wall-up` at this
+   * duration.
    *
    * The three columns are tuned to identical total heights (their tile
    * ratios each sum to 5.33), so these durations translate directly into
    * three similar-but-unequal speeds. Change a tile's ratio and that
    * column's speed changes with it.
    */
-  marquee: string;
+  durationSeconds: number;
+  /**
+   * The row layout's tempo (stacked, below 860px): `wall-left` at this
+   * duration. Kept separate from `durationSeconds` because a row travels
+   * one copy's *width*, not its height — reusing the column's duration
+   * reads as sluggish once the wall is turned on its side.
+   */
+  durationSecondsRow: number;
+  /**
+   * Outer columns travel up (desktop) / left (stacked) forward; the
+   * middle one runs `reverse` so the wall counter-slides against itself
+   * instead of sliding as one slab. `reverse` rather than a second set of
+   * keyframes: `wall-up` played backwards *is* the downward loop, and it
+   * stays seamless for the same reason the forward one does — the start
+   * and end positions are one whole copy apart, so the two are visually
+   * identical and the restart is invisible whichever way it is played.
+   */
+  reverse: boolean;
   tiles: readonly IngredientTile[];
 };
 
@@ -122,7 +131,9 @@ export type IngredientColumn = {
  */
 export const ingredientColumns: readonly IngredientColumn[] = [
   {
-    marquee: "animate-[wall-up_46s_linear_infinite]",
+    durationSeconds: 46,
+    durationSecondsRow: 23,
+    reverse: false,
     tiles: [
       {
         src: "/assets/illustrations/chili-red.png",
@@ -166,7 +177,9 @@ export const ingredientColumns: readonly IngredientColumn[] = [
   {
     // The middle column: same keyframes, played backwards, so it
     // travels down against the two beside it.
-    marquee: "animate-[wall-up_54s_linear_infinite_reverse]",
+    durationSeconds: 54,
+    durationSecondsRow: 27,
+    reverse: true,
     tiles: [
       {
         src: "/assets/illustrations/basket-yellow.png",
@@ -210,7 +223,9 @@ export const ingredientColumns: readonly IngredientColumn[] = [
     ],
   },
   {
-    marquee: "animate-[wall-up_50s_linear_infinite]",
+    durationSeconds: 50,
+    durationSecondsRow: 25,
+    reverse: false,
     tiles: [
       {
         src: "/assets/thaigredient/bowl-rooster.png",
@@ -245,7 +260,7 @@ export const ingredientColumns: readonly IngredientColumn[] = [
       },
       {
         // Long thin strip — bled full so it reads as a woven band.
-        src: "/assets/illustrations/zigzag-strip.png",
+        src: "/assets/illustrations/zigzag-strip-short.png",
         tone: null,
         ratio: "aspect-[220/147]",
         box: null,

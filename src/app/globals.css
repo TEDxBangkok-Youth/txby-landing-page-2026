@@ -78,6 +78,31 @@
   }
 }
 
+/* Same seamless-copy trick as wall-up, along X instead of Y — the rows
+   layout below 860px (see ingredient-wall.tsx) travels sideways rather
+   than up. */
+@keyframes wall-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% / var(--wall-copies)));
+  }
+}
+
+/* Per-track tempo and direction for the ingredient wall, read from
+   `--wall-duration-row` / `--wall-duration` / `--wall-direction` set
+   inline per column in ingredient-wall.tsx. Starts on `wall-left` (rows,
+   stacked below 860px) at the row duration — rows travel one copy's
+   *width*, a much shorter distance than a column's height, so they get
+   their own faster tempo rather than inheriting the column's. The
+   component swaps both `animation-name` and `animation-duration` to
+   `wall-up` / `--wall-duration` (columns, side by side) at that
+   breakpoint. */
+@utility wall-track {
+  animation: wall-left var(--wall-duration-row) linear infinite var(--wall-direction);
+}
+
 /* ─────────────────────────────────────────────────────────────
    Club map — the province SVG is fetched at runtime, so its paths
    cannot carry Tailwind classes. Everything else in the map is

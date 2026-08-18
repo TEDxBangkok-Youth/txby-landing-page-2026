@@ -91,9 +91,9 @@ export function ComingSoonFlip({ startLang }: { startLang: FaceLang }) {
    of the Latin one (84px against 96px), and that ratio is kept here as
    both scale up. */
 const LATIN =
-  "font-heading font-bold tracking-[-0.015em] text-[max(3.25rem,min(23cqw,26cqh))]";
+  "font-heading font-bold tracking-[-0.015em] text-[max(2.75rem,min(19cqw,21.5cqh))]";
 const THAI =
-  "font-heading font-bold text-[max(2.75rem,min(20cqw,22.6cqh))] leading-[1.16]";
+  "font-heading font-bold text-[max(2.3125rem,min(16.5cqw,18.7cqh))] leading-[1.16]";
 
 /* The second word as a sticker card instead of an outline: cyan field,
    thick ink border and a hard offset shadow, all sized in `em` so the
@@ -106,7 +106,10 @@ const THAI =
    clipped flat at the card's own top edge. The own-line-height override
    gives the mark headroom independent of the outer row's tighter lead. */
 const CARD =
-  "inline-block rounded-[0.15em] border-[0.05em] border-line-strong bg-tg-cyan px-[0.12em] pt-[0.14em] pb-[0.08em] leading-[1.5] text-foreground shadow-[0.07em_0.09em_0_var(--t-shadow-tint)] rotate-[-2deg]";
+  "inline-block rounded-[0.15em] border-[0.05em] border-line-strong bg-tg-cyan px-[0.12em] leading-[1.5] text-foreground shadow-[0.07em_0.09em_0_var(--t-shadow-tint)] rotate-[-2deg]";
+
+const CARD_TH =
+  "inline-block rounded-[0.15em] border-[0.05em] border-line-strong bg-tg-cyan px-[0.12em] pt-[0.14em] leading-[1.5] text-foreground shadow-[0.07em_0.09em_0_var(--t-shadow-tint)] rotate-[-2deg]";
 
 function Face({
   face,
@@ -154,11 +157,11 @@ function Face({
         <div
           className={cn(
             THAI,
-            "flex flex-wrap items-baseline justify-center gap-[0.25em] whitespace-nowrap rotate-[-1deg] min-[860px]:justify-start"
+            "flex flex-wrap items-baseline leading-[0.68] justify-center gap-[0.25em] whitespace-nowrap rotate-[-1deg] min-[860px]:justify-start"
           )}
         >
           <span className="text-foreground">{face.solid}</span>
-          <span className={CARD}>{face.outlined}</span>
+          <span className={CARD_TH}>{face.outlined}</span>
         </div>
       ) : (
         <>
@@ -172,7 +175,7 @@ function Face({
       )}
 
       {/* Holds the design's ~0.27 ratio to the headline as both scale. */}
-      <div className="mt-[max(14px,5.2cqw)] font-heading text-[max(0.9375rem,min(5.5cqw,7cqh))] font-bold leading-[1.3] tracking-[0.05em] text-foreground">
+      <div className="mt-[max(14px,5.2cqw)] font-heading text-[max(0.8125rem,min(4.7cqw,6cqh))] font-bold leading-[1.3] tracking-[0.05em] text-foreground">
         {face.theme}
       </div>
     </div>

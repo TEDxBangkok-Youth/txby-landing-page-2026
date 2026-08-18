@@ -98,9 +98,9 @@ export default async function ComingSoonPage(
 
         {/* Dropped on the mobile frame — the stacked column has no room
             for it under the headline. */}
-        <span className="hidden font-heading text-[max(0.75rem,1.9cqw)] font-bold leading-tight tracking-[0.14em] text-foreground min-[860px]:block">
+        {/* <span className="hidden font-heading text-[max(0.75rem,1.9cqw)] font-bold leading-tight tracking-[0.14em] text-foreground min-[860px]:block">
           {comingSoonTagline}
-        </span>
+        </span> */}
       </div>
 
       <IngredientWall />

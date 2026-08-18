@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 
 import { toneField } from "@/components/site/tones";
 import {
@@ -24,6 +25,14 @@ import { cn } from "@/lib/utils";
  *
  * This is CSS multi-column no longer: `columns-3` balances its own content
  * and cannot animate each column separately.
+ *
+ * Below 860px the wall turns 90 degrees: three vertical columns sliding
+ * up/down become three horizontal rows sliding left/right, stacked instead
+ * of side by side (the text column above them is stacked too at this
+ * width — see coming-soon/page.tsx). Same three tracks, same per-track
+ * tempo and mirrored direction, just walking the other axis, so `Tile`
+ * and the copy-count math are unchanged; only the flex direction and
+ * which marquee class plays are swapped per breakpoint.
  */
 export function IngredientWall() {
   return (
@@ -40,14 +49,28 @@ export function IngredientWall() {
         // "[-webkit-mask-image:linear-gradient(to_bottom,transparent_0,#000_56px,#000_calc(100%-96px),transparent_100%)]"
       )}
     >
-      <div className="flex items-start gap-x-3 min-[860px]:gap-x-4">
+      <div className="flex h-full flex-col items-stretch gap-y-3 min-[860px]:flex-row min-[860px]:items-start min-[860px]:gap-x-4 min-[860px]:gap-y-0">
         {ingredientColumns.map((column, index) => (
           <div
             key={index}
             // `--wall-copies` is what the keyframes divide by, so the
             // travel distance and the number of copies can never drift
-            // apart. Change COPIES and the animation follows.
-            className={cn("flex-1 [--wall-copies:3]", column.marquee)}
+            // apart. Change COPIES and the animation follows. The
+            // duration/direction custom properties feed `wall-track`,
+            // which starts on `wall-left` at the row duration (stacked)
+            // and switches to `wall-up` at the column duration (side by
+            // side) from 860px up.
+            className={cn(
+              "flex flex-1 flex-row items-start gap-x-3 [--wall-copies:3] min-[860px]:block min-[860px]:gap-x-0",
+              "wall-track min-[860px]:[animation-name:wall-up] min-[860px]:[animation-duration:var(--wall-duration)]"
+            )}
+            style={
+              {
+                "--wall-duration": `${column.durationSeconds}s`,
+                "--wall-duration-row": `${column.durationSecondsRow}s`,
+                "--wall-direction": column.reverse ? "reverse" : "normal",
+              } as CSSProperties
+            }
           >
             {Array.from({ length: COPIES }).flatMap((_, copy) =>
               column.tiles.map((tile, position) => (
@@ -83,10 +106,18 @@ function Tile({ tile }: { tile: IngredientTile }) {
   return (
     <div
       className={cn(
-        "relative flex items-center justify-center overflow-hidden",
-        // The gap between tiles lives here, not on the column — the
-        // marquee's seamlessness depends on it.
-        "mb-3 min-[860px]:mb-4",
+        // Rows (stacked, below 860px): every tile in a row shares one
+        // height (`h-[32vw]`) and lets its own ratio drive width, so the
+        // row reads as a level strip instead of a jagged skyline.
+        // Columns (side by side, 860px up): the reverse — the column's
+        // width is shared and each tile's ratio drives height, which is
+        // what actually varies tile size there.
+        "relative flex h-[32vw] shrink-0 items-center justify-center overflow-hidden min-[860px]:h-auto min-[860px]:w-full",
+        // The gap between tiles lives here, not on the track — the
+        // marquee's seamlessness depends on it. Rows travel along X, so
+        // the gap is `mr-*`; columns travel along Y, so it switches to
+        // `mb-*`.
+        "mr-3 mb-0 min-[860px]:mr-0 min-[860px]:mb-4",
         // The sticker frame: ink border, hard offset shadow, no blur. The
         // smaller offset is the handoff's mobile frame; `shadow-card` is
         // the 3px/4px desktop one.
