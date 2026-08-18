@@ -89,8 +89,10 @@ export default async function ComingSoonPage(
           // LCP element and preloading two images only makes them compete.
           loading="eager"
           // The red lockup, not the white one — white reads badly on the
-          // yellow field.
-          className="h-auto w-[clamp(112px,16vw,196px)]"
+          // yellow field. Same fixed size as the main site's navbar
+          // (`SiteNavLogo`), rather than scaling with the viewport, so a
+          // visitor bounced between the two sees one consistent mark.
+          className="block h-8.5 w-auto"
         />
 
         <span
