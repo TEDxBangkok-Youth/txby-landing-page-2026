@@ -29,19 +29,19 @@ import { cn } from "@/lib/utils";
  * proportionally: the height stays put and the width alone is clamped, and
  * the bowl comes out visibly squashed on a narrow screen.
  *
- * So the height limit is converted into a width instead. `51cqh` is
- * `27cqh × 2557/1352` — the same vertical bound, expressed on the axis that
+ * So the height limit is converted into a width instead. `62cqh` is
+ * `33cqh × 2557/1352` — the same vertical bound, expressed on the axis that
  * can carry it alongside the other two caps: `100%` keeps the bowl clear of
- * the walls on a tall narrow window, and 480px is its ceiling. That
+ * the walls on a tall narrow window, and 580px is its ceiling. That
  * conversion is tied to the ratio, so swapping the art means recomputing
- * it; the old rooster bowl was `44cqh` for the same 27cqh of height.
+ * it; the old rooster bowl was `44cqh` for 27cqh of height.
  */
 export function MixingBowl() {
   return (
     <div
       aria-hidden
       className={cn(
-        "relative aspect-[2557/1352] h-auto w-[min(100%,51cqh,480px)]",
+        "relative aspect-[2557/1352] h-auto w-[min(100%,62cqh,580px)]",
         "shrink-0"
       )}
     >
