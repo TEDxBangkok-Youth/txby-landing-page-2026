@@ -96,11 +96,14 @@ export function ComingSoonFlip({ startLang }: { startLang: FaceLang }) {
    longer a poster. Latin can afford the larger floor because it wraps onto
    two lines; Thai holds one line, so its floor is a step lower.
 
-   Thai gets its own, smaller step — the handoff sets it at ~0.91 of the
-   Latin one (102px against 112px), and that ratio is kept here as both
-   scale. */
+   Thai gets its own, LARGER step, deliberately inverted from the
+   handoff's ratio (~0.91 of the Latin size). That ratio was tuned for
+   "COMING SOON" against a same-length Thai line; เร็ว ๆ นี้ is much
+   shorter, so at the same size it reads visually lighter — less ink on
+   the same line. Scaled up instead, to about 1.2x the Latin step, it
+   fills the same visual weight in the headline slot. */
 const LATIN = "text-[max(2.75rem,min(13.5cqw,15cqh))] tracking-[-0.012em]";
-const THAI = "text-[max(2.5rem,min(12.3cqw,13.7cqh))] leading-[1.16]";
+const THAI = "text-[max(3.25rem,min(16.2cqw,18cqh))] leading-[1.16]";
 
 /* The theme line under the headline: outlined ink, no fill. Holds the
    design's ~0.3 ratio to the headline as both scale.
@@ -108,13 +111,17 @@ const THAI = "text-[max(2.5rem,min(12.3cqw,13.7cqh))] leading-[1.16]";
    It needs a floor of its own for the same reason the headline does, and
    more urgently: without one, `cqw` against the mobile stage sets this at
    about 9px, where an outlined face is not so much small as illegible.
+   Mobile gets a taller floor than the desktop one (17px vs 13px) — with
+   the headline itself scaled up on small screens now, the same 13px
+   theme line reads as an afterthought under it.
 
    The stroke thins below the desktop frame too. 1.5px is the design's
    weight at 34px; at the floor size it closes up the counters and the
    words turn into blots. */
 const THEME =
   "mt-[max(10px,2.4cqw)] font-heading font-bold leading-[1.1] " +
-  "text-[max(0.8125rem,min(4.1cqw,4.6cqh))] text-transparent " +
+  "text-[max(1.0625rem,min(4.1cqw,4.6cqh))] text-transparent " +
+  "min-[860px]:text-[max(0.8125rem,min(4.1cqw,4.6cqh))] " +
   "[-webkit-text-stroke:1px_var(--color-tg-ink)] " +
   "min-[860px]:[-webkit-text-stroke:1.5px_var(--color-tg-ink)]";
 

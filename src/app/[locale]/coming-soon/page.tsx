@@ -68,16 +68,6 @@ export default async function ComingSoonPage(
 
   return (
     <main className="grain-overlay relative flex h-dvh flex-col overflow-hidden bg-tg-yellow-field">
-      {/* Bleeding off the top-left corner, behind everything. Decorative. */}
-      <Image
-        src="/assets/thaigredient/burst-blue.svg"
-        alt=""
-        width={750}
-        height={616}
-        aria-hidden
-        className="pointer-events-none absolute -top-[15%] -left-[9%] z-[1] w-[clamp(150px,22vw,262px)]"
-      />
-
       <header className="relative z-[6] flex items-start px-[clamp(16px,3.2vw,44px)] pt-[clamp(18px,3vw,40px)]">
         <Image
           src="/assets/logos/tedxbangkokyouth-lockup-red.png"
@@ -129,15 +119,29 @@ export default async function ComingSoonPage(
           // so widening a flank walks the headline inward with it rather
           // than quietly sliding under it because two numbers stopped
           // agreeing.
-          "[--wall-w:clamp(84px,15vw,220px)]",
+          // Zero below the desktop frame, where the walls themselves are
+          // `hidden` (see IngredientWall) — the stage's inline padding is
+          // measured off this variable, so leaving it at its desktop
+          // value would keep reserving a blank flank for a wall that
+          // isn't there, pushing the headline and bowl off-centre.
+          "[--wall-w:clamp(84px,15vw,220px)] max-[859px]:[--wall-w:0px]",
           "[--tilt-sweep:3.5vh]",
-          "[--gutter:clamp(20px,4vw,64px)]",
+          // Fixed at 16px below the desktop frame rather than left on the
+          // fluid clamp — with no wall to justify a scaling flank, mobile
+          // just wants the platform's standard edge margin.
+          "[--gutter:clamp(20px,4vw,64px)] max-[859px]:[--gutter:16px]",
           "px-[calc(var(--wall-w)+var(--gutter))]",
           // Vertical rhythm: the headline at the top, the bowl at the
           // bottom, and the middle of the screen left clear between them,
           // which is what the wireframe asks for. The only movement in
           // that gap is the walls either side of it.
-          "justify-between gap-[clamp(8px,1.8vh,22px)]",
+          //
+          // Below the desktop frame there are no walls to hold that middle
+          // clear — `justify-between` would leave the two pieces stranded
+          // at the top and bottom of the screen with dead yellow between
+          // them. So headline and bowl collapse into one centred group
+          // instead, close enough to read as a unit.
+          "justify-between gap-[clamp(8px,1.8vh,22px)] max-[859px]:justify-center max-[859px]:gap-[clamp(20px,5vh,40px)]",
           "pt-[clamp(6px,1.6vh,22px)] pb-[clamp(4px,1vh,12px)]"
         )}
       >

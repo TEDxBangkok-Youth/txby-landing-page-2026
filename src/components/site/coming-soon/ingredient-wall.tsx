@@ -42,7 +42,12 @@ export function IngredientWall({
         // not here, because the stage's own inline padding is measured from
         // the same value — widening a wall in one place would otherwise
         // slide it under the headline with nothing to say so.
-        "pointer-events-none absolute inset-y-0 w-[var(--wall-w)] overflow-hidden",
+        //
+        // Hidden below the desktop frame: on a phone the wall is too
+        // narrow to read as a masonry column, and the stage sets
+        // `--wall-w` to 0 at the same breakpoint, so a wall left visible
+        // here would render as a full-height sliver with nothing in it.
+        "pointer-events-none absolute inset-y-0 hidden w-[var(--wall-w)] overflow-hidden min-[860px]:block",
         side === "left" ? "left-0" : "right-0",
         // Fades top and bottom so cards dissolve at both edges instead of
         // being guillotined where they meet the header row and the tagline

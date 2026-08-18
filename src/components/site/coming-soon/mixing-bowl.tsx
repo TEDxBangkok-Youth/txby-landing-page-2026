@@ -37,14 +37,20 @@ import { cn } from "@/lib/utils";
  * was actually capping it, not the cqh figure). That conversion is tied to
  * the ratio, so swapping the art means recomputing it; the old rooster bowl
  * was `44cqh` for 27cqh of height.
+ *
+ * Below the desktop frame the walls are hidden and the stage stops
+ * reserving `--wall-w` for them (see the page), so the container is
+ * noticeably wider than before at the same viewport — the `120cqh` step
+ * lets the bowl actually use that width instead of stalling at the same
+ * `50cqh` vertical bound the walled layout was tuned for.
  */
 export function MixingBowl() {
   return (
     <div
       aria-hidden
       className={cn(
-        "relative aspect-[2557/1352] h-auto w-[min(100%,95cqh,900px)]",
-        "shrink-0"
+        "relative aspect-[2557/1352] h-auto shrink-0",
+        "w-[min(100%,120cqh,900px)] min-[860px]:w-[min(100%,95cqh,900px)]"
       )}
     >
       <Image
