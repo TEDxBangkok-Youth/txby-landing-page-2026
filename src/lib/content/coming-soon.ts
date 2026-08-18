@@ -20,9 +20,9 @@ export type FaceLang = "en" | "th";
 
 export type ComingSoonFace = {
   lang: FaceLang;
-  /** Solid paper fill. */
+  /** Solid ink fill. */
   solid: string;
-  /** Outlined: transparent fill over a paper text stroke. */
+  /** Set inside the cyan sticker card. */
   outlined: string;
   /** The edition theme, set under the headline in navy. */
   theme: string;
@@ -48,8 +48,8 @@ export const comingSoonFaces: readonly [ComingSoonFace, ComingSoonFace] = [
   },
   {
     lang: "th",
-    solid: "เร็ว ๆ",
-    outlined: "นี้",
+    solid: "พบกัน",
+    outlined: "เร็ว ๆ นี้",
     theme: "ส่วนผสมลับ ฉบับคนไทย",
     inline: true,
   },

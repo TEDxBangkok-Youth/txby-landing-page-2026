@@ -95,10 +95,18 @@ const LATIN =
 const THAI =
   "font-heading font-bold text-[max(2.75rem,min(20cqw,22.6cqh))] leading-[1.16]";
 
-/* Paper stroke, no fill. Thinner on the mobile frame, where a 3px stroke
-   closes up the counters at the smaller size. */
-const OUTLINED =
-  "text-transparent [-webkit-text-stroke:2px_var(--t-foreground-inverse)] min-[860px]:[-webkit-text-stroke:3px_var(--t-foreground-inverse)]";
+/* The second word as a sticker card instead of an outline: cyan field,
+   thick ink border and a hard offset shadow, all sized in `em` so the
+   chip scales with whichever of LATIN/THAI's cqw/cqh terms is binding on
+   the inherited font-size, the same way the hero's title-highlight span
+   scales off its own line.
+   `leading-[1.5]` and a `pt` to match `pb`: Thai tone/vowel marks sit
+   above the glyph's normal ascent, and the inherited `leading-[1.16]`
+   plus a top-padding-less box left no room for them — they were getting
+   clipped flat at the card's own top edge. The own-line-height override
+   gives the mark headroom independent of the outer row's tighter lead. */
+const CARD =
+  "inline-block rounded-[0.15em] border-[0.05em] border-line-strong bg-tg-cyan px-[0.12em] pt-[0.14em] pb-[0.08em] leading-[1.5] text-foreground shadow-[0.07em_0.09em_0_var(--t-shadow-tint)] rotate-[-2deg]";
 
 function Face({
   face,
@@ -137,22 +145,28 @@ function Face({
         // the scale on the spans instead, the row still inherited 16px and
         // the word space came out at 3px, closing เร็ว ๆ นี้ up into one
         // word. On the row, 0.25em is a real space at display size.
+        //
+        // `flex-wrap`, not `nowrap`: "พบกัน" plus the card is wider than
+        // the type column at this font size, and `nowrap` let it run
+        // straight into the wall instead of dropping to a second line.
+        // `whitespace-nowrap` still guards each span's own text from
+        // breaking mid-phrase.
         <div
           className={cn(
             THAI,
-            "flex flex-nowrap items-baseline justify-center gap-[0.25em] whitespace-nowrap rotate-[-1deg] min-[860px]:justify-start"
+            "flex flex-wrap items-baseline justify-center gap-[0.25em] whitespace-nowrap rotate-[-1deg] min-[860px]:justify-start"
           )}
         >
-          <span className="text-foreground-inverse">{face.solid}</span>
-          <span className={OUTLINED}>{face.outlined}</span>
+          <span className="text-foreground">{face.solid}</span>
+          <span className={CARD}>{face.outlined}</span>
         </div>
       ) : (
         <>
-          <div className={cn(LATIN, "leading-[0.98] rotate-[-1deg] text-foreground-inverse")}>
+          <div className={cn(LATIN, "leading-[0.98] rotate-[-1deg] text-foreground")}>
             {face.solid}
           </div>
-          <div className={cn(LATIN, OUTLINED, "leading-[1.02] rotate-[1.2deg]")}>
-            {face.outlined}
+          <div className={cn(LATIN, "leading-[1.02]")}>
+            <span className={CARD}>{face.outlined}</span>
           </div>
         </>
       )}

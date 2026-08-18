@@ -35,8 +35,9 @@ export function IngredientWall() {
         // Fades top and bottom so tiles dissolve at both edges instead of
         // being guillotined by the overflow clip. The bottom fade is the
         // design's; the top one is what the movement asks for.
-        "[mask-image:linear-gradient(to_bottom,transparent_0,#000_56px,#000_calc(100%-96px),transparent_100%)]",
-        "[-webkit-mask-image:linear-gradient(to_bottom,transparent_0,#000_56px,#000_calc(100%-96px),transparent_100%)]"
+        // Temporarily disabled — restore before merging.
+        // "[mask-image:linear-gradient(to_bottom,transparent_0,#000_56px,#000_calc(100%-96px),transparent_100%)]",
+        // "[-webkit-mask-image:linear-gradient(to_bottom,transparent_0,#000_56px,#000_calc(100%-96px),transparent_100%)]"
       )}
     >
       <div className="flex items-start gap-x-3 min-[860px]:gap-x-4">

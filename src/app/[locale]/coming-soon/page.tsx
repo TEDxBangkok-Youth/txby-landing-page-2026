@@ -67,7 +67,7 @@ export default async function ComingSoonPage(
         // box to size its tiles against.
         "grain-overlay grid h-dvh auto-rows-[minmax(0,1fr)] " +
         "grid-cols-[repeat(auto-fit,minmax(min(100%,430px),1fr))] " +
-        "overflow-hidden bg-tg-pink"
+        "overflow-hidden bg-tg-yellow-field"
       }
     >
       {/* `container-type: size` makes this column the reference box for
@@ -77,7 +77,7 @@ export default async function ComingSoonPage(
           size containment cannot collapse it. */}
       <div className="flex min-h-0 flex-col items-center [container-type:size] pt-[clamp(28px,4vw,52px)] pr-[clamp(20px,3vw,28px)] pb-[clamp(28px,4vw,52px)] pl-[clamp(24px,4vw,56px)] text-center min-[860px]:items-stretch min-[860px]:text-left">
         <Image
-          src="/assets/logos/tedxbangkokyouth-lockup-white.png"
+          src="/assets/logos/tedxbangkokyouth-lockup-red.png"
           alt={t("logoAlt")}
           width={2849}
           height={440}
@@ -98,7 +98,7 @@ export default async function ComingSoonPage(
 
         {/* Dropped on the mobile frame — the stacked column has no room
             for it under the headline. */}
-        <span className="hidden font-heading text-[max(0.75rem,1.9cqw)] font-bold leading-tight tracking-[0.14em] text-tg-yellow-100 min-[860px]:block">
+        <span className="hidden font-heading text-[max(0.75rem,1.9cqw)] font-bold leading-tight tracking-[0.14em] text-foreground min-[860px]:block">
           {comingSoonTagline}
         </span>
       </div>
