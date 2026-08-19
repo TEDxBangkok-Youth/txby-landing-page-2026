@@ -10,7 +10,7 @@ const FACEBOOK_URL = "https://www.facebook.com/TEDxBangkokYouth/";
 // Not the logo — it's transparent and reads poorly as a link-preview
 // card background. The gallery cover is a real photo with an opaque
 // background, sized close to the 1200×630 OG convention.
-const OG_IMAGE = "";
+const OG_IMAGE = "/assets/gallery-2026-cover.jpg";
 
 /**
  * The "Coming Soon" screen body, shared by the site root (`/`) — which
