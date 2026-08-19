@@ -66,6 +66,13 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "meta" });
 
   return {
+    // Resolves relative OG image URLs (see coming-soon-screen.tsx) to an
+    // absolute one — required for link previews, which don't fetch
+    // relative to the page they were shared from.
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_SITE_URL ??
+        "https://tedxbangkok-youth-2026.vercel.app"
+    ),
     title: t("title"),
     description: t("description"),
   };

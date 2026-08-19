@@ -132,10 +132,11 @@
   },
   "coming_soon": {
     "heading": "TEDxBangkok Youth 2026 — Coming Soon",
-    "logo_alt": "TEDxBangkok Youth",
+    "logo_alt": "TEDxBangkok Youth logo",
+    "facebook_cta": "TEDxBangkok Youth on Facebook",
     "meta": {
-      "title": "Coming Soon — TEDxBangkok Youth 2026",
-      "description": "TEDxBangkok Youth 2026 is coming soon: Secret Sauce, Thai Edition. Mix the ordinary, create the extraordinary."
+      "title": "TEDxBangkok Youth 2026",
+      "description": "TEDxBangkok Youth 2026 • Secret Thaigredient ส่วนผสมลับฉบับคนไทย"
     }
   },
   "common": {
