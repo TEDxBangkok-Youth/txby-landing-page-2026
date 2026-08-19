@@ -18,10 +18,22 @@ import { cn } from "@/lib/utils";
  * Each column's tiles are rendered `COPIES` times, and the `wall-up`
  * keyframes move the column up by exactly one copy. When the animation
  * restarts, the next copy is sitting precisely where the previous one
- * began, so the jump is invisible. This is why the columns must not use
- * flex `gap` for their spacing — the gap between copies would be one
- * short and the seam would show. Each tile carries its own `mb-*`
- * instead, making every tile exactly `height + gap` tall.
+ * began, so the jump is invisible.
+ *
+ * Two things keep that seam hidden, and both are easy to undo by accident:
+ *
+ * The columns must not use flex `gap` for their spacing — the gap between
+ * copies would be one short and the seam would jump. Each tile carries its
+ * own `mb-*`/`mr-*` instead, making every tile exactly `size + gap` along
+ * the axis it travels. The *last* tile of the track drops that trailing
+ * margin, or the track is one gap longer than `COPIES` copies and the
+ * travel lands short (see `Tile`'s `last`).
+ *
+ * And the track's own box has to measure its content on the travelling
+ * axis, because the keyframes' `100%` resolves against that box. The
+ * column layout gets this free — a block box is as tall as its content —
+ * but the row layout needs `w-max` to escape the parent column-flex's
+ * `items-stretch`.
  *
  * This is CSS multi-column no longer: `columns-3` balances its own content
  * and cannot animate each column separately.
@@ -61,7 +73,17 @@ export function IngredientWall() {
             // and switches to `wall-up` at the column duration (side by
             // side) from 860px up.
             className={cn(
-              "flex flex-1 flex-row items-start gap-x-3 [--wall-copies:3] min-[860px]:block min-[860px]:gap-x-0",
+              // `w-max` is load-bearing on the row layout: the parent is a
+              // *column* flex container, so `items-stretch` would size this
+              // track to the viewport's width while its `shrink-0` tiles
+              // overflow past it. `wall-left` resolves its `-100%` against
+              // this element's own box, so a viewport-wide track travels a
+              // third of the *screen* instead of a third of its content —
+              // the row slides part-way and snaps back. Sizing the track to
+              // its tiles makes `100%` mean what the keyframes assume.
+              // `min-[860px]:w-auto` hands the column layout back to the
+              // block box, whose height is already its content.
+              "flex w-max flex-none flex-row items-start [--wall-copies:3] min-[860px]:block min-[860px]:w-auto min-[860px]:flex-1",
               "wall-track min-[860px]:[animation-name:wall-up] min-[860px]:[animation-duration:var(--wall-duration)]"
             )}
             style={
@@ -74,7 +96,13 @@ export function IngredientWall() {
           >
             {Array.from({ length: COPIES }).flatMap((_, copy) =>
               column.tiles.map((tile, position) => (
-                <Tile key={`${copy}-${position}`} tile={tile} />
+                <Tile
+                  key={`${copy}-${position}`}
+                  tile={tile}
+                  last={
+                    copy === COPIES - 1 && position === column.tiles.length - 1
+                  }
+                />
               ))
             )}
           </div>
@@ -102,7 +130,16 @@ function fieldClass(tone: IngredientTile["tone"]) {
   return tone === "paper" ? "bg-tg-paper" : toneField[tone];
 }
 
-function Tile({ tile }: { tile: IngredientTile }) {
+/**
+ * `last` is the track's very final tile — the one whose trailing margin
+ * would otherwise be counted into the track's length. The keyframes travel
+ * `100% / COPIES`, which is one copy only while the track measures exactly
+ * `COPIES × (copy + gap) - gap`; with the trailing margin left on, the
+ * track is one gap too long, every loop lands a fraction short of the seam
+ * and the drift shows as a snap back. Dropping it on the last tile alone
+ * keeps every *interior* gap intact, so the copies stay evenly spaced.
+ */
+function Tile({ tile, last }: { tile: IngredientTile; last: boolean }) {
   return (
     <div
       className={cn(
@@ -118,6 +155,9 @@ function Tile({ tile }: { tile: IngredientTile }) {
         // the gap is `mr-*`; columns travel along Y, so it switches to
         // `mb-*`.
         "mr-3 mb-0 min-[860px]:mr-0 min-[860px]:mb-4",
+        // Rows travel X and columns travel Y, so the margin to drop on the
+        // final tile is the one on the axis in play at that breakpoint.
+        last && "mr-0 min-[860px]:mb-0",
         // The sticker frame: ink border, hard offset shadow, no blur. The
         // smaller offset is the handoff's mobile frame; `shadow-card` is
         // the 3px/4px desktop one.
