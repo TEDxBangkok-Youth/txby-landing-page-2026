@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm run localize && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "i18n:export": "node scripts/i18n-export.mjs",
