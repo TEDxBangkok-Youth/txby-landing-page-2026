@@ -1,21 +1,40 @@
 import createMiddleware from "next-intl/middleware";
+import { NextResponse, type NextRequest } from "next/server";
 
 import { routing } from "@/i18n/routing";
 
+const intlMiddleware = createMiddleware(routing);
+
+// Matches "/", "/en", "/en/", "/th", "/th/" — the site root in either
+// locale — and nothing deeper.
+const rootPathPattern = /^\/(en|th)?\/?$/;
+
 /**
- * Locale negotiation and redirect/rewrite for every page route. Both
- * locales are prefixed (`localePrefix: "always"` in routing.ts), so this
- * is what turns a bare `/` or `/events/2025` into `/en/...` on first visit
- * and validates the prefix on every request after that.
+ * Locale negotiation for every page route, plus a hold on the rest of
+ * the site while the 2026 edition is under wraps: only the root
+ * ("/", "/en", "/th") is reachable, everything else — events, the
+ * design system, even the standalone /coming-soon route — bounces back
+ * to "/" before locale negotiation runs.
  *
- * The matcher excludes `_next` internals, `/api`, and anything that looks
- * like a static file request (has a `.` in the last path segment) — that
- * last part is what keeps `/assets/**` and `/fonts/**` (served straight
- * out of `public/`) from being routed through here. Without it every
- * image request gets rewritten to a locale-prefixed URL that doesn't
- * exist and 404s.
+ * The matcher excludes `_next` internals, `/api`, and anything that
+ * looks like a static file request (has a `.` in the last path
+ * segment) — that last part is what keeps `/assets/**` and `/fonts/**`
+ * (served straight out of `public/`) from being routed through here.
+ * Without it every image request gets rewritten to a locale-prefixed
+ * URL that doesn't exist and 404s.
  */
-export default createMiddleware(routing);
+export default function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  if (!rootPathPattern.test(pathname)) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
+    url.search = "";
+    return NextResponse.redirect(url);
+  }
+
+  return intlMiddleware(request);
+}
 
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|.*\\..*).*)"],
