@@ -54,6 +54,56 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Coming Soon — the ingredient wall's upward marquee.
+
+   Each column renders its tile list --wall-copies times and travels
+   exactly one copy, so the next copy arrives where the previous one
+   started and the loop has no seam. The count is read from the
+   element rather than baked in here, so the travel distance cannot
+   drift out of step with how many copies the component renders.
+
+   The seam only stays hidden while every tile carries its gap as
+   margin-bottom rather than the column using `gap`: with `gap`, the
+   space between copies is one short and the seam jumps. See
+   ingredient-wall.tsx.
+
+   The reduced-motion query at the bottom of this file stops it.
+   ───────────────────────────────────────────────────────────── */
+@keyframes wall-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% / var(--wall-copies)));
+  }
+}
+
+/* Same seamless-copy trick as wall-up, along X instead of Y — the rows
+   layout below 860px (see ingredient-wall.tsx) travels sideways rather
+   than up. */
+@keyframes wall-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% / var(--wall-copies)));
+  }
+}
+
+/* Per-track tempo and direction for the ingredient wall, read from
+   `--wall-duration-row` / `--wall-duration` / `--wall-direction` set
+   inline per column in ingredient-wall.tsx. Starts on `wall-left` (rows,
+   stacked below 860px) at the row duration — rows travel one copy's
+   *width*, a much shorter distance than a column's height, so they get
+   their own faster tempo rather than inheriting the column's. The
+   component swaps both `animation-name` and `animation-duration` to
+   `wall-up` / `--wall-duration` (columns, side by side) at that
+   breakpoint. */
+@utility wall-track {
+  animation: wall-left var(--wall-duration-row) linear infinite var(--wall-direction);
+}
+
+/* ─────────────────────────────────────────────────────────────
    Club map — the province SVG is fetched at runtime, so its paths
    cannot carry Tailwind classes. Everything else in the map is
    ordinary JSX; these are the only rules left.

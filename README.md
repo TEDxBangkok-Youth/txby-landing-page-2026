@@ -45,6 +45,18 @@ pnpm build      # production build
   Thaigredient or TED Club language. Sections: hero (theme + รายละเอียด),
   speakers (ชื่อเล่น / ชื่อจริง / one-liner), รูปบรรยากาศในงาน, and the talk
   index linking to YouTube.
+- `src/app/[locale]/coming-soon/page.tsx` — the standalone **Coming Soon** teaser
+  (`/en/coming-soon`), implemented from the Claude Design source
+  `TEDx Youth 2026 - Split Masonry.dc.html`. Deliberately separate from the main
+  site: no nav, no footer, no links out, and nothing to click — it announces the
+  2026 theme and nothing else. Pinned to `100dvh` and never scrolls; instead the
+  wall of ingredient tiles drifts upward forever in three columns, each at its
+  own tempo, fading out at the top and bottom edges. Each column's tile list is
+  repeated and travels exactly one copy, so the loop has no visible seam — see
+  the note in `ingredient-wall.tsx` before changing the tile spacing. The
+  headline flips between English and Thai every 5s, so both languages appear
+  whichever locale is active — its copy lives in `src/lib/content/coming-soon.ts`
+  rather than the message catalogs (see `src/i18n/MESSAGES.md`).
 - `src/lib/events.ts` — the per-year content. Adding next year's page is adding
   one `EventYear` object; the `youtubeId` / `playlistUrl` placeholders
   (`REPLACEME*`) are the only values that must be swapped for real ids.
