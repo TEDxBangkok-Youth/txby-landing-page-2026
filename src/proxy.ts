@@ -5,9 +5,12 @@ import { routing } from "@/i18n/routing";
 
 const intlMiddleware = createMiddleware(routing);
 
-// Matches "/", "/en", "/en/", "/th", "/th/" — the site root in either
-// locale — and nothing deeper.
-const rootPathPattern = /^\/(en|th)?\/?$/;
+// Matches "/" (English, no prefix) and "/th" — the site root in either
+// locale — and nothing deeper. "/en" is deliberately not in this list:
+// English has no prefix under `localePrefix: "as-needed"`, so a request
+// for it falls through to the catch-all redirect below, same as any
+// other disallowed path.
+const rootPathPattern = /^\/(th)?\/?$/;
 
 /**
  * Locale negotiation for every page route, plus a hold on the rest of

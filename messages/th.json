@@ -130,6 +130,14 @@
       "coming_soon": "เร็ว ๆ นี้"
     }
   },
+  "coming_soon": {
+    "heading": "TEDxBangkok Youth 2026 เร็ว ๆ นี้",
+    "logo_alt": "TEDxBangkok Youth",
+    "meta": {
+      "title": "เร็ว ๆ นี้ — TEDxBangkok Youth 2026",
+      "description": "TEDxBangkok Youth 2026 กำลังจะมาเร็ว ๆ นี้ ส่วนผสมลับ ฉบับคนไทย - ผสมของธรรมดา ให้กลายเป็นสิ่งไม่ธรรมดา"
+    }
+  },
   "common": {
     "image_placeholder": "รูปภาพ",
     "language_label": "เปลี่ยนภาษา"

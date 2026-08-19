@@ -20,7 +20,7 @@ import type { Locale } from "@/i18n/routing";
  * the page long. Everything is static, so both locales prerender.
  */
 export async function ComingSoonScreen({ locale }: { locale: Locale }) {
-  const t = await getTranslations({ locale, namespace: "comingSoon" });
+  const t = await getTranslations({ locale, namespace: "coming_soon" });
 
   return (
     <main
@@ -42,7 +42,7 @@ export async function ComingSoonScreen({ locale }: { locale: Locale }) {
       <div className="flex min-h-0 flex-col items-center [container-type:size] pt-[clamp(28px,4vw,52px)] pr-[clamp(20px,3vw,28px)] pb-[clamp(28px,4vw,52px)] pl-[clamp(24px,4vw,56px)] text-center min-[860px]:items-stretch min-[860px]:text-left">
         <Image
           src="/assets/logos/tedxbangkokyouth-lockup-red.png"
-          alt={t("logoAlt")}
+          alt={t("logo_alt")}
           width={2849}
           height={440}
           priority
@@ -67,7 +67,7 @@ export async function ComingSoonScreen({ locale }: { locale: Locale }) {
 }
 
 export async function getComingSoonMetadata(locale: Locale) {
-  const t = await getTranslations({ locale, namespace: "comingSoon" });
+  const t = await getTranslations({ locale, namespace: "coming_soon" });
 
   return {
     title: t("meta.title"),

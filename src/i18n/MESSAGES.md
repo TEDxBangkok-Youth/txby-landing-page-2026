@@ -168,23 +168,23 @@ leave them out of the catalog.
 ชื่อจริง = full name) that does not carry into English. Rewrite it for an
 English reader rather than translating it literally.
 
-## `comingSoon` — standalone teaser page (`app/[locale]/coming-soon/page.tsx`)
+## `coming_soon` — teaser screen, shown at the site root and at `/coming-soon` (`coming-soon-screen.tsx`)
 
 | Key | Notes |
 |---|---|
-| `comingSoon.heading` | `sr-only` `<h1>`; the one stable headline for assistive tech |
-| `comingSoon.logoAlt` | wordmark alt — the page has no home link, so this is the brand name only, not `nav.homeAlt` |
-| `comingSoon.meta.title` | browser tab + search headline |
-| `comingSoon.meta.description` | under ~155 chars |
+| `coming_soon.heading` | `sr-only` `<h1>`; the one stable headline for assistive tech |
+| `coming_soon.logo_alt` | wordmark alt — the screen has no home link, so this is the brand name only, not `nav.home_alt` |
+| `coming_soon.meta.title` | browser tab + search headline |
+| `coming_soon.meta.description` | under ~155 chars |
 
 **Only four keys, deliberately.** The visible headline ("COMING SOON" /
-"เร็ว ๆ นี้"), the theme line and the tagline are *not* messages. The page
+"เร็ว ๆ นี้"), the theme line and the tagline are *not* messages. The screen
 flips between English and Thai on a timer, so both faces are on screen in
 the same session whichever locale is active — resolving them through `t()`
 would render the active locale twice and delete half the design. They live
 in `src/lib/content/coming-soon.ts`, which is not locale-keyed. The active
 locale decides only which face shows first (`startLang`) and what
-`comingSoon.heading` says.
+`coming_soon.heading` says.
 
 The theme line is edition copy by the rule of thumb above — 2027 changes
 it — which puts it in a content module regardless.
