@@ -20,6 +20,13 @@
     "bowl_alt": "The secret sauce mixing bowl",
     "price_tag_alt": "฿67.00 · TED x Bangkok"
   },
+  "slot_machine": {
+    "title": "Spin Your <hl>Secret Mix</hl>",
+    "lead": "Three Thai things off the reels, one very Thai story. What will your mix be?",
+    "spin": "Spin",
+    "spin_again": "Spin Again",
+    "spinning": "Spinning"
+  },
   "gallery": {
     "title_line1": "TED Youth",
     "title_line2": "Gallery",

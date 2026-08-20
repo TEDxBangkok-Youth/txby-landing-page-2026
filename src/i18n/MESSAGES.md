@@ -56,6 +56,22 @@ English line lengths must stay close to the Thai, because the type is sized
 in `cqw` against a fixed-ratio stage and will overflow if the English runs
 long. Treat this as a headline-writing problem, not a translation problem.
 
+## `slot_machine` — Secret Thaigredient slot machine (`slot-machine.tsx`, hero section)
+
+| Key | Current Thai source | Notes |
+|---|---|---|
+| `slot_machine.title` | `สุ่ม<hl>ส่วนผสมลับ</hl>ฉบับคุณ` | rendered with `t.rich`; `<hl>` wraps the cyan boxed word — keep the tag pair in both locales |
+| `slot_machine.lead` | `ของไทยสามอย่างจากวงล้อ รวมกันเป็นเรื่องราวแบบไทย ๆ หนึ่งเรื่อง — ส่วนผสมของคุณจะเป็นอะไร?` | |
+| `slot_machine.spin` | `หมุนเลย` | button, first spin |
+| `slot_machine.spin_again` | `หมุนอีกครั้ง` | button, after a result |
+| `slot_machine.spinning` | `กำลังหมุน` | disabled button label while the reels run |
+
+The 12 item names and the 169 taglines are **not** messages — each record
+carries both languages and the component picks by locale, like `Club`'s
+`city`/`en` pair. They live in `src/lib/thaigredient/` and mirror the
+txby-data repo (`master.csv` / `taglines.json`); update them there and
+regenerate rather than editing the constants by hand.
+
 ## `gallery` — landing gallery section
 
 | Key | Current Thai source | Notes |

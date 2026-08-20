@@ -70,6 +70,10 @@
      --ease-ink, which is what makes it read as a sticker turning
      over rather than a UI element easing. */
   --ease-flip: cubic-bezier(0.62, 0.02, 0.28, 1);
+
+  /* The slot machine reel's landing curve (ease-out-quint): flat out
+     through the strip, then a long settle onto the drawn item. */
+  --ease-reel: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 /* ── Border widths ───────────────────────────────────────────

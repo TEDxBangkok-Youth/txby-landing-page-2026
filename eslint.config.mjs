@@ -65,9 +65,15 @@ const eslintConfig = defineConfig([
     // there is no finite set of classes to switch between. Its timing
     // and easing are still tokens (--ease-flip); only the angle is
     // inline.
+    //
+    // The slot machine's reel travel is a translateY derived from the
+    // strip length built per spin, and its duration from the per-reel
+    // stagger — both runtime values. The easing stays a token
+    // (--ease-reel).
     files: [
       "src/components/site/club-map.tsx",
       "src/components/site/coming-soon-flip.tsx",
+      "src/components/site/slot-machine.tsx",
     ],
     rules: { "no-restricted-syntax": "off" },
   },

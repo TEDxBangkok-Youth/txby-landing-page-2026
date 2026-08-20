@@ -10,6 +10,7 @@ import { ImageSlot } from "@/components/site/image-slot";
 import { NavBar } from "@/components/site/nav-bar";
 import { SectionHeader, SectionShell } from "@/components/site/section-shell";
 import { SiteFooter } from "@/components/site/site-footer";
+import { SlotMachine } from "@/components/site/slot-machine";
 import { SpeakerCard } from "@/components/site/speaker-card";
 import { TicketTag } from "@/components/site/ticket-tag";
 import { VolunteersRoster } from "@/components/site/volunteers-roster";
@@ -67,15 +68,20 @@ const HERO_TITLE_TYPE = {
 
 async function Hero({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "hero" });
+  const tSlot = await getTranslations({ locale, namespace: "slot_machine" });
   const type = HERO_TITLE_TYPE[locale];
 
   return (
     <section
       id="hero"
-      className="relative flex h-dvh min-h-140 w-full items-center justify-center overflow-hidden bg-tg-yellow-field"
+      className="relative w-full overflow-hidden bg-tg-yellow-field"
     >
       <NavBar />
 
+      {/* The poster keeps the first viewport to itself — this wrapper
+          carries the sizing the section owned before the slot machine
+          moved in below it. */}
+      <div className="flex h-dvh min-h-140 w-full items-center justify-center">
       <div className="@container relative mx-auto aspect-1456/1010 w-[min(100%,calc((100dvh-132px)*1456/1010))] max-w-[1680px]">
         <Image
           src="/assets/thaigredient/burst-blue.svg"
@@ -123,6 +129,27 @@ async function Hero({ locale }: { locale: Locale }) {
           height={393}
           className="absolute top-[48cqw] left-[70cqw] h-auto w-[12cqw] rotate-[-3deg]"
         />
+      </div>
+      </div>
+
+      {/* Secret Thaigredient slot machine — docs/slot-machine.md. Same
+          yellow field, one scroll below the poster. */}
+      <div className="relative mx-auto flex w-full max-w-[760px] flex-col items-center gap-4 px-6 pt-2 pb-24 text-center">
+        <h2 className="font-heading text-h2 font-bold text-foreground">
+          {tSlot.rich("title", {
+            hl: (chunks) => (
+              <span className="inline-block rotate-[-1.5deg] rounded-lg border-marker border-line-strong bg-tg-cyan px-[0.3em] py-[0.1em] leading-[1.4]">
+                {chunks}
+              </span>
+            ),
+          })}
+        </h2>
+        <p className="max-w-[560px] text-base leading-[1.6] text-foreground-secondary">
+          {tSlot("lead")}
+        </p>
+        <div className="mt-4 w-full">
+          <SlotMachine />
+        </div>
       </div>
     </section>
   );
